@@ -274,7 +274,7 @@
         // CONFIGURATION: Replace with your actual WhatsApp Business short link
         const RELENS_WHATSAPP_NUMBER = "919488353749";
 
-function openWhatsApp(customText) {
+function openWhatsApp(wa) {
   const encodedMsg = encodeURIComponent(customText || "Hi ReLens! I want to replace lenses for my frame.");
   window.open("https://wa.me/" + RELENS_WHATSAPP_NUMBER + "?text=" + encodedMsg, "_blank");
 }
