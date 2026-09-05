@@ -272,15 +272,11 @@
 
     <script>
         // CONFIGURATION: Replace with your actual WhatsApp Business short link
-        const RELENS_WHATSAPP_NUMBER = "919488353749";
+        const RELENS_WA_SHORTLINK = "https://wa.me/message/3XHYZJ2WIHFTO1";
 
-function openWhatsApp(wa) {
-  const encodedMsg = encodeURIComponent(customText || "Hi ReLens! I want to replace lenses for my frame.");
-  window.open("https://wa.me/" + RELENS_WHATSAPP_NUMBER + "?text=" + encodedMsg, "_blank");
-}
-
-
-        
+        function openWhatsApp(customText) {
+            const encodedMsg = encodeURIComponent(customText || "Hi ReLens! I want to replace lenses for my frame.");
+            window.open(`${RELENS_WA_SHORTLINK}?text=${encodedMsg}`, '_blank');
         }
 
         function scrollToSection(id) {
