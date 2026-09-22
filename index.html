@@ -1,4 +1,96 @@
-    <script>
+    <!-- ==========================================
+     ReLens Hero Banner Carousel Script
+     ========================================== -->
+<script>
+(function () {
+  let currentSlideIndex = 0;
+  const totalSlides = 3;
+  let bannerInterval = null;
+
+  // Global functions for inline onclick attributes (arrows & dots)
+  window.goToBannerSlide = function (index) {
+    currentSlideIndex = (index + totalSlides) % totalSlides;
+    updateBannerPosition();
+    resetBannerTimer();
+  };
+
+  window.nextBannerSlide = function () {
+    window.goToBannerSlide(currentSlideIndex + 1);
+  };
+
+  window.prevBannerSlide = function () {
+    window.goToBannerSlide(currentSlideIndex - 1);
+  };
+
+  function updateBannerPosition() {
+    const slider = document.getElementById('banner-slider');
+    const dots = document.querySelectorAll('.banner-dot');
+
+    if (slider) {
+      slider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+    }
+
+    if (dots && dots.length > 0) {
+      dots.forEach((dot, idx) => {
+        if (idx === currentSlideIndex) {
+          dot.className = "banner-dot w-6 h-1.5 rounded-full bg-orange-500 transition-all duration-300";
+        } else {
+          dot.className = "banner-dot w-2 h-1.5 rounded-full bg-white/40 transition-all duration-300";
+        }
+      });
+    }
+  }
+
+  function startBannerTimer() {
+    if (bannerInterval) clearInterval(bannerInterval);
+    bannerInterval = setInterval(window.nextBannerSlide, 5500);
+  }
+
+  function resetBannerTimer() {
+    startBannerTimer();
+  }
+
+  // Mobile Touch Swipe Support
+  function setupTouchGestures() {
+    const slider = document.getElementById('banner-slider');
+    if (!slider) return;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchStartX - touchEndX;
+
+      // Threshold: 45px swipe
+      if (Math.abs(swipeDistance) > 45) {
+        if (swipeDistance > 0) {
+          window.nextBannerSlide(); // Swiped left -> show next
+        } else {
+          window.prevBannerSlide(); // Swiped right -> show prev
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Initialize on page load
+  function initCarousel() {
+    updateBannerPosition();
+    startBannerTimer();
+    setupTouchGestures();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+})();
+</script>
   let currentSlideIndex = 0;
   const totalSlides = 3;
   let bannerInterval = null;
