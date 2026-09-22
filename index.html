@@ -1,9 +1,12 @@
-// Banner Carousel Logic
-let currentSlideIndex = 0;
-const totalSlides = 3;
-let bannerInterval = null;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+  let currentSlideIndex = 0;
+  const totalSlides = 3;
+  let bannerInterval = null;
 
-function updateBannerPosition() {
+  function updateBannerPosition() {
     const slider = document.getElementById('banner-slider');
     const dots = document.querySelectorAll('.banner-dot');
     if (!slider) return;
@@ -11,26 +14,43 @@ function updateBannerPosition() {
     slider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
 
     dots.forEach((dot, idx) => {
-        if (idx === currentSlideIndex) {
-            dot.className = "banner-dot w-6 h-1.5 rounded-full bg-orange-500 transition-all duration-300";
-        } else {
-            dot.className = "banner-dot w-2 h-1.5 rounded-full bg-white/40 transition-all duration-300";
-        }
+      if (idx === currentSlideIndex) {
+        dot.className = "banner-dot w-6 h-1.5 rounded-full bg-orange-500 transition-all duration-300";
+      } else {
+        dot.className = "banner-dot w-2 h-1.5 rounded-full bg-white/40 transition-all duration-300";
+      }
     });
-}
+  }
 
-function nextBannerSlide() {
+  function nextBannerSlide() {
     currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
     updateBannerPosition();
-}
+  }
 
-function prevBannerSlide() {
+  function prevBannerSlide() {
     currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
     updateBannerPosition();
-}
+  }
 
-function goToBannerSlide(index) {
+  function goToBannerSlide(index) {
     currentSlideIndex = index;
+    updateBannerPosition();
+    resetBannerTimer();
+  }
+
+  function startBannerTimer() {
+    bannerInterval = setInterval(nextBannerSlide, 5500);
+  }
+
+  function resetBannerTimer() {
+    clearInterval(bannerInterval);
+    startBannerTimer();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    startBannerTimer();
+  });
+</script>
     updateBannerPosition();
     resetBannerTimer();
 }
