@@ -3,70 +3,310 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ReLens Service | Premium Lenses Delivered to Your Door</title>
-  <meta name="description" content="Shop premium prescription, blue-cut, photochromic and progressive lenses from ReLens Service. Doorstep pickup and delivery in Puducherry." />
+  <title>ReLens Service | Luxury Lens Replacement</title>
+  <meta name="description" content="Luxury optical lens replacement and premium doorstep service in Puducherry. Premium designer lenses, blue-cut, photochromic, progressive and custom lens fitting." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Playfair Display', 'serif'] },
-      colors: { ink: '#162b2a', teal: '#0c6b69', mint: '#dff4ee', gold: '#d9a441', cream: '#fbfaf6' }
-    } } };
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+            display: ['Cormorant Garamond', 'serif']
+          },
+          colors: {
+            noir: '#0f0f12',
+            gold: '#d8b36a',
+            champagne: '#f4efe7',
+            ivory: '#faf8f4',
+            olive: '#57614a',
+            bronze: '#7f6043',
+            smoke: '#c9b7a2'
+          }
+        }
+      }
+    }
   </script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    :root { color-scheme: light; }
-    body { background:#fbfaf6; color:#162b2a; }
-    .hero-grid { background-image: linear-gradient(rgba(12,107,105,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(12,107,105,.07) 1px, transparent 1px); background-size:34px 34px; }
-    .soft-shadow { box-shadow: 0 18px 50px rgba(22,43,42,.10); }
-    .glass { background:rgba(255,255,255,.78); backdrop-filter:blur(16px); }
-    .product-card { transition:transform .25s ease, box-shadow .25s ease; }
-    .product-card:hover { transform:translateY(-6px); box-shadow:0 20px 45px rgba(22,43,42,.13); }
-    .hide-scrollbar::-webkit-scrollbar { display:none; }
+    body { background: #f7f3ee; color: #111; }
+    .luxury-sheen { background: radial-gradient(circle at top, rgba(216,179,106,.25), rgba(255,255,255,0) 45%); }
+    .glass { background: rgba(255,255,255,0.58); backdrop-filter: blur(15px); }
+    .shadow-lux { box-shadow: 0 25px 60px rgba(17,17,17,.12); }
+    .gold-border { border: 1px solid rgba(216,179,106,.45); }
+    .hero-bg { background-image: linear-gradient(rgba(15,15,18,.12), rgba(15,15,18,.12)), url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1400&q=80'); background-size: cover; background-position: center; }
+    .product-card { transition: transform .25s ease, box-shadow .25s ease; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(17,17,17,.12); }
   </style>
 </head>
 <body class="font-sans antialiased">
-  <div class="bg-ink text-white text-xs sm:text-sm py-2.5 px-4 text-center">Free doorstep pickup in Puducherry · Genuine lenses · 48-hour delivery</div>
-  <header class="sticky top-0 z-40 border-b border-teal/10 bg-cream/90 backdrop-blur-xl">
+  <div class="bg-noir text-white text-xs sm:text-sm py-2.5 px-4 text-center tracking-[.18em] uppercase">Luxury doorstep optical care • Free pick up across Puducherry</div>
+
+  <header class="sticky top-0 z-50 border-b border-black/5 bg-[#f8f5f0]/90 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-5">
       <a href="#top" class="flex items-center gap-3 shrink-0">
-        <div class="h-11 w-11 rounded-2xl bg-teal text-white grid place-items-center shadow-lg shadow-teal/20"><i data-lucide="glasses" class="w-6 h-6"></i></div>
-        <div><div class="font-display text-2xl font-bold tracking-tight">ReLens<span class="text-gold">.</span></div><div class="text-[10px] uppercase tracking-[.2em] text-teal font-bold">Service</div></div>
+        <div class="grid h-12 w-12 place-items-center rounded-2xl bg-noir text-gold shadow-lg shadow-gold/15"><i data-lucide="glasses" class="w-6 h-6"></i></div>
+        <div>
+          <div class="font-display text-3xl leading-none">Relens<span class="text-gold">.</span></div>
+          <div class="text-[10px] uppercase tracking-[.25em] text-[#6d655e]">Service</div>
+        </div>
       </a>
-      <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-ink/70"><a href="#categories" class="hover:text-teal">Lens categories</a><a href="#brands" class="hover:text-teal">Brands</a><a href="#how-it-works" class="hover:text-teal">How it works</a><a href="#about" class="hover:text-teal">About us</a></nav>
-      <div class="flex items-center gap-2"><a href="https://wa.me/919488353749?text=Hi%20ReLens%20Service,%20I%20want%20to%20order%20lenses" target="_blank" class="hidden sm:flex items-center gap-2 rounded-full border border-teal/20 px-4 py-2.5 text-sm font-bold text-teal hover:bg-mint"><i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp</a><button onclick="toggleCart()" class="relative rounded-full bg-teal p-3 text-white hover:bg-ink"><i data-lucide="shopping-bag" class="w-5 h-5"></i><span id="cart-count" class="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-gold text-xs font-bold text-ink">0</span></button></div>
+
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-black/70">
+        <a href="#collections" class="hover:text-gold">Collections</a>
+        <a href="#craft" class="hover:text-gold">Craft</a>
+        <a href="#brands" class="hover:text-gold">Brands</a>
+        <a href="#reviews" class="hover:text-gold">Reviews</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/919488353749?text=Hi%20Relens%20Service,%20I%20want%20premium%20lenses" target="_blank" class="hidden sm:flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm font-bold text-noir hover:border-gold hover:text-gold">WhatsApp</a>
+        <button onclick="toggleCart()" class="relative rounded-full bg-noir p-3 text-white hover:bg-gold hover:text-noir transition">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cart-count" class="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-gold text-xs font-bold text-noir">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero-grid overflow-hidden"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
-      <div><p class="text-sm font-bold uppercase tracking-[.22em] text-teal mb-5">Premium vision, made personal</p><h1 class="font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.03] tracking-tight text-ink">See the world<br /><span class="text-teal italic">beautifully.</span></h1><p class="mt-6 max-w-lg text-lg leading-8 text-ink/65">Upgrade your favourite frames with precision lenses from trusted optical brands. Choose online, we collect and deliver to your door.</p><div class="mt-8 flex flex-wrap gap-3"><a href="#categories" class="rounded-full bg-teal px-6 py-3.5 font-bold text-white shadow-lg shadow-teal/20 hover:bg-ink">Shop lens categories <i data-lucide="arrow-down" class="inline w-4 h-4 ml-1"></i></a><a href="https://wa.me/919488353749?text=Hi%20ReLens%20Service,%20please%20help%20me%20choose%20lenses" target="_blank" class="rounded-full border border-ink/15 bg-white px-6 py-3.5 font-bold hover:border-teal hover:text-teal">Talk to an expert</a></div><div class="mt-10 flex items-center gap-6 text-sm text-ink/60"><span><b class="block text-xl text-ink">4.9/5</b>Customer rating</span><span class="h-9 w-px bg-ink/15"></span><span><b class="block text-xl text-ink">48 hr</b>Doorstep delivery</span><span class="h-9 w-px bg-ink/15"></span><span><b class="block text-xl text-ink">100%</b>Genuine</span></div></div>
-      <div class="relative"><div class="absolute -inset-6 rounded-[3rem] bg-mint/70 blur-2xl"></div><div class="relative overflow-hidden rounded-[2.5rem] border-8 border-white soft-shadow"><img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1200&q=85" alt="Premium eyewear and optical lenses" class="h-[500px] w-full object-cover" /><div class="glass absolute bottom-5 left-5 right-5 rounded-2xl p-4 border border-white"><div class="flex items-center justify-between"><div><p class="text-xs uppercase tracking-widest text-teal font-bold">Editor's pick</p><p class="font-display text-xl">ClearView Premium</p></div><span class="rounded-full bg-gold px-3 py-1 text-xs font-bold text-ink">From ₹790</span></div></div></div><div class="absolute -right-3 top-10 rounded-2xl bg-white p-4 soft-shadow"><i data-lucide="sparkles" class="w-5 h-5 text-gold"></i><p class="mt-1 text-xs font-bold">Made for<br />your eyes</p></div></div>
-    </div></section>
+    <section class="luxury-sheen">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+        <div class="grid lg:grid-cols-[1.15fr_0.85fr] items-center gap-12">
+          <div class="relative z-10">
+            <p class="text-xs uppercase tracking-[.28em] text-gold font-bold mb-5">Luxury optical craftsmanship</p>
+            <h1 class="font-display text-5xl sm:text-6xl lg:text-[6rem] leading-[0.9] text-noir">
+              Elevate your <span class="text-gold">vision</span><br />with signature clarity.
+            </h1>
+            <p class="mt-6 max-w-xl text-lg leading-8 text-black/60">Premium lenses for your favourite frames. Tailored precision, immaculate finishing, and doorstep service designed around your lifestyle.</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#collections" class="rounded-full bg-noir px-6 py-3.5 text-sm font-bold text-white hover:bg-gold hover:text-noir transition">Shop collection</a>
+              <a href="https://wa.me/919488353749?text=Hi%20Relens%20Service,%20help%20me%20choose%20a%20premium%20lens" target="_blank" class="rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-bold text-noir hover:border-gold hover:text-gold transition">Book consultation</a>
+            </div>
+            <div class="mt-10 flex flex-wrap items-center gap-8 text-sm text-black/60">
+              <div><div class="text-2xl font-bold text-noir">4.9/5</div><div>Luxury client rating</div></div>
+              <div class="hidden sm:block h-10 w-px bg-black/10"></div>
+              <div><div class="text-2xl font-bold text-noir">48 hr</div><div>Doorstep completion</div></div>
+              <div class="hidden sm:block h-10 w-px bg-black/10"></div>
+              <div><div class="text-2xl font-bold text-noir">100%</div><div>Certified materials</div></div>
+            </div>
+          </div>
 
-    <section id="categories" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"><div class="flex flex-wrap items-end justify-between gap-5 mb-10"><div><p class="text-sm font-bold uppercase tracking-[.2em] text-teal">Find your perfect pair</p><h2 class="font-display text-4xl sm:text-5xl mt-2">Shop by lens category</h2></div><p class="max-w-sm text-ink/60">Clear advice, premium coatings and expert fitting for every lifestyle.</p></div><div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <article class="product-card rounded-3xl bg-white p-3 soft-shadow"><img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?auto=format&fit=crop&w=700&q=80" alt="Clear single vision lens" class="h-48 w-full rounded-2xl object-cover" /><div class="p-4"><p class="text-xs font-bold uppercase tracking-widest text-teal">Everyday essential</p><h3 class="font-display text-2xl mt-1">Single Vision</h3><p class="text-sm text-ink/60 mt-2">Sharp distance, reading or computer vision.</p><div class="flex items-center justify-between mt-5"><span class="font-bold">From ₹790</span><button onclick="addToCart('Single Vision',790)" class="rounded-full bg-mint p-2.5 text-teal hover:bg-teal hover:text-white"><i data-lucide="plus" class="w-4 h-4"></i></button></div></div></article>
-      <article class="product-card rounded-3xl bg-white p-3 soft-shadow"><img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80" alt="Blue light protection glasses" class="h-48 w-full rounded-2xl object-cover" /><div class="p-4"><p class="text-xs font-bold uppercase tracking-widest text-teal">Digital comfort</p><h3 class="font-display text-2xl mt-1">BlueCut</h3><p class="text-sm text-ink/60 mt-2">Comfortable eyes for your screen-first life.</p><div class="flex items-center justify-between mt-5"><span class="font-bold">From ₹1,190</span><button onclick="addToCart('BlueCut Digital',1190)" class="rounded-full bg-mint p-2.5 text-teal hover:bg-teal hover:text-white"><i data-lucide="plus" class="w-4 h-4"></i></button></div></div></article>
-      <article class="product-card rounded-3xl bg-white p-3 soft-shadow"><img src="https://images.unsplash.com/photo-1509695507497-903c140c43b0?auto=format&fit=crop&w=700&q=80" alt="Progressive lens eyewear" class="h-48 w-full rounded-2xl object-cover" /><div class="p-4"><p class="text-xs font-bold uppercase tracking-widest text-teal">Seamless focus</p><h3 class="font-display text-2xl mt-1">Progressive</h3><p class="text-sm text-ink/60 mt-2">One pair for far, screen and reading vision.</p><div class="flex items-center justify-between mt-5"><span class="font-bold">From ₹1,850</span><button onclick="addToCart('Progressive Freeform',1850)" class="rounded-full bg-mint p-2.5 text-teal hover:bg-teal hover:text-white"><i data-lucide="plus" class="w-4 h-4"></i></button></div></div></article>
-      <article class="product-card rounded-3xl bg-white p-3 soft-shadow"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&q=80" alt="Photochromic sunglasses lens" class="h-48 w-full rounded-2xl object-cover" /><div class="p-4"><p class="text-xs font-bold uppercase tracking-widest text-teal">Light adaptive</p><h3 class="font-display text-2xl mt-1">Photochromic</h3><p class="text-sm text-ink/60 mt-2">Clear indoors, tinted outdoors, effortlessly.</p><div class="flex items-center justify-between mt-5"><span class="font-bold">From ₹1,950</span><button onclick="addToCart('Photochromic Sun-Drive',1950)" class="rounded-full bg-mint p-2.5 text-teal hover:bg-teal hover:text-white"><i data-lucide="plus" class="w-4 h-4"></i></button></div></div></article>
-    </div></section>
+          <div class="relative">
+            <div class="hero-bg relative overflow-hidden rounded-[2.4rem] border border-white/70 shadow-lux min-h-[540px]">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0f0f12]/75 via-[#0f0f12]/10 to-transparent"></div>
+              <div class="absolute inset-x-8 bottom-8 rounded-[1.5rem] glass p-5 gold-border">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <p class="text-[10px] uppercase tracking-[.25em] text-gold font-bold">Curated choice</p>
+                    <div class="font-display text-3xl text-noir">Eclat Elite</div>
+                  </div>
+                  <div class="rounded-full bg-gold px-3 py-1.5 text-xs font-bold text-noir">From ₹790</div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -left-4 top-10 rounded-2xl bg-white p-4 shadow-lux border border-black/5">
+              <div class="flex items-center gap-2 text-noir">
+                <span class="rounded-full bg-gold p-2 text-noir"><i data-lucide="sparkles" class="w-4 h-4"></i></span>
+                <span class="font-bold text-sm">Crafted for comfort</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section id="brands" class="bg-ink text-white"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14"><div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6"><div><p class="text-sm font-bold uppercase tracking-[.2em] text-gold">Trusted optical partners</p><h2 class="font-display text-4xl mt-2">Quality you can see.</h2></div><p class="max-w-md text-white/60">We offer precision fitting with carefully selected lens technologies and authentic warranty support.</p></div><div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10"><div class="rounded-2xl border border-white/15 p-6 text-center font-display text-xl">Essilor<span class="text-gold">®</span></div><div class="rounded-2xl border border-white/15 p-6 text-center font-display text-xl">ValueVis<span class="text-gold">™</span></div><div class="rounded-2xl border border-white/15 p-6 text-center font-display text-xl">Crizal<span class="text-gold">®</span></div><div class="rounded-2xl border border-white/15 p-6 text-center font-display text-xl">Transitions<span class="text-gold">®</span></div></div></div></section>
+    <section id="collections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10">
+        <div>
+          <p class="text-xs uppercase tracking-[.28em] text-gold font-bold">Signature collection</p>
+          <h2 class="font-display text-5xl text-noir mt-2">Lens categories</h2>
+        </div>
+        <p class="max-w-lg text-black/60">Precision lens solutions selected for performance, comfort and long-lasting luxury.</p>
+      </div>
 
-    <section id="how-it-works" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20"><div class="text-center max-w-2xl mx-auto"><p class="text-sm font-bold uppercase tracking-[.2em] text-teal">Simple from start to finish</p><h2 class="font-display text-4xl sm:text-5xl mt-2">Your new vision,<br class="sm:hidden" /> delivered.</h2></div><div class="grid md:grid-cols-3 gap-8 mt-12"><div class="text-center"><div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mint text-teal font-bold text-xl">01</div><h3 class="font-display text-2xl mt-5">Choose online</h3><p class="mt-2 text-sm leading-6 text-ink/60">Pick a category or WhatsApp us for personal lens advice.</p></div><div class="text-center"><div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mint text-teal font-bold text-xl">02</div><h3 class="font-display text-2xl mt-5">We collect</h3><p class="mt-2 text-sm leading-6 text-ink/60">Our optical specialist safely picks up your frame and prescription.</p></div><div class="text-center"><div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mint text-teal font-bold text-xl">03</div><h3 class="font-display text-2xl mt-5">See the difference</h3><p class="mt-2 text-sm leading-6 text-ink/60">Precision fitting, complimentary clean and delivery within 48 hours.</p></div></div></section>
+      <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        <article class="product-card rounded-[2rem] bg-white p-3 border border-black/5 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?auto=format&fit=crop&w=800&q=80" alt="Single vision lens" class="h-56 w-full rounded-[1.5rem] object-cover" />
+          <div class="p-4">
+            <p class="text-[10px] uppercase tracking-[.2em] text-gold font-bold">Everyday luxury</p>
+            <h3 class="font-display text-3xl text-noir mt-2">Single Vision</h3>
+            <p class="mt-2 text-sm text-black/60">Clear, sharp and refined for daily wear.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="font-bold text-noir">From ₹790</span>
+              <button onclick="addToCart('Single Vision',790)" class="rounded-full bg-noir p-2.5 text-white hover:bg-gold hover:text-noir"><i data-lucide="plus" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card rounded-[2rem] bg-white p-3 border border-black/5 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80" alt="Blue cut lens" class="h-56 w-full rounded-[1.5rem] object-cover" />
+          <div class="p-4">
+            <p class="text-[10px] uppercase tracking-[.2em] text-gold font-bold">Digital comfort</p>
+            <h3 class="font-display text-3xl text-noir mt-2">BlueCut</h3>
+            <p class="mt-2 text-sm text-black/60">Optimised for screens, mobile and workdays.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="font-bold text-noir">From ₹1,190</span>
+              <button onclick="addToCart('BlueCut Digital',1190)" class="rounded-full bg-noir p-2.5 text-white hover:bg-gold hover:text-noir"><i data-lucide="plus" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card rounded-[2rem] bg-white p-3 border border-black/5 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1509695507497-903c140c43b0?auto=format&fit=crop&w=800&q=80" alt="Progressive lens" class="h-56 w-full rounded-[1.5rem] object-cover" />
+          <div class="p-4">
+            <p class="text-[10px] uppercase tracking-[.2em] text-gold font-bold">Seamless focus</p>
+            <h3 class="font-display text-3xl text-noir mt-2">Progressive</h3>
+            <p class="mt-2 text-sm text-black/60">One uninterrupted lens for distance, screen and reading.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="font-bold text-noir">From ₹1,850</span>
+              <button onclick="addToCart('Progressive Freeform',1850)" class="rounded-full bg-noir p-2.5 text-white hover:bg-gold hover:text-noir"><i data-lucide="plus" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card rounded-[2rem] bg-white p-3 border border-black/5 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Photochromic lens" class="h-56 w-full rounded-[1.5rem] object-cover" />
+          <div class="p-4">
+            <p class="text-[10px] uppercase tracking-[.2em] text-gold font-bold">Adaptive sunlight</p>
+            <h3 class="font-display text-3xl text-noir mt-2">Photochromic</h3>
+            <p class="mt-2 text-sm text-black/60">Clear indoors, tinted outdoors, effortlessly chic.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="font-bold text-noir">From ₹1,950</span>
+              <button onclick="addToCart('Photochromic Sun-Drive',1950)" class="rounded-full bg-noir p-2.5 text-white hover:bg-gold hover:text-noir"><i data-lucide="plus" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="craft" class="bg-[#111214] text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="text-xs uppercase tracking-[.28em] text-gold font-bold">Crafted detail</p>
+            <h2 class="font-display text-5xl mt-3">The luxury of flawless focus.</h2>
+            <p class="mt-5 max-w-lg text-white/70 leading-7">Every lens is selected and finished to suit your lifestyle, your frame and your daily rhythm. We combine precision optics with white-glove doorstep care.</p>
+            <div class="mt-8 space-y-5">
+              <div class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4"><div class="rounded-xl bg-gold text-noir p-2"><i data-lucide="shield-check" class="w-5 h-5"></i></div><div><h3 class="font-bold">Authenticity assured</h3><p class="text-sm text-white/60">Certified, traceable materials with premium warranty support.</p></div></div>
+              <div class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4"><div class="rounded-xl bg-gold text-noir p-2"><i data-lucide="truck" class="w-5 h-5"></i></div><div><h3 class="font-bold">Doorstep experience</h3><p class="text-sm text-white/60">We collect, repair, refine and return your frames with elegance.</p></div></div>
+              <div class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4"><div class="rounded-xl bg-gold text-noir p-2"><i data-lucide="sparkles" class="w-5 h-5"></i></div><div><h3 class="font-bold">Premium surface finish</h3><p class="text-sm text-white/60">Anti-glare coatings, lens polishing and comfort finishing built in.</p></div></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-[2rem] overflow-hidden border border-white/10"><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=80" alt="Designer eyewear" class="h-80 w-full object-cover" /></div>
+            <div class="rounded-[2rem] overflow-hidden border border-white/10 mt-10"><img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=80" alt="Optical lens closeup" class="h-80 w-full object-cover" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="brands" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="text-xs uppercase tracking-[.28em] text-gold font-bold">Trusted brands</p>
+        <h2 class="font-display text-5xl text-noir mt-2">Quality leaders</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="rounded-[2rem] border border-black/10 bg-white p-8 text-center font-display text-3xl text-noir shadow-sm">Essilor®</div>
+        <div class="rounded-[2rem] border border-black/10 bg-white p-8 text-center font-display text-3xl text-noir shadow-sm">ValueVis™</div>
+        <div class="rounded-[2rem] border border-black/10 bg-white p-8 text-center font-display text-3xl text-noir shadow-sm">Crizal®</div>
+        <div class="rounded-[2rem] border border-black/10 bg-white p-8 text-center font-display text-3xl text-noir shadow-sm">Transitions®</div>
+      </div>
+    </section>
+
+    <section id="reviews" class="bg-[#f1ebdf] py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto">
+          <p class="text-xs uppercase tracking-[.28em] text-gold font-bold">Client love</p>
+          <h2 class="font-display text-5xl text-noir mt-2">A premium experience, every time.</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 mt-12">
+          <div class="rounded-[2rem] bg-white p-6 border border-black/5 shadow-sm"><div class="text-gold text-xl">★★★★★</div><p class="mt-4 text-black/70 leading-7">“The lens quality and service were exceptional. It felt like a boutique optical experience from home.”</p><div class="mt-5 font-bold">Rhea M.</div></div>
+          <div class="rounded-[2rem] bg-white p-6 border border-black/5 shadow-sm"><div class="text-gold text-xl">★★★★★</div><p class="mt-4 text-black/70 leading-7">“Beautiful finish, quick delivery, and the team was extremely helpful with the lens recommendation.”</p><div class="mt-5 font-bold">Naveen K.</div></div>
+          <div class="rounded-[2rem] bg-white p-6 border border-black/5 shadow-sm"><div class="text-gold text-xl">★★★★★</div><p class="mt-4 text-black/70 leading-7">“Our frames stayed intact, and the premium lens clarity was noticeable immediately. Highly recommended.”</p><div class="mt-5 font-bold">Anita S.</div></div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer id="about" class="border-t border-teal/10 bg-white"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row justify-between gap-8"><div><div class="font-display text-2xl font-bold">ReLens<span class="text-gold">.</span></div><p class="mt-3 max-w-sm text-sm leading-6 text-ink/60">Premium lens replacement at your doorstep in Puducherry. Keep your frames. Upgrade your vision.</p></div><div class="text-sm text-ink/60"><p class="font-bold text-ink">Need help choosing?</p><a class="mt-2 block text-teal font-bold" href="https://wa.me/919488353749" target="_blank">+91 94883 53749 on WhatsApp</a><p class="mt-2">© 2026 ReLens Service. All rights reserved.</p></div></div></footer>
+  <footer class="bg-noir text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-8">
+      <div>
+        <div class="font-display text-4xl">Relens<span class="text-gold">.</span></div>
+        <p class="mt-3 max-w-md text-white/60 leading-7">Luxury lens replacement service for refined everyday living. Precision, comfort and beauty in every detail.</p>
+      </div>
+      <div class="text-white/70 text-sm">
+        <p class="font-bold text-white">Need assistance?</p>
+        <a href="https://wa.me/919488353749" target="_blank" class="mt-2 block text-gold font-bold">+91 94883 53749</a>
+        <p class="mt-4">© 2026 Relens Service</p>
+      </div>
+    </div>
+  </footer>
 
-  <aside id="cart" class="fixed inset-y-0 right-0 z-50 w-full max-w-md translate-x-full bg-cream shadow-2xl transition-transform duration-300"><div class="flex items-center justify-between border-b border-teal/10 p-5"><h2 class="font-display text-2xl">Your selection</h2><button onclick="toggleCart()" class="rounded-full p-2 hover:bg-mint"><i data-lucide="x"></i></button></div><div id="cart-items" class="p-5 space-y-3"></div><div class="absolute bottom-0 left-0 right-0 border-t border-teal/10 bg-white p-5"><div class="flex justify-between font-bold"><span>Estimated total</span><span id="cart-total">₹0</span></div><a id="checkout" href="https://wa.me/919488353749?text=Hi%20ReLens%20Service,%20I%20would%20like%20to%20order%20lenses" target="_blank" class="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-teal py-3.5 font-bold text-white hover:bg-ink"><i data-lucide="message-circle" class="w-4 h-4"></i> Order on WhatsApp</a></div></aside><div id="overlay" onclick="toggleCart()" class="fixed inset-0 z-40 hidden bg-ink/30 backdrop-blur-sm"></div>
+  <aside id="cart" class="fixed inset-y-0 right-0 z-50 w-full max-w-md translate-x-full bg-[#f9f5f0] shadow-2xl transition-transform duration-300">
+    <div class="flex items-center justify-between border-b border-black/5 p-5">
+      <h2 class="font-display text-3xl text-noir">Your selection</h2>
+      <button onclick="toggleCart()" class="rounded-full p-2 hover:bg-gold/20"><i data-lucide="x" class="w-5 h-5 text-noir"></i></button>
+    </div>
+    <div id="cart-items" class="p-5 space-y-3"></div>
+    <div class="absolute bottom-0 left-0 right-0 border-t border-black/5 bg-white p-5">
+      <div class="flex items-center justify-between font-bold text-noir"><span>Estimated total</span><span id="cart-total">₹0</span></div>
+      <a href="https://wa.me/919488353749?text=Hi%20Relens%20Service,%20I%20would%20like%20to%20order%20premium%20lenses" target="_blank" class="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-noir py-3.5 font-bold text-white hover:bg-gold hover:text-noir transition"><i data-lucide="message-circle" class="w-4 h-4"></i> Order on WhatsApp</a>
+    </div>
+  </aside>
+
+  <div id="overlay" onclick="toggleCart()" class="fixed inset-0 z-40 hidden bg-black/25 backdrop-blur-sm"></div>
+
   <script>
-    let cart=[];
-    function addToCart(name,price){cart.push({name,price});renderCart();document.getElementById('cart-count').textContent=cart.length;toggleCart(true)}
-    function renderCart(){const box=document.getElementById('cart-items');const total=cart.reduce((s,i)=>s+i.price,0);box.innerHTML=cart.length?cart.map((i,n)=>`<div class="flex items-center justify-between rounded-2xl bg-white p-4"><div><p class="font-bold">${i.name}</p><p class="text-sm text-ink/60">Premium fitted pair</p></div><div class="text-right"><p class="font-bold">₹${i.price.toLocaleString('en-IN')}</p><button onclick="cart.splice(${n},1);renderCart();document.getElementById('cart-count').textContent=cart.length" class="text-xs text-red-500">Remove</button></div></div>`).join(''):'<div class="py-16 text-center text-ink/50"><i data-lucide="shopping-bag" class="mx-auto h-8 w-8 mb-3"></i><p>Your selection is empty.</p></div>';document.getElementById('cart-total').textContent='₹'+total.toLocaleString('en-IN');lucide.createIcons()}
-    function toggleCart(force){const cartEl=document.getElementById('cart'),overlay=document.getElementById('overlay');const open=force===true||cartEl.classList.contains('translate-x-full');cartEl.classList.toggle('translate-x-full',!open);overlay.classList.toggle('hidden',!open)}
-    lucide.createIcons();renderCart();
+    const cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      renderCart();
+      document.getElementById('cart-count').textContent = cart.length;
+      toggleCart(true);
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('cart-total').textContent = '₹' + total.toLocaleString('en-IN');
+
+      if (!cart.length) {
+        container.innerHTML = '<div class="py-16 text-center text-black/45"><i data-lucide="shopping-bag" class="mx-auto h-9 w-9 mb-3"></i><p class="font-medium">Your selection is empty.</p></div>';
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = cart.map((item, index) => `
+        <div class="flex items-center justify-between rounded-2xl bg-white p-4 border border-black/5">
+          <div>
+            <p class="font-bold text-noir">${item.name}</p>
+            <p class="text-sm text-black/50">Premium fitted pair</p>
+          </div>
+          <div class="text-right">
+            <p class="font-bold text-noir">₹${item.price.toLocaleString('en-IN')}</p>
+            <button onclick="cart.splice(${index}, 1); renderCart(); document.getElementById('cart-count').textContent = cart.length;" class="text-xs text-red-500 mt-1">Remove</button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function toggleCart(forceOpen) {
+      const cartEl = document.getElementById('cart');
+      const overlay = document.getElementById('overlay');
+      const isOpen = forceOpen === true || cartEl.classList.contains('translate-x-full') === false;
+      cartEl.classList.toggle('translate-x-full', !isOpen);
+      overlay.classList.toggle('hidden', !isOpen);
+    }
+
+    renderCart();
+    lucide.createIcons();
   </script>
 </body>
 </html>
