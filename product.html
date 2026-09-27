@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReLens | Product Details</title>
+    <meta name="description" content="View product details for premium lenses and optical products from ReLens Service." />
+    <link rel="icon" href="WhatsApp%20Image%202026-09-23%20at%209.23.43%20AM.jpeg" type="image/jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              display: ['Cormorant Garamond', 'serif'],
+            },
+            colors: {
+              noir: '#0f0f12',
+              gold: '#d8b36a',
+              ivory: '#faf8f4',
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      body { background: #f7f3ee; color: #111; }
+      .product-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+      .product-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(17, 17, 20, 0.10); }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div class="bg-noir text-white text-xs sm:text-sm py-2.5 px-4 text-center tracking-[.18em] uppercase">
+      Luxury doorstep optical care • Free pickup across Puducherry
+    </div>
+
+    <header class="sticky top-0 z-50 border-b border-black/5 bg-[#f8f5f0]/90 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-5">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="WhatsApp%20Image%202026-09-23%20at%209.23.43%20AM.jpeg" alt="ReLens logo" class="h-11 w-11 rounded-full object-cover border border-[#d8b36a]/60" />
+          <div>
+            <div class="font-display text-3xl leading-none tracking-tight">ReLens</div>
+            <div class="text-[10px] uppercase tracking-[.22em] text-black/60">Service</div>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-3">
+          <a href="index.html#shop" class="hidden sm:inline-flex px-4 py-2 rounded-full border border-black/10 text-sm font-semibold text-black hover:bg-black hover:text-white transition">Back to shop</a>
+          <button id="cart-trigger" class="relative inline-flex items-center justify-center rounded-full border border-black/10 bg-white p-3 shadow-sm hover:bg-black hover:text-white transition" aria-label="Open cart">
+            <i data-lucide="shopping-bag"></i>
+            <span id="cart-count" class="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#d8b36a] px-1 text-[10px] font-bold text-black">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div id="product-detail" class="grid gap-8 lg:grid-cols-[1.05fr_.95fr]"></div>
+    </main>
+
+    <aside id="cart" class="fixed inset-y-0 right-0 z-50 w-full max-w-md translate-x-full bg-[#f9f5f0] shadow-2xl transition-transform duration-300">
+      <div class="flex items-center justify-between border-b border-black/5 px-5 py-4">
+        <div>
+          <p class="text-xs uppercase tracking-[.18em] text-[#d8b36a] font-bold">My cart</p>
+          <h3 class="text-2xl font-semibold text-[#111214]">Your items</h3>
+        </div>
+        <button id="close-cart" aria-label="Close cart" class="rounded-full border border-black/10 p-2 hover:bg-black hover:text-white transition">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="flex h-[calc(100%-140px)] flex-col">
+        <div id="cart-items" class="flex-1 space-y-4 overflow-y-auto p-5"></div>
+        <div class="border-t border-black/5 bg-white/70 p-5">
+          <div class="flex items-center justify-between text-black/60">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">₹0</span>
+          </div>
+          <div class="mt-2 flex items-center justify-between text-black/60">
+            <span>Delivery</span>
+            <span>₹99</span>
+          </div>
+          <div class="mt-4 flex items-center justify-between text-lg font-bold text-[#111214]">
+            <span>Total</span>
+            <span id="cart-total">₹0</span>
+          </div>
+          <button id="checkout-btn" class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#111214] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#d8b36a] hover:text-[#111214]">
+            Proceed to checkout
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <div id="overlay" class="fixed inset-0 hidden bg-black/30 backdrop-blur-[2px] z-40"></div>
+
+    <a href="https://wa.me/919488353749?text=Hi%20ReLens%20Service,%20I%20want%20to%20buy%20a%20product" target="_blank" aria-label="Chat on WhatsApp" class="fixed bottom-5 right-5 z-[60] flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/30 transition hover:scale-105">
+      <i data-lucide="message-circle" class="h-7 w-7"></i>
+    </a>
+
+    <script>
+      const products = [
+        { id: 1, sku: 'DL-01', name: 'PureVision 2', type: 'Daily lenses', price: 1299, rating: 4.9, image: 'https://images.unsplash.com/photo-1556306535-0f09a537f0a3?auto=format&fit=crop&w=800&q=80', badge: 'Best seller', description: 'Hydrated comfort for clear and crisp daily wear.', details: 'PureVision 2 delivers stable vision, smooth moisture retention, and an all-day lens feel designed for comfort and clarity in work, travel, and daily routines.' },
+        { id: 2, sku: 'ML-12', name: 'Acuvue Oasys', type: 'Monthly lenses', price: 1999, rating: 4.8, image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80', badge: 'Popular', description: 'All-day hydration and visibility across long wear.', details: 'Acuvue Oasys is engineered for extended comfort with high oxygen permeability and a smooth feel across long wear sessions. Ideal for active lifestyles and daily use.' },
+        { id: 3, sku: 'PL-09', name: 'Bausch + Lomb', type: 'Premium lenses', price: 2499, rating: 5.0, image: 'https://images.unsplash.com/photo-1610439342089-2f5c7f32b0ec?auto=format&fit=crop&w=800&q=80', badge: 'Top rated', description: 'Advanced lens technology for sharper focus and ease.', details: 'This premium lens set combines advanced optics and superior moisture balance for sharper focus, easier adaptation, and daily visual confidence.' },
+        { id: 4, sku: 'FR-21', name: 'Signature Frame', type: 'Prescription frame', price: 3499, rating: 4.7, image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80', badge: 'New arrival', description: 'Modern frame design engineered for all-day comfort.', details: 'The Signature Frame pairs polished styling with precise optical fit and lightweight comfort — a premium choice for work, meetings, and everyday wear.' }
+      ];
+
+      const cart = JSON.parse(localStorage.getItem('relens-cart') || '[]');
+
+      const productDetail = document.getElementById('product-detail');
+      const cartItems = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartSubtotal = document.getElementById('cart-subtotal');
+      const cartTotal = document.getElementById('cart-total');
+      const cartElement = document.getElementById('cart');
+      const overlay = document.getElementById('overlay');
+
+      function formatPrice(value) {
+        return '₹' + Number(value).toLocaleString('en-IN');
+      }
+
+      function saveCart() {
+        localStorage.setItem('relens-cart', JSON.stringify(cart));
+      }
+
+      function addToCart(product) {
+        const existing = cart.find(item => item.id === product.id);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          cart.push({ ...product, qty: 1 });
+        }
+        saveCart();
+        renderCart();
+        toggleCart(true);
+      }
+
+      function removeFromCart(id) {
+        const index = cart.findIndex(item => item.id === id);
+        if (index !== -1) {
+          cart.splice(index, 1);
+          saveCart();
+          renderCart();
+        }
+      }
+
+      function updateQty(id, delta) {
+        const item = cart.find(prod => prod.id === id);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) removeFromCart(id);
+        saveCart();
+        renderCart();
+      }
+
+      function toggleCart(forceOpen = null) {
+        const shouldOpen = forceOpen !== null ? forceOpen : !cartElement.classList.contains('translate-x-0');
+        cartElement.classList.toggle('translate-x-full', !shouldOpen);
+        cartElement.classList.toggle('translate-x-0', shouldOpen);
+        overlay.classList.toggle('hidden', !shouldOpen);
+      }
+
+      function renderCart() {
+        cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+
+        if (!cart.length) {
+          cartItems.innerHTML = `
+            <div class="flex h-full flex-col items-center justify-center rounded-[1.5rem] border border-dashed border-black/10 bg-white p-8 text-center">
+              <i data-lucide="shopping-bag" class="h-12 w-12 text-black/25"></i>
+              <p class="mt-4 text-lg font-semibold text-[#111214]">Your cart is empty</p>
+              <p class="mt-2 text-sm text-black/55">Add a lens pack or frame to start your order.</p>
+            </div>
+          `;
+          cartSubtotal.textContent = '₹0';
+          cartTotal.textContent = '₹0';
+          lucide.createIcons();
+          return;
+        }
+
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        const total = subtotal + 99;
+
+        cartItems.innerHTML = cart.map(item => `
+          <div class="rounded-[1.5rem] border border-black/5 bg-white p-3 shadow-sm">
+            <div class="flex items-start gap-3">
+              <img src="${item.image}" alt="${item.name}" class="h-20 w-20 rounded-xl object-cover" />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="text-xs uppercase tracking-[.18em] text-[#d8b36a] font-bold">${item.type}</div>
+                    <h4 class="mt-1 text-base font-semibold text-[#111214]">${item.name}</h4>
+                  </div>
+                  <button class="remove-item text-black/45 hover:text-red-500" data-id="${item.id}" aria-label="Remove item">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                  <div class="inline-flex items-center rounded-full border border-black/10">
+                    <button class="qty-btn px-2 py-1 text-lg" data-id="${item.id}" data-delta="-1">−</button>
+                    <span class="px-2 text-sm font-medium">${item.qty}</span>
+                    <button class="qty-btn px-2 py-1 text-lg" data-id="${item.id}" data-delta="1">+</button>
+                  </div>
+                  <span class="text-base font-bold text-[#111214]">${formatPrice(item.price * item.qty)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        cartSubtotal.textContent = formatPrice(subtotal);
+        cartTotal.textContent = formatPrice(total);
+
+        document.querySelectorAll('.remove-item').forEach(button => {
+          button.addEventListener('click', () => removeFromCart(Number(button.dataset.id)));
+        });
+
+        document.querySelectorAll('.qty-btn').forEach(button => {
+          button.addEventListener('click', () => updateQty(Number(button.dataset.id), Number(button.dataset.delta)));
+        });
+
+        lucide.createIcons();
+      }
+
+      function renderProductDetail() {
+        const params = new URLSearchParams(window.location.search);
+        const productId = Number(params.get('id') || '1');
+        const product = products.find(item => item.id === productId) || products[0];
+
+        productDetail.innerHTML = `
+          <div class="rounded-[2rem] bg-white p-3 border border-black/5 shadow-[0_20px_60px_rgba(20,20,20,0.08)]">
+            <img src="${product.image}" alt="${product.name}" class="h-[540px] w-full rounded-[1.5rem] object-cover" />
+          </div>
+
+          <div class="rounded-[2rem] bg-white p-6 sm:p-8 border border-black/5 shadow-[0_20px_60px_rgba(20,20,20,0.08)]">
+            <div class="flex items-center justify-between gap-3">
+              <span class="rounded-full bg-[#111214] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[.2em] text-white">${product.badge}</span>
+              <div class="flex items-center gap-1 text-sm text-black/60">
+                <i data-lucide="star" class="w-3.5 h-3.5 fill-[#d8b36a] text-[#d8b36a]"></i>
+                ${product.rating}
+              </div>
+            </div>
+
+            <p class="mt-5 text-xs uppercase tracking-[.22em] text-[#d8b36a] font-bold">${product.type}</p>
+            <h1 class="mt-3 font-display text-5xl text-[#111214]">${product.name}</h1>
+            <p class="mt-4 text-lg text-black/70">${product.description}</p>
+
+            <div class="mt-6 flex items-end gap-4">
+              <div class="text-4xl font-bold text-[#111214]">${formatPrice(product.price)}</div>
+              <div class="text-sm text-black/45">Includes consultation support</div>
+            </div>
+
+            <div class="mt-8 space-y-3 text-black/70">
+              <div class="flex items-center gap-3"><i data-lucide="shield-check" class="w-5 h-5 text-[#d8b36a]"></i> Genuine product guarantee</div>
+              <div class="flex items-center gap-3"><i data-lucide="truck" class="w-5 h-5 text-[#d8b36a]"></i> Home delivery across Puducherry</div>
+              <div class="flex items-center gap-3"><i data-lucide="stethoscope" class="w-5 h-5 text-[#d8b36a]"></i> Expert optical consultation</div>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <button class="add-to-cart rounded-full bg-[#111214] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#d8b36a] hover:text-[#111214]" data-id="${product.id}">Add to cart</button>
+              <a href="index.html#shop" class="inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-black hover:text-white">Continue shopping</a>
+            </div>
+
+            <div class="mt-10 border-t border-black/10 pt-6">
+              <h2 class="text-xl font-semibold text-[#111214]">Product details</h2>
+              <p class="mt-3 text-black/65">${product.details}</p>
+            </div>
+          </div>
+        `;
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+          button.addEventListener('click', () => addToCart(product));
+        });
+
+        lucide.createIcons();
+      }
+
+      document.getElementById('cart-trigger').addEventListener('click', () => toggleCart(true));
+      document.getElementById('close-cart').addEventListener('click', () => toggleCart(false));
+      overlay.addEventListener('click', () => toggleCart(false));
+
+      document.getElementById('checkout-btn').addEventListener('click', () => {
+        if (!cart.length) return;
+        const cartText = cart.map(item => `${item.name} x${item.qty} - ${formatPrice(item.price * item.qty)}`).join(', ');
+        const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0) + 99;
+        const message = encodeURIComponent(`Hi ReLens Service, I want to order:\n${cartText}\nTotal: ${formatPrice(total)}`);
+        window.open(`https://wa.me/919488353749?text=${message}`, '_blank');
+      });
+
+      renderProductDetail();
+      renderCart();
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
