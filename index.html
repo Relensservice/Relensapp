@@ -39,13 +39,13 @@
     .hero-pill { display: inline-block; font-size: 0.72rem; font-weight: 700; background: #e0f2fe; color: var(--primary-dark); padding: 4px 12px; border-radius: 9999px; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
     .hero-banner h1 { font-size: 2.2rem; color: var(--slate-900); line-height: 1.2; margin-bottom: 0.5rem; }
     .hero-banner h1 span { color: var(--primary); }
-    .hero-banner p { max-width: 600px; margin: 0 auto 1rem; color: var(--slate-600); font-size: 0.95rem; }
+    .hero-banner p { max-width: 620px; margin: 0 auto 1rem; color: var(--slate-600); font-size: 0.95rem; }
     
     .trust-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
     .trust-badge { font-size: 0.78rem; font-weight: 600; color: #166534; background: #f0fdf4; padding: 4px 10px; border-radius: 9999px; border: 1px solid #bbf7d0; }
 
     /* Brand Showcase Cards */
-    .brand-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .brand-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
     .brand-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
     .brand-tag { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 0.25rem; }
     .brand-card h3 { font-size: 1.05rem; color: var(--slate-900); margin-bottom: 0.35rem; }
@@ -100,6 +100,25 @@
     .booking-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
     .booking-form-grid select, .booking-form-grid input { width: 100%; padding: 0.65rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; outline: none; }
     .book-direct-btn { background: var(--primary); color: var(--white); border: none; padding: 0.75rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
+
+    /* AI Assistant Trigger & Modal */
+    .ai-assistant-btn { position: fixed; bottom: 25px; left: 20px; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #0284c7, #6366f1); color: #ffffff; border: none; padding: 10px 18px; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4); cursor: pointer; z-index: 99; }
+    .ai-modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(2px); z-index: 1002; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .ai-modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .ai-modal { position: fixed; bottom: 90px; left: 20px; width: calc(100% - 40px); max-width: 380px; height: 480px; background: #ffffff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 1003; display: flex; flex-direction: column; transform: translateY(20px) scale(0.96); opacity: 0; pointer-events: none; transition: all 0.25s ease; overflow: hidden; }
+    .ai-modal.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .ai-modal-header { padding: 0.85rem 1.1rem; background: #0f172a; color: #ffffff; display: flex; justify-content: space-between; align-items: center; }
+    .ai-badge { font-size: 0.65rem; color: #38bdf8; font-weight: 700; text-transform: uppercase; }
+    .ai-chat-body { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; background: #f8fafc; }
+    .ai-msg { max-width: 85%; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; line-height: 1.4; }
+    .ai-msg.bot { background: #ffffff; color: #1e293b; border: 1px solid #e2e8f0; align-self: flex-start; }
+    .ai-msg.user { background: #0284c7; color: #ffffff; align-self: flex-end; }
+    .ai-quick-prompts { display: flex; gap: 4px; overflow-x: auto; padding: 6px 10px; background: #ffffff; border-top: 1px solid #f1f5f9; }
+    .ai-quick-prompts button { white-space: nowrap; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; font-size: 0.68rem; padding: 3px 6px; cursor: pointer; color: #334155; }
+    .ai-input-bar { display: flex; padding: 8px 10px; background: #ffffff; border-top: 1px solid #e2e8f0; gap: 6px; }
+    .ai-input-bar input { flex-grow: 1; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px; font-size: 0.8rem; outline: none; }
+    .ai-send-btn { background: #0284c7; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+    .ai-action-btn { margin-top: 8px; background: #0284c7; color: #ffffff; border: none; padding: 6px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
 
     /* Cart Floating & Drawer */
     .cart-floating-btn { position: fixed; bottom: 25px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: var(--white); border: none; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4); cursor: pointer; z-index: 99; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
@@ -276,6 +295,42 @@
 
   </main>
 
+  <!-- Floating AI Assistant Trigger -->
+  <button class="ai-assistant-btn" onclick="toggleAiAssistant(true)">
+    <span>✨</span>
+    <span>Ask ReLens AI</span>
+  </button>
+
+  <!-- AI Vision Advisor Modal -->
+  <div class="ai-modal-overlay" id="aiOverlay" onclick="toggleAiAssistant(false)"></div>
+  <div class="ai-modal" id="aiModal">
+    <div class="ai-modal-header">
+      <div>
+        <span class="ai-badge">✨ AI Vision Advisor</span>
+        <h4 style="font-size: 0.95rem;">ReLens Smart Guide</h4>
+      </div>
+      <button class="close-btn" style="color: #fff;" onclick="toggleAiAssistant(false)">✕</button>
+    </div>
+
+    <div class="ai-chat-body" id="aiChatBody">
+      <div class="ai-msg bot">
+        Hello! I'm your ReLens Vision Advisor. Tell me about your routine or prescription (e.g., <em>"I work 10 hours on laptops and have -3.50 power"</em>) and I will match the exact ValueVis lens package.
+      </div>
+    </div>
+
+    <div class="ai-quick-prompts">
+      <button type="button" onclick="runAiPrompt('high-screen')">💻 Screen Work</button>
+      <button type="button" onclick="runAiPrompt('reading-distance')">📖 Reading + Driving</button>
+      <button type="button" onclick="runAiPrompt('outdoor-sun')">☀️ Sunlight Adaptive</button>
+      <button type="button" onclick="runAiPrompt('high-power')">👓 High Power (-5.00+)</button>
+    </div>
+
+    <div class="ai-input-bar">
+      <input type="text" id="aiUserInput" placeholder="Describe your vision need..." onkeypress="handleAiKeyPress(event)" />
+      <button type="button" class="ai-send-btn" onclick="processAiInput()">Send</button>
+    </div>
+  </div>
+
   <!-- Floating Cart Button -->
   <button class="cart-floating-btn" id="openCartBtn" onclick="toggleCart(true)">
     <span>🛒</span>
@@ -358,9 +413,9 @@
         </div>
       </div>
 
-      <!-- Addons Section -->
+      <!-- Addons Section (Spa & Official ValueVis Custom Lab Services) -->
       <div class="cart-addons-section">
-        <span style="font-size: 0.85rem; font-weight: 700;">🛠️ Frame Spa & Maintenance</span>
+        <span style="font-size: 0.85rem; font-weight: 700;">🛠️️ Frame Spa & Lab Add-ons</span>
         <div class="addons-list">
           <label class="addon-card" for="addon-nosepads">
             <input type="checkbox" id="addon-nosepads" value="nosepads" onchange="toggleAddon('nosepads')" />
@@ -392,6 +447,39 @@
                 <span class="addon-price">+₹199</span>
               </div>
               <p class="addon-desc">Balances pantoscopic tilt and tightens loose temples.</p>
+            </div>
+          </label>
+
+          <label class="addon-card" for="addon-dualcoat">
+            <input type="checkbox" id="addon-dualcoat" value="dualcoat" onchange="toggleAddon('dualcoat')" />
+            <div class="addon-info">
+              <div class="addon-title-row">
+                <span>ValueVis Dual Coat™ Technology</span>
+                <span class="addon-price">+₹500</span>
+              </div>
+              <p class="addon-desc">Front Green ARC + Back Blue ARC reflection finish.</p>
+            </div>
+          </label>
+
+          <label class="addon-card" for="addon-tint">
+            <input type="checkbox" id="addon-tint" value="tint" onchange="toggleAddon('tint')" />
+            <div class="addon-info">
+              <div class="addon-title-row">
+                <span>Custom Sunglass Tint (Full / Gradient)</span>
+                <span class="addon-price">+₹300</span>
+              </div>
+              <p class="addon-desc">Available in Dark/Light Grey, Brown, Blue, and Green.</p>
+            </div>
+          </label>
+
+          <label class="addon-card" for="addon-rimless">
+            <input type="checkbox" id="addon-rimless" value="rimless" onchange="toggleAddon('rimless')" />
+            <div class="addon-info">
+              <div class="addon-title-row">
+                <span>Rimless / Supra Lab Edge Drilling</span>
+                <span class="addon-price">+₹500</span>
+              </div>
+              <p class="addon-desc">Notch & drill mounting on Coburn / Buhler machinery.</p>
             </div>
           </label>
         </div>
@@ -444,79 +532,313 @@
     </div>
   </aside>
 
-  <!-- Complete Inlined JS (Ensures Zero 404s on GitHub Pages) -->
+  <!-- Complete Inlined Reactive Logic -->
   <script>
     const RELENS_STORAGE_KEY = "relens_cart_session_v1";
 
+    // 1. Complete Lens Catalog (ValueVis July 2026 Price List Integration)
     const catalogData = [
+      // Precious Blue FSV
       {
-        id: "rl-sv-01",
-        name: "Standard Clear SV (1.56 Index)",
+        id: "vv-fsv-clear",
+        name: "ValueVis Precious Blue Clear SV (1.56)",
         category: "Single Vision",
+        series: "Precious Blue",
         index: 1.56,
         brand: "ValueVis",
         image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80",
-        features: ["Anti-reflective coating", "Scratch resistant", "UV380 protection"],
-        price: 999
+        features: ["HMC Blue anti-reflective coating", "Scratch & dust repellent", "Hydrophobic easy-clean"],
+        price: 1490
       },
       {
-        id: "rl-bc-01",
-        name: "UV420 Digital Blue-Cut (1.60 Hi-Index)",
+        id: "vv-fsv-bluecut",
+        name: "ValueVis Precious Blue UV BlueCut (1.56)",
         category: "Blue Cut",
-        index: 1.60,
+        series: "Precious Blue",
+        index: 1.56,
         brand: "ValueVis",
         image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80",
-        features: ["Screen glare reduction", "Hydrophobic easy-clean", "20% thinner edge profile"],
-        price: 1499
+        features: ["Screens glare protection", "HMC Blue reflection control", "Power up to -6.00 / -2.00 Cyl"],
+        price: 1590
       },
       {
-        id: "rl-pg-01",
-        name: "Wide Corridor Free-Form Progressive (1.56)",
-        category: "Progressive",
+        id: "vv-fsv-daynite",
+        name: "ValueVis Precious Blue DayNite Photochromic (1.56)",
+        category: "Single Vision",
+        series: "Precious Blue",
         index: 1.56,
         brand: "ValueVis",
         image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
-        features: ["Seamless distant-to-near", "Zero swim distortion", "Wide reading corridor"],
-        price: 3499
+        features: ["Adapts to changing light", "Clear indoors, dark outdoors", "HMC Blue coating"],
+        price: 1890
       },
       {
-        id: "rl-pg-02",
-        name: "Thin Precision Progressive (1.67 Hi-Index)",
-        category: "Progressive",
+        id: "vv-fsv-daynite-bc",
+        name: "ValueVis Precious Blue DayNite + BlueCut (1.56)",
+        category: "Blue Cut",
+        series: "Precious Blue",
+        index: 1.56,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80",
+        features: ["Dual protection: Screens + Sunlight", "HMC Blue premium coat", "Fast react indoor fade"],
+        price: 1990
+      },
+
+      // Single Vision RX
+      {
+        id: "vv-sv-rx-156-bc",
+        name: "ValueVis RX BlueCut Single Vision (1.56)",
+        category: "Blue Cut",
+        series: "Single Vision RX",
+        index: 1.56,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80",
+        features: ["Custom surfaced optics", "HMC Green/Blue ARC", "Higher cyl power availability"],
+        price: 3590
+      },
+      {
+        id: "vv-sv-rx-160-bc",
+        name: "ValueVis RX MR-8 Hi-Index BlueCut (1.60)",
+        category: "Blue Cut",
+        series: "Single Vision RX",
+        index: 1.60,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80",
+        features: ["MR-8 impact resistant material", "20% thinner profile", "Perfect for rimless frames"],
+        price: 5790
+      },
+      {
+        id: "vv-sv-rx-167-bc",
+        name: "ValueVis RX Ultra-Thin BlueCut (1.67)",
+        category: "Blue Cut",
+        series: "Single Vision RX",
         index: 1.67,
         brand: "ValueVis",
         image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80",
-        features: ["Ultra-thin edges", "Optimized optics for high power", "Wide reading zone"],
-        price: 5499
+        features: ["Ultra-thin edges for high minus powers", "Aspheric design", "Reduced eye minification"],
+        price: 7390
       },
       {
-        id: "rl-es-pg02",
-        name: "Essilor Varilux Comfort Max (1.60)",
-        category: "Progressive",
+        id: "vv-sv-rx-daynite-160",
+        name: "ValueVis RX DayNite Photochromic (1.60 MR-8)",
+        category: "Single Vision",
+        series: "Single Vision RX",
         index: 1.60,
-        brand: "Essilor",
-        image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80",
-        features: ["Flex Optim technology", "Postural flexibility", "All-day comfort"],
-        price: 8500
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+        features: ["MR-8 high tensile strength", "Sunlight responsive DayNite tint", "HMC Green/Blue coating"],
+        price: 8290
+      },
+
+      // Progressives (Entice & Venture)
+      {
+        id: "vv-pg-entice-149",
+        name: "ValueVis Entice Freeform Progressive (1.49)",
+        category: "Progressive",
+        series: "Entice",
+        index: 1.50,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+        features: ["Entry-level digital progressive", "HMC Green reflection coating", "Reliable distance & near flow"],
+        price: 2090
       },
       {
-        id: "rl-bl-cl01",
-        name: "Bausch + Lomb SofLens 59 (Monthly)",
+        id: "vv-pg-venture-156-bc",
+        name: "ValueVis Venture Freeform BlueCut (1.56)",
+        category: "Progressive",
+        series: "Venture",
+        index: 1.56,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80",
+        features: ["Wider visual zones", "Reduced peripheral swim effect", "HMC Green/Blue coating"],
+        price: 3490
+      },
+      {
+        id: "vv-pg-venture-160-bc",
+        name: "ValueVis Venture Freeform BlueCut (1.60)",
+        category: "Progressive",
+        series: "Venture",
+        index: 1.60,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80",
+        features: ["Thin & light for moderate powers", "Optimized computer intermediate corridor", "Quick visual adaptation"],
+        price: 5390
+      },
+
+      // Progressives (Customized American Tech)
+      {
+        id: "vv-pg-custom-156-bc",
+        name: "ValueVis Customized Freeform BlueCut (1.56)",
+        category: "Progressive",
+        series: "Customized",
+        index: 1.56,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+        features: ["Advanced American Freeform Tech", "Balanced corridor distribution", "HMC Green/Blue coating"],
+        price: 4390
+      },
+      {
+        id: "vv-pg-custom-160-bc",
+        name: "ValueVis Customized Freeform BlueCut (1.60)",
+        category: "Progressive",
+        series: "Customized",
+        index: 1.60,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80",
+        features: ["MR-8 premium optical substrate", "Effortless natural progression", "Superior impact resistance"],
+        price: 6790
+      },
+      {
+        id: "vv-pg-custom-167-bc",
+        name: "ValueVis Customized Freeform BlueCut (1.67)",
+        category: "Progressive",
+        series: "Customized",
+        index: 1.67,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80",
+        features: ["Ultra-thin edges for high additions & powers", "Laser authenticated engraving", "Wide reading corridor"],
+        price: 8390
+      },
+      {
+        id: "vv-pg-custom-174-bc",
+        name: "ValueVis Customized Freeform BlueCut (1.74)",
+        category: "Progressive",
+        series: "Customized",
+        index: 1.74,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80",
+        features: ["Extreme high index 1.74 design", "Slimmest aesthetic profile worldwide", "HMC Blue / Green coating"],
+        price: 19790
+      },
+
+      // Progressives (Evolux European Tech)
+      {
+        id: "vv-pg-evolux-156-optix",
+        name: "ValueVis Evolux ClearView (1.56)",
+        category: "Progressive",
+        series: "Evolux",
+        index: 1.56,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80",
+        features: ["Engineered with European Tech", "Extended field of vision (Far/Mid/Near)", "Optix ARC green reflection coating"],
+        price: 6990
+      },
+      {
+        id: "vv-pg-evolux-160-bluvex",
+        name: "ValueVis Evolux MR-8 ClearView (1.60)",
+        category: "Progressive",
+        series: "Evolux",
+        index: 1.60,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80",
+        features: ["MR-8 premium strength", "Bluvex ARC signature blue finish", "Minimal peripheral distortion"],
+        price: 9390
+      },
+      {
+        id: "vv-pg-evolux-daynite-160",
+        name: "ValueVis Evolux DayNite Adaptive (1.60)",
+        category: "Progressive",
+        series: "Evolux",
+        index: 1.60,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+        features: ["Intelligent light transition", "Extended driving & digital clarity", "Optix ARC anti-reflection"],
+        price: 13890
+      },
+
+      // Progressives (Evolux Elite Flagship)
+      {
+        id: "vv-pg-elite-156",
+        name: "ValueVis Evolux Elite Flagship (1.56)",
+        category: "Progressive",
+        series: "Evolux Elite",
+        index: 1.56,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80",
+        features: ["Panoramic visual coverage", "Instant adaptation comfort", "Optix / Bluvex ARC coating"],
+        price: 10690
+      },
+      {
+        id: "vv-pg-elite-160",
+        name: "ValueVis Evolux Elite MR-8 (1.60)",
+        category: "Progressive",
+        series: "Evolux Elite",
+        index: 1.60,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80",
+        features: ["Maximum corridor width", "Ultra-smooth visual flow across zones", "Elite adaptive comfort"],
+        price: 12790
+      },
+      {
+        id: "vv-pg-elite-167",
+        name: "ValueVis Evolux Elite Ultra-Thin (1.67)",
+        category: "Progressive",
+        series: "Evolux Elite",
+        index: 1.67,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80",
+        features: ["Unmatched precision for high powers", "Luxury optical finish", "Optix / Bluvex ARC"],
+        price: 14490
+      },
+      {
+        id: "vv-pg-elite-174",
+        name: "ValueVis Evolux Elite Extreme Thin (1.74)",
+        category: "Progressive",
+        series: "Evolux Elite",
+        index: 1.74,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+        features: ["Flagship 1.74 free-form optics", "Flattest panoramic lens on market", "Authentic laser engraving"],
+        price: 26190
+      },
+      {
+        id: "vv-pg-elite-daynite-160",
+        name: "ValueVis Evolux Elite DayNite (1.60 MR-8)",
+        category: "Progressive",
+        series: "Evolux Elite",
+        index: 1.60,
+        brand: "ValueVis",
+        image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80",
+        features: ["Flagship optics + fast photochromic", "Effortless transition in & outdoors", "Bluvex ARC signature reflection"],
+        price: 17690
+      },
+
+      // Contact Lenses
+      {
+        id: "bl-cl-soflens59",
+        name: "Bausch + Lomb SofLens 59 (Monthly - 6 Pack)",
         category: "Contact Lenses",
+        series: "Contact Lenses",
         index: null,
         brand: "Bausch + Lomb",
         image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80",
-        features: ["Hilafilcon B material", "Deposit resistant", "High hydration comfort"],
+        features: ["Hilafilcon B protein-resistant material", "Stable tear-film hydration", "Easy handling for beginners"],
         price: 1250
+      },
+      {
+        id: "bl-cl-biotrue",
+        name: "Bausch + Lomb Biotrue ONEday (Daily - 30 Pack)",
+        category: "Contact Lenses",
+        series: "Contact Lenses",
+        index: null,
+        brand: "Bausch + Lomb",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80",
+        features: ["HyperGel matches natural eye moisture", "High oxygen breathability", "Fresh pair every day"],
+        price: 2400
       }
     ];
 
+    // 2. Addons Data (Spa + Official ValueVis Custom Lab Services)
     const availableAddons = {
       nosepads: { id: "addon-nosepads", name: "German Silicone Nose Pads", price: 99 },
       ultrasonic: { id: "addon-ultrasonic", name: "Ultrasonic Deep Cleaning Spa", price: 149 },
-      alignment: { id: "addon-alignment", name: "Frame Realignment & Tightening", price: 199 }
+      alignment: { id: "addon-alignment", name: "Frame Realignment & Tightening", price: 199 },
+      dualcoat: { id: "addon-dualcoat", name: "ValueVis Dual Coat™ Technology", price: 500 },
+      tint: { id: "addon-tint", name: "Custom Sunglass Tint (Full/Gradient)", price: 300 },
+      rimless: { id: "addon-rimless", name: "Rimless / Supra Lab Edge Drilling", price: 500 }
     };
 
+    // 3. Mock Order Journey Database
     const RELENS_ORDERS = {
       "RL-2026-1042": {
         orderId: "RL-2026-1042",
@@ -560,6 +882,7 @@
     let currentRxMode = "manual";
     let selectedRxFile = null;
 
+    // Render Catalog
     function renderCatalog(items) {
       const container = document.getElementById("catalogGrid");
       if (!container) return;
@@ -622,6 +945,7 @@
       toggleCart(false);
     }
 
+    // Prescription & Index Rule
     function switchRxMode(mode) {
       currentRxMode = mode;
       document.getElementById("tabBtnManual").classList.toggle("active", mode === "manual");
@@ -685,13 +1009,13 @@
         box.className = "index-rec-box rec-standard";
       } else if (maxPower <= 4.00) {
         currentRecommendedIndex = 1.60;
-        title.textContent = "1.60 Thin Hi-Index";
-        reason.textContent = "Up to 20% thinner edge profile for moderate powers.";
+        title.textContent = "1.60 Thin Hi-Index (MR-8)";
+        reason.textContent = "Up to 20% thinner edge profile with high impact strength.";
         box.className = "index-rec-box rec-mid";
       } else if (maxPower <= 6.00) {
         currentRecommendedIndex = 1.67;
         title.textContent = "1.67 Ultra-Thin Hi-Index";
-        reason.textContent = "Significantly reduces edge thickness and distortion.";
+        reason.textContent = "Significantly reduces edge thickness and peripheral distortion.";
         box.className = "index-rec-box rec-high";
       } else {
         currentRecommendedIndex = 1.74;
@@ -705,6 +1029,72 @@
       applyFilters();
     }
 
+    // AI Vision Advisor Engine
+    function toggleAiAssistant(isOpen) {
+      document.getElementById("aiModal").classList.toggle("active", isOpen);
+      document.getElementById("aiOverlay").classList.toggle("active", isOpen);
+    }
+
+    function handleAiKeyPress(e) {
+      if (e.key === "Enter") processAiInput();
+    }
+
+    function runAiPrompt(type) {
+      let promptText = "";
+      if (type === "high-screen") promptText = "I spend 8+ hours on laptops and digital screens.";
+      if (type === "reading-distance") promptText = "I need clear vision for reading phone and distance driving.";
+      if (type === "outdoor-sun") promptText = "I want lenses that adapt and turn dark in sunlight.";
+      if (type === "high-power") promptText = "My power is high (-5.00 or above) and I need ultra-thin edges.";
+      
+      document.getElementById("aiUserInput").value = promptText;
+      processAiInput();
+    }
+
+    function processAiInput() {
+      const input = document.getElementById("aiUserInput");
+      const query = input.value.trim().toLowerCase();
+      if (!query) return;
+
+      const chatBody = document.getElementById("aiChatBody");
+      chatBody.innerHTML += `<div class="ai-msg user">${input.value}</div>`;
+      input.value = "";
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      setTimeout(() => {
+        let reply = "";
+        let recommendedLensId = "";
+
+        if (query.includes("screen") || query.includes("computer") || query.includes("laptop") || query.includes("blue")) {
+          reply = "For extensive screen use, you need high blue-violet reflection control. I recommend the **ValueVis RX MR-8 Hi-Index BlueCut (1.60)** for thinness, anti-glare, and reduced eye fatigue.";
+          recommendedLensId = "vv-sv-rx-160-bc";
+        } else if (query.includes("reading") || query.includes("driving") || query.includes("progressive") || query.includes("bifocal")) {
+          reply = "For seamless multi-distance vision without dividing lines, the **ValueVis Evolux ClearView Progressive (1.56)** delivers an extended viewing corridor with instant adaptation.";
+          recommendedLensId = "vv-pg-evolux-156-optix";
+        } else if (query.includes("outdoor") || query.includes("sun") || query.includes("dark") || query.includes("photochromic")) {
+          reply = "You need light-adaptive technology. The **ValueVis Precious Blue DayNite Photochromic (1.56)** darkens automatically in sunlight and clears up indoors.";
+          recommendedLensId = "vv-fsv-daynite";
+        } else if (query.includes("high") || query.includes("thick") || query.includes("-5") || query.includes("-6") || query.includes("thin")) {
+          reply = "For strong prescriptions, standard lenses become bulky. I recommend **ValueVis RX Ultra-Thin BlueCut (1.67)** or **Customized 1.74** for a slim aesthetic edge.";
+          recommendedLensId = "vv-sv-rx-167-bc";
+        } else {
+          reply = "Based on everyday versatility, the **ValueVis Precious Blue UV BlueCut (1.56)** provides balanced multi-coating and screen comfort at optimal value.";
+          recommendedLensId = "vv-fsv-bluecut";
+        }
+
+        chatBody.innerHTML += `
+          <div class="ai-msg bot">
+            ${reply}
+            <br><br>
+            <button class="ai-action-btn" onclick="handleSelectLens('${recommendedLensId}'); toggleAiAssistant(false);">
+              👉 Add Recommended Lens to Bag
+            </button>
+          </div>
+        `;
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }, 400);
+    }
+
+    // Cart & Addons
     function toggleCart(isOpen) {
       document.getElementById("cartDrawer")?.classList.toggle("active", isOpen);
       document.getElementById("cartOverlay")?.classList.toggle("active", isOpen);
@@ -773,7 +1163,7 @@
       container.innerHTML = cart.map(item => `
         <div class="cart-item">
           <div class="cart-item-details">
-            <span class="item-brand" style="font-size: 0.72rem; color: var(--primary); font-weight: 700;">${item.brand}</span>
+            <span class="item-brand" style="font-size: 0.72rem; color: var(--primary); font-weight: 700;">${item.brand} • ${item.series || 'Lens'}</span>
             <h4 style="font-size: 0.95rem; margin: 2px 0;">${item.name}</h4>
             <span style="font-size: 0.8rem; color: #64748b;">₹${item.price.toLocaleString("en-IN")} each</span>
           </div>
@@ -882,7 +1272,7 @@
       let addonsTotal = 0;
       if (selectedAddons.size > 0) {
         const list = Array.from(selectedAddons).map(key => `  + ${availableAddons[key].name} (₹${availableAddons[key].price})`).join("\n");
-        addonsSummary = `\n*Frame Care Add-ons:*\n${list}\n`;
+        addonsSummary = `\n*Frame Care & Lab Add-ons:*\n${list}\n`;
       }
 
       const grandTotal = lensesTotal + addonsTotal;
