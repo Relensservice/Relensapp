@@ -1,1901 +1,1016 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ReLens • Same Frame. Better Vision.</title>
-  <link rel="icon" href="https://relensservice.github.io/Relensapp/icon-512.png" />
-  <style>
-    :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --slate-900: #0f172a;
-      --slate-800: #1e293b;
-      --slate-600: #475569;
-      --slate-400: #94a3b8;
-      --slate-100: #f1f5f9;
-      --bg: #f8fafc;
-      --white: #ffffff;
-      --border: #e2e8f0;
-      --success: #22c55e;
-      --wa-green: #25d366;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg); color: var(--slate-800); line-height: 1.5; padding-bottom: 95px; }
-
-    /* Header */
-    header { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
-    .nav-container { max-width: 1100px; margin: 0 auto; padding: 0.85rem 1rem; display: flex; justify-content: space-between; align-items: center; }
-    .brand-logo-wrap { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--slate-900); font-weight: 800; font-size: 1.25rem; }
-    .brand-logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
-    .brand-logo-wrap span { color: var(--primary); }
-    .header-tagline { font-size: 0.75rem; color: var(--slate-600); font-weight: 500; }
-
-    .main-container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
-
-    /* Hero */
-    .hero-banner { text-align: center; padding: 2rem 0 1.5rem; }
-    .hero-pill { display: inline-block; font-size: 0.72rem; font-weight: 700; background: #e0f2fe; color: var(--primary-dark); padding: 4px 12px; border-radius: 9999px; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
-    .hero-banner h1 { font-size: 2.2rem; color: var(--slate-900); line-height: 1.2; margin-bottom: 0.5rem; }
-    .hero-banner h1 span { color: var(--primary); }
-    .hero-banner p { max-width: 650px; margin: 0 auto 1rem; color: var(--slate-600); font-size: 0.95rem; }
-    
-    .trust-badges { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .trust-badge { font-size: 0.78rem; font-weight: 600; color: #166534; background: #f0fdf4; padding: 4px 12px; border-radius: 9999px; border: 1px solid #bbf7d0; }
-
-    /* Brand Showcase Grid */
-    .brand-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-    .brand-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
-    .brand-tag { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 0.25rem; }
-    .brand-card h3 { font-size: 1.05rem; color: var(--slate-900); margin-bottom: 0.35rem; }
-    .brand-card p { font-size: 0.8rem; color: var(--slate-600); }
-
-    /* Order Tracker */
-    .tracker-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); margin-bottom: 2.5rem; }
-    .tracker-header h2 { font-size: 1.25rem; color: var(--slate-900); margin: 0.25rem 0 0.5rem; }
-    .tracker-header p { font-size: 0.85rem; color: var(--slate-600); margin-bottom: 1rem; }
-    .tracker-search-bar { display: flex; gap: 0.5rem; }
-    .input-wrapper { position: relative; flex-grow: 1; }
-    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; }
-    .input-wrapper input { width: 100%; padding: 0.75rem 0.75rem 0.75rem 2.25rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; outline: none; }
-    .track-btn { background: var(--slate-900); color: var(--white); border: none; padding: 0.75rem 1.25rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-    .demo-id-pills { display: flex; align-items: center; gap: 0.4rem; margin: 0.6rem 0 0.5rem; font-size: 0.75rem; color: var(--slate-600); }
-    .demo-id-pills button { background: var(--slate-100); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; font-size: 0.72rem; cursor: pointer; color: var(--primary); font-weight: 600; }
-
-    /* Catalog Section */
-    .catalog-section-header { margin-bottom: 0.5rem; }
-    .catalog-section-header h2 { font-size: 1.35rem; color: var(--slate-900); }
-    .catalog-filters { display: flex; gap: 0.55rem; overflow-x: auto; padding: 0.5rem 0 1rem; -webkit-overflow-scrolling: touch; }
-    .catalog-filters::-webkit-scrollbar { display: none; }
-    .filter-btn { white-space: nowrap; padding: 0.5rem 1rem; border-radius: 9999px; border: 1px solid var(--border); background: var(--white); color: var(--slate-600); font-size: 0.825rem; font-weight: 600; cursor: pointer; }
-    .filter-btn.active { background: var(--slate-900); color: var(--white); border-color: var(--slate-900); }
-
-    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
-    .catalog-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; position: relative; }
-    .catalog-card.recommended-match { border: 2px solid var(--primary); box-shadow: 0 4px 16px rgba(2, 132, 199, 0.16); }
-    .match-badge { position: absolute; top: 10px; right: 10px; background: var(--primary); color: var(--white); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; z-index: 2; }
-    
-    .card-media { 
-      position: relative; 
-      height: 190px; 
-      background: #0f172a; 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .card-media img.product-img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover;
-      object-position: center;
-      transition: transform 0.3s ease;
-    }
-    .catalog-card:hover .card-media img.product-img {
-      transform: scale(1.04);
-    }
-    .brand-pill { position: absolute; top: 10px; left: 10px; background: rgba(255, 255, 255, 0.95); padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; color: #0f172a; z-index: 2; }
-    
-    .card-body { padding: 1rem; display: flex; flex-direction: column; flex-grow: 1; }
-    .tag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem; }
-    .category-badge { color: var(--primary); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; }
-    .index-pill { font-size: 0.68rem; font-weight: 600; background: var(--slate-100); color: var(--slate-600); padding: 2px 6px; border-radius: 4px; }
-    .product-title { font-size: 0.98rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--slate-900); }
-    .feature-tags { list-style: none; margin-bottom: 1rem; flex-grow: 1; }
-    .feature-tags li { font-size: 0.78rem; color: var(--slate-600); margin-bottom: 0.25rem; }
-    
-    .card-action { display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--slate-100); }
-    .price-wrap { display: flex; flex-direction: column; }
-    .price-label { font-size: 0.65rem; color: var(--slate-400); text-transform: uppercase; }
-    .price { font-size: 1.15rem; font-weight: 800; color: var(--slate-900); }
-    .select-btn { background: var(--primary); color: var(--white); border: none; padding: 0.5rem 1.1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-
-    /* Direct Booking Form Section */
-    .booking-section { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; margin-bottom: 2.5rem; }
-    .booking-section h2 { font-size: 1.25rem; color: var(--slate-900); margin-bottom: 0.25rem; }
-    .booking-section p { font-size: 0.85rem; color: var(--slate-600); margin-bottom: 1rem; }
-    .booking-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
-    .booking-form-grid select, .booking-form-grid input { width: 100%; padding: 0.65rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; outline: none; }
-    .book-direct-btn { background: var(--primary); color: var(--white); border: none; padding: 0.75rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
-
-    /* AI Assistant Trigger & Modal */
-    .ai-assistant-btn { position: fixed; bottom: 25px; left: 20px; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #0284c7, #6366f1); color: #ffffff; border: none; padding: 10px 18px; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4); cursor: pointer; z-index: 99; }
-    .ai-modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(2px); z-index: 1002; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
-    .ai-modal-overlay.active { opacity: 1; pointer-events: auto; }
-    .ai-modal { position: fixed; bottom: 90px; left: 20px; width: calc(100% - 40px); max-width: 380px; height: 480px; background: #ffffff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 1003; display: flex; flex-direction: column; transform: translateY(20px) scale(0.96); opacity: 0; pointer-events: none; transition: all 0.25s ease; overflow: hidden; }
-    .ai-modal.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-    .ai-modal-header { padding: 0.85rem 1.1rem; background: #0f172a; color: #ffffff; display: flex; justify-content: space-between; align-items: center; }
-    .ai-badge { font-size: 0.65rem; color: #38bdf8; font-weight: 700; text-transform: uppercase; }
-    .ai-chat-body { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; background: #f8fafc; }
-    .ai-msg { max-width: 85%; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; line-height: 1.4; }
-    .ai-msg.bot { background: #ffffff; color: #1e293b; border: 1px solid #e2e8f0; align-self: flex-start; }
-    .ai-msg.user { background: #0284c7; color: #ffffff; align-self: flex-end; }
-    .ai-quick-prompts { display: flex; gap: 4px; overflow-x: auto; padding: 6px 10px; background: #ffffff; border-top: 1px solid #f1f5f9; }
-    .ai-quick-prompts button { white-space: nowrap; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 4px; font-size: 0.68rem; padding: 3px 6px; cursor: pointer; color: #334155; }
-    .ai-input-bar { display: flex; padding: 8px 10px; background: #ffffff; border-top: 1px solid #e2e8f0; gap: 6px; }
-    .ai-input-bar input { flex-grow: 1; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px; font-size: 0.8rem; outline: none; }
-    .ai-send-btn { background: #0284c7; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
-    .ai-action-btn { margin-top: 8px; background: #0284c7; color: #ffffff; border: none; padding: 6px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
-
-    /* Cart Floating & Drawer */
-    .cart-floating-btn { position: fixed; bottom: 25px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: var(--white); border: none; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4); cursor: pointer; z-index: 99; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-    .cart-badge { position: absolute; top: -2px; right: -2px; background: #ef4444; color: var(--white); font-size: 0.75rem; font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
-    
-    .cart-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(2px); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-    .cart-overlay.active { opacity: 1; pointer-events: auto; }
-    .cart-drawer { position: fixed; top: 0; right: 0; width: 100%; max-width: 450px; height: 100%; background: var(--white); z-index: 1001; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; }
-    .cart-drawer.active { transform: translateX(0); }
-    
-    .cart-header { padding: 1.25rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .close-btn { background: none; border: none; font-size: 1.35rem; cursor: pointer; color: var(--slate-400); }
-    .cart-scroll-body { flex-grow: 1; overflow-y: auto; }
-    .cart-items { padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
-    .cart-item { border-bottom: 1px solid var(--border); padding-bottom: 0.85rem; }
-    .item-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
-    .qty-stepper { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 6px; }
-    .qty-stepper button { background: transparent; border: none; padding: 4px 10px; cursor: pointer; font-weight: 700; }
-
-    /* Prescription Section */
-    .cart-rx-section { padding: 1rem 1.25rem; background: #fafafa; border-top: 1px solid var(--border); }
-    .rx-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
-    .rx-tab-toggle { display: flex; background: var(--slate-100); border-radius: 6px; padding: 2px; }
-    .rx-tab-btn { border: none; background: transparent; font-size: 0.72rem; font-weight: 600; padding: 4px 8px; border-radius: 4px; cursor: pointer; color: var(--slate-600); }
-    .rx-tab-btn.active { background: var(--white); color: var(--slate-900); }
-    .rx-mode-content { display: none; }
-    .rx-mode-content.active { display: block; }
-    .rx-power-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-    .rx-power-table th, .rx-power-table td { padding: 3px 2px; text-align: center; }
-    .rx-power-table input { width: 100%; padding: 6px 4px; border: 1px solid #cbd5e1; border-radius: 6px; text-align: center; font-size: 0.78rem; }
-    
-    .index-rec-box { margin-top: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 8px; display: flex; gap: 0.6rem; font-size: 0.75rem; border-left: 4px solid; }
-    .index-rec-box.rec-standard { background: #f0fdf4; border-left-color: var(--success); }
-    .index-rec-box.rec-mid { background: #f0f9ff; border-left-color: var(--primary); }
-    .index-rec-box.rec-high { background: #fefce8; border-left-color: #eab308; }
-    .index-rec-box.rec-ultra { background: #fdf2f8; border-left-color: #ec4899; }
-    .rec-filter-btn { margin-top: 0.5rem; width: 100%; padding: 0.4rem; font-size: 0.72rem; font-weight: 700; background: var(--slate-900); color: var(--white); border: none; border-radius: 6px; cursor: pointer; }
-
-    /* Addons */
-    .cart-addons-section { padding: 1rem 1.25rem; background: var(--slate-100); border-top: 1px solid var(--border); }
-    .addon-card { display: flex; gap: 0.65rem; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem 0.8rem; cursor: pointer; margin-top: 0.5rem; }
-    .addon-card:has(input:checked) { border-color: var(--primary); background: #f0f9ff; }
-    .addon-info { flex-grow: 1; }
-    .addon-title-row { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; }
-    .addon-price { color: var(--primary); font-weight: 700; }
-    .addon-desc { font-size: 0.7rem; color: var(--slate-600); }
-
-    /* Appointment Slot */
-    .cart-appointment-section { padding: 1rem 1.25rem; background: var(--white); border-top: 1px solid var(--border); }
-    .slot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.45rem; margin-top: 0.4rem; }
-    .slot-pill input { display: none; }
-    .slot-pill span { display: block; text-align: center; font-size: 0.72rem; padding: 0.45rem 0.2rem; background: var(--slate-100); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; }
-    .slot-pill input:checked + span { background: var(--primary); color: var(--white); border-color: var(--primary); font-weight: 600; }
-
-    /* Promo Code Section */
-    .cart-promo-section { padding: 1rem 1.25rem; background: #f8fafc; border-top: 1px solid var(--border); }
-    .promo-header { margin-bottom: 0.4rem; }
-    .promo-title { font-size: 0.8rem; font-weight: 700; color: var(--slate-800); }
-    .promo-input-row { display: flex; gap: 0.5rem; }
-    .promo-input-row input { flex-grow: 1; padding: 0.5rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.825rem; text-transform: uppercase; font-weight: 600; outline: none; }
-    .promo-input-row input:focus { border-color: var(--primary); }
-    .promo-apply-btn { background: var(--slate-900); color: var(--white); border: none; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
-    .quick-promo-pills { display: flex; align-items: center; gap: 0.35rem; margin-top: 0.45rem; flex-wrap: wrap; }
-    .promo-hint { font-size: 0.68rem; color: var(--slate-400); font-weight: 600; }
-    .quick-promo-pills button { background: var(--white); border: 1px dashed #cbd5e1; border-radius: 4px; padding: 2px 6px; font-size: 0.68rem; cursor: pointer; color: var(--primary-dark); font-weight: 600; }
-    .promo-feedback { font-size: 0.75rem; font-weight: 600; margin-top: 0.4rem; padding: 4px 8px; border-radius: 4px; }
-    .promo-feedback.success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
-    .promo-feedback.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
-
-    /* Drawer Footer & Cost Breakdown */
-    .cart-footer { padding: 1.25rem; border-top: 1px solid var(--border); background: var(--white); }
-    .cost-breakdown { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.85rem; }
-    .breakdown-row { display: flex; justify-content: space-between; font-size: 0.825rem; color: var(--slate-600); }
-    .discount-row { color: #166534; font-weight: 600; }
-    .discount-amount { font-weight: 700; }
-    .total-row { display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800; padding-top: 0.4rem; border-top: 1px solid var(--border); }
-    .checkout-whatsapp-btn { width: 100%; background: var(--wa-green); color: var(--white); border: none; padding: 0.85rem; font-size: 0.95rem; font-weight: 700; border-radius: 10px; cursor: pointer; margin-top: 0.5rem; }
-    .hidden { display: none !important; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ReLens | ValueVis Lens Catalog & Booking</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#0f1c3f;--mut:#5a6787;--navy:#14295a;--gold:#c9962b;--gold2:#e6b54a;--line:#dde3f0;--bh:40px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1330;--card:#111e45;--ink:#eef1fa;--mut:#9aa7c9;--line:#25356b}}
+:root[data-theme="dark"]{--bg:#0a1330;--card:#111e45;--ink:#eef1fa;--mut:#9aa7c9;--line:#25356b}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + var(--bh,0px) + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'DM Sans',system-ui,sans-serif}
+h1,h2,h3,h4{font-family:Outfit,'DM Sans',sans-serif;line-height:1.15;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+nav{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--bh,0px));z-index:20;background:var(--navy);color:#fff;display:flex;align-items:center;gap:18px;padding:8px 18px;flex-wrap:wrap}
+nav img{height:44px;width:44px;border-radius:10px;background:#fff;padding:2px;object-fit:cover}
+nav b{font:700 20px Outfit,sans-serif;margin-right:auto}
+nav a{text-decoration:none;font-weight:500;opacity:.9}
+nav a.cta{background:var(--gold);color:#101a38;padding:8px 14px;border-radius:999px;font-weight:700;opacity:1}
+.hero{background:linear-gradient(135deg,#0d1d47,#14295a 60%,#1d3a7a);color:#fff;padding:56px 18px 64px}
+.wrap{max-width:1120px;margin:0 auto}
+.hero .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,58px);font-weight:700}
+.hero h1 span{color:var(--gold2)}
+.hero p{max-width:52ch;color:#cfd8f2;font-size:18px}
+.hero .lg{background:#fff;border-radius:24px;padding:8px;box-shadow:0 20px 50px #0006;justify-self:center;max-width:560px;width:100%}
+.hero .lg img{width:100%;display:block;border-radius:18px;object-fit:cover;min-height:240px}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 15px 'DM Sans',sans-serif;padding:12px 20px;border-radius:12px;background:var(--gold);color:#101a38;text-decoration:none;transition:opacity .2s}
+.btn:hover{opacity:.9}
+.btn.o{background:transparent;color:inherit;border:2px solid currentColor}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+section{padding:52px 18px}
+section h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:8px}
+.sub{color:var(--mut);max-width:64ch;margin:0 0 26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 24px #0000000a}
+.card .ph{aspect-ratio:3/2;background:#0d1d47;cursor:zoom-in;display:flex;align-items:center;justify-content:center;color:#cfd8f2}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card .b{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tag{align-self:flex-start;background:var(--gold);color:#101a38;font-weight:700;font-size:12px;padding:3px 10px;border-radius:99px}
+.card h3{font-size:22px}.card p{margin:0;color:var(--mut);font-size:15px}
+.from{font:700 22px Outfit,sans-serif;color:var(--navy);margin-top:auto}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .from{color:var(--gold2)}}
+:root[data-theme="dark"] .from{color:var(--gold2)}
+.from small{font:500 13px 'DM Sans';color:var(--mut)}
+.det{display:none;grid-column:1/-1;background:var(--card);border:2px solid var(--gold);border-radius:18px;padding:18px}
+.det.on{display:block}
+.det h4{margin:18px 0 8px;font:700 17px Outfit}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:13px}
+td button{font:700 14px 'DM Sans';background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 9px;cursor:pointer}
+td button:hover{background:var(--gold);color:#101a38;border-color:var(--gold)}
+.note{font-size:13px;color:var(--mut);margin-top:12px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.gal figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:zoom-in}
+.gal img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}.gal figcaption{padding:8px 12px;font-weight:700;font-size:14px}
+.bk{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 4px}
+input,select,textarea{width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.it{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;align-items:center}
+.it button{background:none;border:0;color:var(--mut);cursor:pointer;font-size:18px}
+.tot{display:flex;justify-content:space-between;font:700 22px Outfit;margin-top:14px}
+.sd{background:var(--navy);color:#fff;border-radius:14px;padding:14px 18px;margin:0 0 24px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;border-left:6px solid var(--gold)}
+.sd b{font:700 19px Outfit}.ph svg{width:100%;height:100%;display:block}
+.pl{list-style:none;margin:8px 0 0;padding:0}.pl li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.pl button{font:700 14px 'DM Sans';background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 9px;cursor:pointer;white-space:nowrap}
+.pl button:hover{background:var(--gold);color:#101a38;border-color:var(--gold)}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:10px}summary{font-weight:700;cursor:pointer}
+#all table{min-width:0}#all td:last-child,#all th:last-child{text-align:right}
+.cp{background:#fff!important;cursor:zoom-in}.cp img{object-fit:contain;padding:8px}.th{display:flex;gap:8px;padding:8px 16px 0}.th img{width:64px;height:48px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:8px;cursor:zoom-in}nav a.lk{display:inline!important;border:1px solid #ffffff66;padding:7px 14px;border-radius:999px}
+#lg{position:fixed;inset:0;z-index:40;background:var(--bg);overflow:auto;display:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}#lg.on{display:block}
+.lgw{min-height:100%;display:grid;grid-template-columns:1fr 1fr}
+.lgw aside{background:linear-gradient(160deg,#0d1d47,#14295a 60%,#1d3a7a);color:#fff;padding:48px 36px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.lgw aside img{width:110px;border-radius:20px;background:#fff;padding:4px}.lgw aside h2{font-size:34px;margin:0}.lgw aside li{margin:8px 0;color:#cfd8f2}.lgw aside ul{padding-left:20px;margin:0}
+.lgw main{padding:48px 36px;max-width:480px;width:100%;margin:auto}
+.tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;margin:16px 0}
+.tabs button{flex:1;border:0;background:transparent;color:var(--ink);font:700 15px 'DM Sans';padding:10px;border-radius:9px;cursor:pointer}.tabs button.on{background:var(--navy);color:#fff}
+#lm{min-height:22px;font-size:14px;font-weight:700;color:#c0392b;margin-top:10px}#lm.ok{color:#1e8e5a}
+.xx{float:right;background:none;border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:6px 14px;cursor:pointer;font:700 14px 'DM Sans'}
+.bkh{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px;background:var(--card);font-size:14px}
+@media(max-width:800px){.lgw{grid-template-columns:1fr}.lgw aside{padding:28px 24px}.lgw main{padding:24px}}
+.dz{display:block;border:2px dashed var(--gold);border-radius:16px;padding:26px 16px;text-align:center;cursor:pointer;background:var(--bg);font-weight:700}.dz:focus-within{outline:3px solid var(--gold2);outline-offset:2px}.dz small{display:block;font-weight:400;color:var(--mut);margin-top:4px}.dz input{position:absolute;opacity:0;width:1px;height:1px}
+.pv{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.pv>div{position:relative;width:110px;height:110px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg);font-size:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;word-break:break-all}.pv img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.pv button{position:absolute;top:4px;right:4px;z-index:1;border:0;border-radius:99px;width:24px;height:24px;background:#000a;color:#fff;cursor:pointer}
+.pw{width:100%;min-width:0;padding:8px;text-align:center}.pt{min-width:0;font-size:14px}.pt th,.pt td{text-align:center;padding:5px 4px}.pt td:first-child{text-align:left;font-weight:700}
+#rxs{margin-top:12px;font-weight:700;font-size:14px;min-height:20px}
+.wf{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;background:#25d366;color:#053b1c;font:700 15px 'DM Sans',sans-serif;padding:12px 18px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px #0004}
+#bn{position:sticky;top:env(safe-area-inset-top,0px);z-index:22;height:40px;background:var(--gold2);color:#101a38;display:flex;align-items:center;font-size:14px;font-weight:700}
+#bn .vp{position:relative;flex:1;height:100%;overflow:hidden}
+#bn .sl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 44px;text-align:center;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transform:translateY(100%);transition:transform .5s ease}
+#bn .sl.on{transform:none}#bn .sl.out{transform:translateY(-100%)}
+#bn button{flex:none;width:36px;height:36px;border:0;background:transparent;color:inherit;font-size:20px;cursor:pointer;border-radius:99px}
+#bn button:hover{background:#0002}
+@media(max-width:600px){#bn{font-size:13px}#bn .sl{padding:0 6px;white-space:normal;line-height:1.15}#bn .pn{display:none}}
+@media(prefers-reduced-motion:reduce){#bn .sl{transition:none}}
+#iv{position:fixed;inset:0;z-index:45;background:var(--bg);overflow:auto;display:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}#iv.on{display:block}
+.ivg{display:grid;grid-template-columns:400px 1fr;gap:20px;padding:20px;max-width:1240px;margin:0 auto;align-items:start}
+.ln{display:grid;grid-template-columns:1fr 54px 88px 30px;gap:6px;margin-top:6px}.ln input{padding:8px}.ln button{border:0;background:none;color:var(--mut);font-size:18px;cursor:pointer}
+.ivr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#inv{background:#fff;color:#111;padding:28px;border-radius:12px;font-size:14px;line-height:1.45}
+#inv table{min-width:0;color:#111}#inv th{background:#14295a;color:#fff}#inv td,#inv th{border-color:#ddd}#inv .tt{width:52%;margin-left:auto;margin-top:12px}#inv .tt td{border:0;padding:4px 10px}#inv .gt td{border-top:2px solid #14295a;font-weight:700;font-size:16px}
+.ivh{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}.ivh img{width:64px;border-radius:12px}
+@media(max-width:900px){.ivg{grid-template-columns:1fr}}
+@media print{body>*{display:none!important}body>#iv{display:block!important;position:static;overflow:visible}#iv .noprint{display:none!important}.ivg{display:block;padding:0}#inv{border-radius:0;padding:0}}
+#lb{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+#lb.on{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:10px}
+footer{background:var(--navy);color:#cfd8f2;text-align:center;padding:28px 18px;font-size:14px}
+@media(max-width:800px){.hero .wrap,.bk{grid-template-columns:1fr}nav a:not(.cta){display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
-  <header>
-    <div class="nav-container">
-      <a href="#" class="brand-logo-wrap">
-        <img src="https://relensservice.github.io/Relensapp/icon-512.png" alt="ReLens Icon" />
-        <div>Re<span>Lens</span></div>
-      </a>
-      <span class="header-tagline">Puducherry Doorstep Optical Lab</span>
-    </div>
-  </header>
+<div id="bn" role="region" aria-label="Announcements">
+  <button class="pn" id="bp" aria-label="Previous message">‹</button>
+  <div class="vp">
+    <a class="sl on" href="#contacts">Same-day delivery in Puducherry on Bausch + Lomb contact lenses. Order before 4 PM.</a>
+    <a class="sl" href="#book">Give your frame a second life: lens replacement with doorstep pickup and delivery.</a>
+    <a class="sl" href="#catalog">ValueVis Evolux Elite, Evolux, Customized and DayNite lenses with full price lists.</a>
+    <a class="sl" href="#rx">Upload your prescription and our optometrist will verify it before ordering.</a>
+  </div>
+  <button class="pn" id="bnx" aria-label="Next message">›</button>
+  <button id="bc" aria-label="Close announcements">×</button>
+</div>
 
-  <main class="main-container">
+<nav>
+  <img src="" data-img="1" alt="ReLens logo">
+  <b>ReLens</b>
+  <a href="#catalog">Catalog</a>
+  <a href="#contacts">Contact lenses</a>
+  <a href="#essilor">Essilor</a>
+  <a href="#rx">Prescription</a>
+  <a href="#sheets">Price sheets</a>
+  <a class="lk" id="lgb" href="#login">Login</a>
+  <a class="cta" href="#book">Book · <span id="cnt">0</span> selected</a>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero-banner">
-      <span class="hero-pill">GIVE YOUR FRAME A SECOND LIFE</span>
-      <h1>Same Frame.<br><span>Better Vision.</span></h1>
-      <p>Upgrade to authentic ValueVis and high-index lenses at your doorstep in Puducherry. Maintain your favourite frame with zero optical compromise.</p>
-      <div class="trust-badges">
-        <span class="trust-badge">✓ Doorstep Service</span>
-        <span class="trust-badge">✓ Freeform European & US Tech</span>
-        <span class="trust-badge">✓ Authenticity Card Included</span>
-      </div>
-    </section>
-
-    <!-- Curated Brand Showcase -->
-    <section class="brand-grid">
-      <div class="brand-card">
-        <div class="brand-tag">FLAGSHIP PROGRESSIVES</div>
-        <h3>Evolux & Evolux Elite</h3>
-        <p>Panoramic focal zones, instant adaptation, Optix ARC Green, and Bluvex ARC Blue optics[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span).</p>
-      </div>
-      <div class="brand-card">
-        <div class="brand-tag">SURFACED FREEFORM</div>
-        <h3>Customized & Venture</h3>
-        <p>American Freeform technology with balanced corridor progression for active daily routines[span_16](start_span)[span_16](end_span)[span_17](start_span)[span_17](end_span)[span_18](start_span)[span_18](end_span).</p>
-      </div>
-      <div class="brand-card">
-        <div class="brand-tag">LIGHT-ADAPTIVE</div>
-        <h3>DayNite & Transitions</h3>
-        <p>Effortlessly clear indoors and reactive dark outdoors for driving and sunny environments[span_19](start_span)[span_19](end_span)[span_20](start_span)[span_20](end_span).</p>
-      </div>
-      <div class="brand-card">
-        <div class="brand-tag">CONTACT OPTICS</div>
-        <h3>Bausch + Lomb 2026</h3>
-        <p>Ultra Silicone Hydrogels, Biotrue Hypergels, and Renu solutions with doorstep guidance.</p>
-      </div>
-    </section>
-
-    <!-- Live Order Tracking -->
-    <section class="tracker-card">
-      <div class="tracker-header">
-        <span style="font-size: 0.72rem; font-weight: 700; color: var(--primary);">LIVE ORDER JOURNEY</span>
-        <h2>Track Your Doorstep Service</h2>
-        <p>Check the live inspection, optical edging, and dispatch status of your frame.</p>
-      </div>
-
-      <form class="tracker-search-bar" onsubmit="handleTrackOrder(event)">
-        <div class="input-wrapper">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="orderTrackerInput" placeholder="Enter Order ID (e.g. RL-2026-1042)" required />
-        </div>
-        <button type="submit" class="track-btn">Track Order</button>
-      </form>
-
-      <div class="demo-id-pills">
-        <span>Sample test IDs:</span>
-        <button type="button" onclick="quickFillTrack('RL-2026-1042')">#RL-2026-1042</button>
-        <button type="button" onclick="quickFillTrack('RL-2026-1088')">#RL-2026-1088</button>
-      </div>
-
-      <div id="trackerResultArea"></div>
-    </section>
-
-    <!-- Interactive Lens Catalog -->
-    <section class="catalog-section">
-      <div class="catalog-section-header">
-        <h2>Optical Catalog (2026 Price List)</h2>
-      </div>
-
-      <div class="catalog-filters" id="filterContainer">
-        <button class="filter-btn active" data-filter="all">All Lenses</button>
-        <button class="filter-btn" data-filter="Evolux Elite">Evolux Elite</button>
-        <button class="filter-btn" data-filter="Evolux">Evolux</button>
-        <button class="filter-btn" data-filter="Customized">Customized Freeform</button>
-        <button class="filter-btn" data-filter="Venture">Venture / Entice</button>
-        <button class="filter-btn" data-filter="Single Vision">Single Vision Rx</button>
-        <button class="filter-btn" data-filter="FSV Stock">FSV & Stock PALs</button>
-        <button class="filter-btn" data-filter="Bifocals">Rx Bifocals</button>
-        <button class="filter-btn" data-filter="Contact Lenses">Contact Lenses (B+L)</button>
-        <button class="filter-btn" data-filter="Lens Care">Solutions & Drops</button>
-      </div>
-
-      <div class="catalog-grid" id="catalogGrid"></div>
-    </section>
-
-    <!-- Direct Doorstep Appointment Form -->
-    <section class="booking-section">
-      <h2>Book Your ReLens Doorstep Service</h2>
-      <p>Select your required service and preferred appointment slot to confirm directly with our specialist on WhatsApp.</p>
-      <form class="booking-form-grid" onsubmit="handleDirectBooking(event)">
-        <select id="quickServiceSelect">
-          <option>Lens Replacement (Keep Frame)</option>
-          <option>Progressive Lens Trial & Consultation</option>
-          <option>Doorstep Eye Test Assistant</option>
-          <option>Frame Realignment & Hinge Spa</option>
-        </select>
-        <input type="date" id="quickBookingDate" required />
-        <select id="quickBookingSlot">
-          <option>09:00 AM - 11:00 AM</option>
-          <option>11:00 AM - 01:00 PM</option>
-          <option>01:00 PM - 03:00 PM</option>
-          <option>03:00 PM - 05:00 PM</option>
-          <option>05:00 PM - 07:00 PM</option>
-        </select>
-        <button type="submit" class="book-direct-btn">Schedule Visit</button>
-      </form>
-    </section>
-
-  </main>
-
-  <!-- Floating AI Assistant Trigger -->
-  <button class="ai-assistant-btn" onclick="toggleAiAssistant(true)">
-    <span>✨</span>
-    <span>Ask ReLens AI</span>
-  </button>
-
-  <!-- AI Vision Advisor Modal -->
-  <div class="ai-modal-overlay" id="aiOverlay" onclick="toggleAiAssistant(false)"></div>
-  <div class="ai-modal" id="aiModal">
-    <div class="ai-modal-header">
-      <div>
-        <span class="ai-badge">✨ AI Vision Advisor</span>
-        <h4 style="font-size: 0.95rem;">ReLens Smart Guide</h4>
-      </div>
-      <button class="close-btn" style="color: #fff;" onclick="toggleAiAssistant(false)">✕</button>
-    </div>
-
-    <div class="ai-chat-body" id="aiChatBody">
-      <div class="ai-msg bot">
-        Hello! I'm your ReLens Vision Advisor. Tell me about your routine or prescription (e.g., <em>"I drive at night and work on laptops with -3.50 power"</em>) and I will match the exact lens package.
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Give your frame a <span>second life.</span></h1>
+      <p>Premium ValueVis lens replacement for the frame you already love. Pick a lens, see the full price, and book doorstep pickup and delivery in Puducherry.</p>
+      <div class="row">
+        <a class="btn" href="#catalog">Browse lenses</a>
+        <a class="btn o" href="#book">Book pickup</a>
       </div>
     </div>
-
-    <div class="ai-quick-prompts">
-      <button type="button" onclick="runAiPrompt('high-screen')">💻 Screen BlueCut</button>
-      <button type="button" onclick="runAiPrompt('reading-distance')">📖 Reading + Driving</button>
-      <button type="button" onclick="runAiPrompt('outdoor-sun')">☀️ DayNite Adaptive</button>
-      <button type="button" onclick="runAiPrompt('high-power')">👓 High Power (-5.00+)</button>
-    </div>
-
-    <div class="ai-input-bar">
-      <input type="text" id="aiUserInput" placeholder="Describe your vision need..." onkeypress="handleAiKeyPress(event)" />
-      <button type="button" class="ai-send-btn" onclick="processAiInput()">Send</button>
+    <div class="lg">
+      <img data-img="10" alt="ReLens Bausch + Lomb contact lenses with same-day delivery">
     </div>
   </div>
+</header>
 
-  <!-- Floating Cart Button -->
-  <button class="cart-floating-btn" id="openCartBtn" onclick="toggleCart(true)">
-    <span>🛒</span>
-    <span class="cart-badge" id="cartCount">0</span>
-  </button>
+<section id="catalog">
+  <div class="wrap">
+    <h2>ValueVis lens catalog</h2>
+    <p class="sub">Tap a lens to see every index, coating and price. Tap a price to add it to your booking.</p>
+    <div class="grid" id="cg"></div>
+  </div>
+</section>
 
-  <!-- Slide-Over Cart Drawer -->
-  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(false)"></div>
-  <aside class="cart-drawer" id="cartDrawer">
-    <div class="cart-header">
-      <h3 style="font-size: 1.1rem; font-weight: 700;">Your ReLens Bag</h3>
-      <button class="close-btn" onclick="toggleCart(false)">✕</button>
+<section id="contacts">
+  <div class="wrap">
+    <h2>Bausch + Lomb contact lenses</h2>
+    <p class="sub">Genuine Bausch + Lomb lenses at MRP 2026. Tap a price to add the pack to your booking.</p>
+    <div class="sd">
+      <b>Same-day delivery in Puducherry</b>
+      <span>Order before 4:00 PM. Powers -0.50 D to -6.00 D.</span>
     </div>
+    <div class="grid" id="cl"></div>
+    <h3 style="margin-top:34px">Full Bausch + Lomb MRP list</h3>
+    <div id="all"></div>
+    <p class="note">Sheet prices are MRP per pack. *The sheet prints two Medivision+ rows as "30 Lens"; the 1026 row is likely the 5-lens pack, please confirm before ordering. Toric, multifocal and colour lenses depend on your prescription.</p>
+  </div>
+</section>
 
-    <div class="cart-scroll-body">
-      <div class="cart-items" id="cartItemsContainer"></div>
+<section id="sheets" style="background:var(--card)">
+  <div class="wrap">
+    <h2>Original price sheets</h2>
+    <p class="sub">The ValueVis sheets exactly as supplied. Tap an image to enlarge.</p>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
 
-      <!-- Prescription Section -->
-      <div class="cart-rx-section">
-        <div class="rx-header">
-          <span style="font-size: 0.85rem; font-weight: 700;">👓 Optical Prescription</span>
-          <div class="rx-tab-toggle">
-            <button type="button" class="rx-tab-btn active" id="tabBtnManual" onclick="switchRxMode('manual')">Enter Power</button>
-            <button type="button" class="rx-tab-btn" id="tabBtnUpload" onclick="switchRxMode('upload')">Upload Slip</button>
-          </div>
+<section id="essilor">
+  <div class="wrap">
+    <h2>Essilor lenses</h2>
+    <p class="sub">Genuine Essilor lens technologies for your frame. Descriptions are summarised from the Essilor India website. Ask ReLens for today's MRP for your prescription.</p>
+    <div class="grid" id="es"></div>
+    <p class="note">Essilor does not publish MRP on its website, so no price is shown until the official Essilor MRP sheet is added. Availability depends on prescription and index.</p>
+  </div>
+</section>
+
+<section id="rx" style="background:var(--card)">
+  <div class="wrap">
+    <h2>Upload your prescription</h2>
+    <p class="sub">Add a photo of your prescription and the ReLens optometrist checks it before any lens is ordered. Powers are optional if the photo is clear.</p>
+    <div class="bk">
+      <div class="box">
+        <h3>Prescription photo</h3>
+        <label class="dz" for="rxf">
+          Tap to take a photo or choose a file
+          <small>Photo or PDF, up to 3 files</small>
+          <input id="rxf" type="file" accept="image/*,application/pdf" multiple>
+        </label>
+        <div class="pv" id="rxp"></div>
+        <label for="rxn">Name</label>
+        <input id="rxn" autocomplete="name">
+        <label for="rxt">WhatsApp number</label>
+        <input id="rxt" type="tel" autocomplete="tel">
+      </div>
+      <div class="box">
+        <h3>Powers (optional)</h3>
+        <div class="tw">
+          <table class="pt">
+            <tr><th></th><th>SPH</th><th>CYL</th><th>AXIS</th><th>ADD</th></tr>
+            <tr>
+              <td>Right</td>
+              <td><input class="pw" data-k="R SPH" aria-label="Right SPH"></td>
+              <td><input class="pw" data-k="R CYL" aria-label="Right CYL"></td>
+              <td><input class="pw" data-k="R AXIS" aria-label="Right AXIS"></td>
+              <td><input class="pw" data-k="R ADD" aria-label="Right ADD"></td>
+            </tr>
+            <tr>
+              <td>Left</td>
+              <td><input class="pw" data-k="L SPH" aria-label="Left SPH"></td>
+              <td><input class="pw" data-k="L CYL" aria-label="Left CYL"></td>
+              <td><input class="pw" data-k="L AXIS" aria-label="Left AXIS"></td>
+              <td><input class="pw" data-k="L ADD" aria-label="Left ADD"></td>
+            </tr>
+          </table>
         </div>
+        <label for="rxd">PD (pupil distance, mm)</label>
+        <input id="rxd" inputmode="decimal">
+        <label for="rxk">Notes</label>
+        <textarea id="rxk" rows="2" placeholder="Lens type, frame, anything the optometrist should know"></textarea>
+        <div class="row">
+          <button class="btn" id="rxg">Send to ReLens on WhatsApp</button>
+        </div>
+        <div id="rxs" role="status"></div>
+        <p class="note">On a phone, WhatsApp opens with your photo attached. On a computer, WhatsApp opens with your details and you attach the photo in the chat.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div id="rxManualForm" class="rx-mode-content active">
-          <table class="rx-power-table">
-            <thead>
-              <tr>
-                <th>Eye</th>
-                <th>SPH</th>
-                <th>CYL</th>
-                <th>AXIS</th>
-                <th>ADD</th>
-              </tr>
-            </thead>
+<section id="book">
+  <div class="wrap">
+    <h2>Book your lens replacement</h2>
+    <p class="sub">Send the request on WhatsApp and the ReLens optometrist verifies your prescription before anything is fitted.</p>
+    <div class="bk">
+      <div class="box">
+        <h3>Your selection</h3>
+        <div id="items"><p class="note">Nothing selected yet. Pick a price from the catalog.</p></div>
+        <div class="tot"><span>Total</span><span id="tot">₹0</span></div>
+        <p class="note">Prices are catalog MRP: ValueVis per pair, Bausch + Lomb per pack. Frame fitting and taxes are confirmed by ReLens.</p>
+      </div>
+      <div class="box">
+        <h3>Pickup details</h3>
+        <label for="nm">Name</label>
+        <input id="nm" autocomplete="name">
+        <label for="ph">WhatsApp number</label>
+        <input id="ph" type="tel" autocomplete="tel">
+        <label for="ad">Pickup address</label>
+        <textarea id="ad" rows="2"></textarea>
+        <label for="dt">Pickup date</label>
+        <input id="dt" type="date">
+        <label for="sl">Time slot</label>
+        <select id="sl">
+          <option>Morning 10 AM to 1 PM</option>
+          <option>Afternoon 2 PM to 5 PM</option>
+          <option>Evening 5 PM to 8 PM</option>
+        </select>
+        <div class="row">
+          <button class="btn" id="send">Send on WhatsApp</button>
+          <a class="btn o" href="https://relens.setmore.com/" target="_blank" rel="noopener">Book on Setmore</a>
+        </div>
+        <div id="bkc" role="status" style="margin-top:12px;font-weight:700"></div>
+        <p class="note">Have your prescription image and a photo of your frame ready to share on WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  ReLens · Puducherry · Lens replacement · Premium quality · Pickup &amp; delivery<br>
+  WhatsApp <a href="https://wa.me/message/3XHYZJ2WIHFTO1" target="_blank" rel="noopener">Chat with ReLens</a> · +91 94883 53749<br>
+  <a href="#billing" id="sb">Staff billing</a>
+</footer>
+
+<div id="lg" role="dialog" aria-label="Customer login">
+  <div class="lgw">
+    <aside>
+      <img data-img="1" alt="ReLens logo">
+      <h2>Your ReLens account</h2>
+      <ul>
+        <li>Save your pickup address and number</li>
+        <li>Rebook a lens in one tap</li>
+        <li>See your past booking requests</li>
+      </ul>
+    </aside>
+    <main>
+      <button class="xx" id="lx">Close</button>
+      <div id="lf">
+        <h2>Customer login</h2>
+        <div class="tabs">
+          <button class="on" data-m="in">Sign in</button>
+          <button data-m="up">Create account</button>
+        </div>
+        <div id="nmw" hidden>
+          <label for="ln">Full name</label>
+          <input id="ln" autocomplete="name">
+        </div>
+        <label for="lp">WhatsApp number</label>
+        <input id="lp" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10 digit number">
+        <label for="lc">4 digit PIN</label>
+        <input id="lc" type="password" inputmode="numeric" maxlength="4" autocomplete="current-password">
+        <div id="adw" hidden>
+          <label for="la">Pickup address (optional)</label>
+          <textarea id="la" rows="2"></textarea>
+        </div>
+        <div class="row"><button class="btn" id="lgo">Sign in</button></div>
+        <div id="lm" role="status"></div>
+        <p class="note">Forgot your PIN? <a href="https://wa.me/919488353749?text=Hi%20ReLens%2C%20I%20forgot%20my%20account%20PIN" target="_blank" rel="noopener">Message ReLens on WhatsApp</a>. Your account is saved on this device only.</p>
+      </div>
+      <div id="ac" hidden></div>
+    </main>
+  </div>
+</div>
+
+<a class="wf" href="https://wa.me/message/3XHYZJ2WIHFTO1" target="_blank" rel="noopener" aria-label="Chat with ReLens on WhatsApp">Chat on WhatsApp</a>
+
+<div id="iv" role="dialog" aria-label="Staff billing">
+  <div id="ivgate" class="box noprint" style="max-width:420px;margin:60px auto">
+    <h2>Staff billing</h2>
+    <p class="sub" id="ivgm">Enter staff access PIN to proceed</p>
+    <label for="ivpin">Staff PIN</label>
+    <input id="ivpin" type="password" inputmode="numeric" maxlength="6" autocomplete="off">
+    <div class="row">
+      <button class="btn" id="ivpg">Unlock</button>
+      <button class="btn o" id="ivc0">Close</button>
+    </div>
+    <div id="ivgt" role="status" style="margin-top:10px;font-weight:700;color:#c0392b"></div>
+  </div>
+  
+  <div id="ivapp" class="ivg" hidden>
+    <div class="box noprint">
+      <h3>Create invoice</h3>
+      <label for="ivn">Customer name</label>
+      <input id="ivn">
+      <label for="ivp">Customer phone</label>
+      <input id="ivp" type="tel">
+      <label for="iva">Address</label>
+      <textarea id="iva" rows="2"></textarea>
+      <label for="ivgs">Your GSTIN (shown on invoice)</label>
+      <input id="ivgs" autocapitalize="characters" value="34AAAAA0000A1Z5">
+      <h3 style="margin-top:18px">Items</h3>
+      <div id="ivl"></div>
+      <div class="row">
+        <button class="btn o" id="ivsl">Add from booking</button>
+        <button class="btn o" id="ivad">Add line</button>
+      </div>
+      <div class="ivr">
+        <div>
+          <label for="ivgr">GST rate</label>
+          <select id="ivgr">
+            <option value="0">0%</option>
+            <option value="5" selected>5%</option>
+            <option value="12">12%</option>
+            <option value="18">18%</option>
+          </select>
+        </div>
+        <div>
+          <label for="ivd">Discount (₹)</label>
+          <input id="ivd" type="number" min="0" value="0">
+        </div>
+        <div>
+          <label for="ivx">Advance paid (₹)</label>
+          <input id="ivx" type="number" min="0" value="0">
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <label style="margin:0;font-weight:500"><input id="ivin" type="checkbox" checked style="width:auto"> Prices include GST</label>
+        </div>
+      </div>
+      <p class="note">Confirm the GST rate with your accountant. CGST and SGST are shown half each.</p>
+      <div class="row">
+        <button class="btn" id="ivpr">Print or save PDF</button>
+        <button class="btn o" id="ivwa">Send on WhatsApp</button>
+      </div>
+      <div class="row">
+        <button class="btn o" id="ivnw">New invoice</button>
+        <button class="btn o" id="ivc1">Close</button>
+      </div>
+    </div>
+    <div id="inv"></div>
+  </div>
+</div>
+
+<div id="lb" role="dialog" aria-label="Image preview"><img alt="Preview"></div>
+
+<script>
+/* Static Asset SVG Data URLs */
+const IM = {
+  "1": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><rect width='80' height='80' rx='16' fill='%2314295a'/><circle cx='40' cy='40' r='24' fill='none' stroke='%23e6b54a' stroke-width='6'/><path d='M30 40 Q40 26 50 40 Q40 54 30 40' fill='%23e6b54a'/></svg>",
+  "10": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'><rect width='600' height='360' fill='%230d1d47'/><circle cx='300' cy='180' r='110' fill='none' stroke='%23e6b54a' stroke-width='8'/><circle cx='300' cy='180' r='90' fill='%2314295a'/><text x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-size='22' font-weight='bold'>ReLens Optical Studio</text></svg>",
+  "cv": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'><rect width='600' height='360' fill='%230d1d47'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-size='24'>Bausch + Lomb Delivery</text></svg>"
+};
+
+/* Catalog Datasets */
+const CATALOG = [
+  {
+    id: "vv-elite",
+    title: "ValueVis Evolux Elite",
+    tag: "Flagship Progressive",
+    desc: "Digital freeform multi-focal lenses designed for effortless intermediate and near transitions.",
+    from: "3,800",
+    models: [
+      { name: "1.50 Hard Coat UV400", price: 3800 },
+      { name: "1.56 Super Hydrophobic BlueCut", price: 5200 },
+      { name: "1.60 Ultra-Thin Anti-Reflective", price: 7400 },
+      { name: "1.67 High Index DayNite Photochromic", price: 10500 }
+    ]
+  },
+  {
+    id: "vv-evolux",
+    title: "ValueVis Evolux",
+    tag: "Advanced Single Vision",
+    desc: "Aspheric optical design minimizing peripheral distortion with complete glare reduction.",
+    from: "1,800",
+    models: [
+      { name: "1.56 Single Vision Anti-Glare", price: 1800 },
+      { name: "1.56 BlueCut Digital Protection", price: 2600 },
+      { name: "1.60 Hi-Index Super Hydrophobic", price: 4200 },
+      { name: "1.67 Ultra-Thin Aspheric", price: 6500 }
+    ]
+  },
+  {
+    id: "vv-daynite",
+    title: "ValueVis DayNite",
+    tag: "Fast Photochromic",
+    desc: "Fast-adapting transition tinting engineered for harsh sun exposure and night glare safety.",
+    from: "2,900",
+    models: [
+      { name: "1.56 DayNite Grey UV400", price: 2900 },
+      { name: "1.56 DayNite BlueCut Duo", price: 3900 },
+      { name: "1.60 Hi-Index DayNite AR", price: 5900 }
+    ]
+  },
+  {
+    id: "vv-custom",
+    title: "ValueVis Customized Office",
+    tag: "Computer & Screen",
+    desc: "Ergonomic wide-reading corridor optimized for prolonged laptop, screen, and desk comfort.",
+    from: "3,400",
+    models: [
+      { name: "1.56 Office Digital Clear", price: 3400 },
+      { name: "1.60 Thin Blue Shield Digital", price: 5100 }
+    ]
+  }
+];
+
+const CONTACTS = [
+  { name: "SofLens 59 (6 Lenses/pack)", cat: "Monthly Disposable", price: 1150 },
+  { name: "PureVision 2 HD (6 Lenses/pack)", cat: "Silicone Hydrogel Monthly", price: 1850 },
+  { name: "Biotrue ONEday (30 Lenses/pack)", cat: "Daily Disposable Moisture", price: 2450 },
+  { name: "SofLens Daily Disposable (30 Lenses)", cat: "Daily Disposable Comfort", price: 1650 },
+  { name: "PureVision 2 for Astigmatism (6 Lenses)", cat: "Toric Monthly Cylinder", price: 2900 },
+  { name: "Lacelle Color (Monthly Plano/Power)", cat: "Cosmetic Enhancing", price: 1200 }
+];
+
+const ESSILOR = [
+  { title: "Crizal Rock / Prevencia", tag: "Anti-Reflective", desc: "Best-in-class scratch resistance, dust repellent, and selective blue-violet light filtration." },
+  { title: "Eyezen Start & Boost", tag: "Single Vision Relief", desc: "Dualoptim technology providing eye strain relief for modern multi-screen lifestyles." },
+  { title: "Varilux Comfort Max", tag: "Progressive Freedom", desc: "Ergonomic postural flexibility offering broad, natural vision at every distance." },
+  { title: "Transitions Gen S", tag: "Smart Light Control", desc: "Ultra-responsive dynamic light intelligence darkening outdoors in seconds." }
+];
+
+/* Application State */
+let cart = [];
+let currentUser = null;
+
+/* DOM Element Selectors */
+const cartCnt = document.getElementById('cnt');
+const cartItems = document.getElementById('items');
+const cartTot = document.getElementById('tot');
+const catalogGrid = document.getElementById('cg');
+const contactsGrid = document.getElementById('cl');
+const contactsTable = document.getElementById('all');
+const essilorGrid = document.getElementById('es');
+const sheetsGal = document.getElementById('gal');
+const lightbox = document.getElementById('lb');
+
+/* Render Catalog */
+function renderCatalog() {
+  catalogGrid.innerHTML = CATALOG.map(cat => `
+    <div class="card" onclick="toggleDetails('${cat.id}')">
+      <div class="ph">
+        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="7" cy="12" r="5"/><circle cx="17" cy="12" r="5"/><path d="M12 12h.01"/></svg>
+      </div>
+      <div class="b">
+        <span class="tag">${cat.tag}</span>
+        <h3>${cat.title}</h3>
+        <p>${cat.desc}</p>
+        <div class="from"><small>from </small>₹${cat.from}</div>
+      </div>
+      <div class="det" id="det-${cat.id}">
+        <h4>Available Options & Price List</h4>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Specification</th><th>Price (Pair)</th><th>Action</th></tr></thead>
             <tbody>
-              <tr>
-                <td style="font-weight: 700;">OD (R)</td>
-                <td><input type="text" id="odSph" placeholder="-1.50" /></td>
-                <td><input type="text" id="odCyl" placeholder="0.00" /></td>
-                <td><input type="number" id="odAxis" placeholder="0" min="0" max="180" /></td>
-                <td><input type="text" id="odAdd" placeholder="+1.50" /></td>
-              </tr>
-              <tr>
-                <td style="font-weight: 700;">OS (L)</td>
-                <td><input type="text" id="osSph" placeholder="-1.50" /></td>
-                <td><input type="text" id="osCyl" placeholder="0.00" /></td>
-                <td><input type="number" id="osAxis" placeholder="0" min="0" max="180" /></td>
-                <td><input type="text" id="osAdd" placeholder="+1.50" /></td>
-              </tr>
+              ${cat.models.map(m => `
+                <tr>
+                  <td>${m.name}</td>
+                  <td>₹${m.price}</td>
+                  <td><button onclick="event.stopPropagation(); addToCart('${cat.title} - ${m.name}',${m.price})">Add to booking</button></td>
+                </tr>
+              `).join('')}
             </tbody>
           </table>
-
-          <div id="indexRecommendationBox" class="index-rec-box hidden">
-            <div style="font-size: 1.1rem;">💡</div>
-            <div style="flex-grow: 1;">
-              <div style="font-weight: 700;" id="recIndexVal">1.60 Hi-Index</div>
-              <div style="color: var(--slate-600);" id="recReasonText">Recommended thickness for your entered power.</div>
-              <button type="button" class="rec-filter-btn" id="filterByIndexBtn" onclick="toggleIndexFilter()">Show Only Recommended Lenses</button>
-            </div>
-          </div>
         </div>
-
-        <div id="rxUploadForm" class="rx-mode-content">
-          <label class="rx-file-dropzone" for="rxFileInput" style="display: block; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 1rem; text-align: center; cursor: pointer;">
-            <input type="file" id="rxFileInput" accept="image/*,.pdf" onchange="handleRxFileSelect(event)" style="display: none;" />
-            <div id="dropzoneEmpty">
-              <span style="font-size: 1.25rem;">📄</span>
-              <div style="font-weight: 600; font-size: 0.8rem;">Tap to select prescription slip</div>
-              <div style="font-size: 0.7rem; color: var(--slate-400);">PNG, JPG, or PDF</div>
-            </div>
-            <div id="dropzonePreview" class="hidden">
-              <span id="rxFileName">📎 file.jpg</span>
-              <button type="button" style="background: none; border: none; color: #ef4444; margin-left: 8px; cursor: pointer;" onclick="clearRxFile(event)">✕</button>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- Addons Section (Spa & Official ValueVis Custom Lab Services) -->
-      <div class="cart-addons-section">
-        <span style="font-size: 0.85rem; font-weight: 700;">🛠 Frame Fitting & Lab Add-ons</span>
-        <div class="addons-list">
-          <label class="addon-card" for="addon-fullfit">
-            <input type="checkbox" id="addon-fullfit" value="fullfit" onchange="toggleAddon('fullfit')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>Standard Full Frame Edging</span>
-                <span class="addon-price">+₹200</span>
-              </div>
-              <p class="addon-desc">Automated bevel edging & lens mounting on full-rim frames[span_21](start_span)[span_21](end_span).</p>
-            </div>
-          </label>
-
-          <label class="addon-card" for="addon-supra">
-            <input type="checkbox" id="addon-supra" value="supra" onchange="toggleAddon('supra')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>Supra (Semi-Rimless) Grooving</span>
-                <span class="addon-price">+₹300</span>
-              </div>
-              <p class="addon-desc">Precision nylon-wire grooving for semi-rimless frames[span_22](start_span)[span_22](end_span).</p>
-            </div>
-          </label>
-
-          <label class="addon-card" for="addon-rimless">
-            <input type="checkbox" id="addon-rimless" value="rimless" onchange="toggleAddon('rimless')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>Rimless Drill Mounting</span>
-                <span class="addon-price">+₹500</span>
-              </div>
-              <p class="addon-desc">Precision hole drilling on Coburn/Buhler machinery[span_23](start_span)[span_23](end_span).</p>
-            </div>
-          </label>
-
-          <label class="addon-card" for="addon-dualcoat">
-            <input type="checkbox" id="addon-dualcoat" value="dualcoat" onchange="toggleAddon('dualcoat')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>Dual Coat™ (Front Green + Back Blue ARC)</span>
-                <span class="addon-price">+₹500</span>
-              </div>
-              <p class="addon-desc">Front surface green reflection + back surface blue reflection[span_24](start_span)[span_24](end_span).</p>
-            </div>
-          </label>
-
-          <label class="addon-card" for="addon-tint">
-            <input type="checkbox" id="addon-tint" value="tint" onchange="toggleAddon('tint')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>Custom Tint (Full / Gradient)</span>
-                <span class="addon-price">+₹300</span>
-              </div>
-              <p class="addon-desc">Dark/Light Grey, Brown, Blue, Yellow, or Pink tints[span_25](start_span)[span_25](end_span).</p>
-            </div>
-          </label>
-
-          <label class="addon-card" for="addon-nosepads">
-            <input type="checkbox" id="addon-nosepads" value="nosepads" onchange="toggleAddon('nosepads')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>German Silicone Nose Pads</span>
-                <span class="addon-price">+₹99</span>
-              </div>
-              <p class="addon-desc">Anti-slip, air-cushioned replacement.</p>
-            </div>
-          </label>
-
-          <label class="addon-card" for="addon-ultrasonic">
-            <input type="checkbox" id="addon-ultrasonic" value="ultrasonic" onchange="toggleAddon('ultrasonic')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>Ultrasonic Deep Cleaning Spa</span>
-                <span class="addon-price">+₹149</span>
-              </div>
-              <p class="addon-desc">Cleans grease, sweat, and micro-dirt from hinges.</p>
-            </div>
-          </label>
-
-          <label class="addon-card" for="addon-alignment">
-            <input type="checkbox" id="addon-alignment" value="alignment" onchange="toggleAddon('alignment')" />
-            <div class="addon-info">
-              <div class="addon-title-row">
-                <span>Frame Realignment & Tightening</span>
-                <span class="addon-price">+₹199</span>
-              </div>
-              <p class="addon-desc">Balances pantoscopic tilt and tightens loose temples.</p>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <!-- Appointment Slot Section -->
-      <div class="cart-appointment-section">
-        <span style="font-size: 0.85rem; font-weight: 700;">📅 Preferred Doorstep Appointment</span>
-        <div style="margin-top: 0.5rem;">
-          <input type="date" id="appointmentDate" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem;" onchange="saveReLensState()" />
-        </div>
-        <div class="slot-grid">
-          <label class="slot-pill">
-            <input type="radio" name="appointmentSlot" value="09:00 AM - 11:00 AM" checked onchange="saveReLensState()" />
-            <span>09:00 AM - 11:00 AM</span>
-          </label>
-          <label class="slot-pill">
-            <input type="radio" name="appointmentSlot" value="11:00 AM - 01:00 PM" onchange="saveReLensState()" />
-            <span>11:00 AM - 01:00 PM</span>
-          </label>
-          <label class="slot-pill">
-            <input type="radio" name="appointmentSlot" value="01:00 PM - 03:00 PM" onchange="saveReLensState()" />
-            <span>01:00 PM - 03:00 PM</span>
-          </label>
-          <label class="slot-pill">
-            <input type="radio" name="appointmentSlot" value="03:00 PM - 05:00 PM" onchange="saveReLensState()" />
-            <span>03:00 PM - 05:00 PM</span>
-          </label>
-          <label class="slot-pill">
-            <input type="radio" name="appointmentSlot" value="05:00 PM - 07:00 PM" onchange="saveReLensState()" />
-            <span>05:00 PM - 07:00 PM</span>
-          </label>
-          <label class="slot-pill">
-            <input type="radio" name="appointmentSlot" value="07:00 PM - 09:00 PM" onchange="saveReLensState()" />
-            <span>07:00 PM - 09:00 PM</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Promo Code Section -->
-      <div class="cart-promo-section">
-        <div class="promo-header">
-          <span class="promo-title">🏷️ Have a Promo Code?</span>
-        </div>
-        <div class="promo-input-row">
-          <input type="text" id="promoCodeInput" placeholder="Enter code (e.g. RELENS10)" />
-          <button type="button" class="promo-apply-btn" onclick="applyPromoCode()">Apply</button>
-        </div>
-        <div class="quick-promo-pills">
-          <span class="promo-hint">Try:</span>
-          <button type="button" onclick="quickApplyPromo('RELENS10')">RELENS10 (10% Off)</button>
-          <button type="button" onclick="quickApplyPromo('DOORSTEPFREE')">DOORSTEPFREE (₹200 Off)</button>
-          <button type="button" onclick="quickApplyPromo('PROG500')">PROG500 (₹500 Off PALs)</button>
-        </div>
-        <div id="promoFeedback" class="promo-feedback hidden"></div>
       </div>
     </div>
+  `).join('');
+}
 
-    <!-- Drawer Footer -->
-    <div class="cart-footer">
-      <div class="cost-breakdown">
-        <div class="breakdown-row">
-          <span>Subtotal</span>
-          <span id="cartSubtotalPrice">₹0</span>
-        </div>
-        <div class="breakdown-row discount-row hidden" id="discountDisplayRow">
-          <span>Discount (<span id="appliedPromoBadge">CODE</span>)</span>
-          <span class="discount-amount" id="cartDiscountPrice">-₹0</span>
-        </div>
-        <div class="total-row">
-          <span>Estimated Total</span>
-          <span id="cartTotalPrice" style="color: var(--primary);">₹0</span>
-        </div>
+function toggleDetails(id) {
+  const el = document.getElementById(`det-${id}`);
+  if (el) el.classList.toggle('on');
+}
+
+/* Render Contacts */
+function renderContacts() {
+  contactsGrid.innerHTML = CONTACTS.slice(0, 3).map(c => `
+    <div class="card">
+      <div class="b">
+        <span class="tag">${c.cat}</span>
+        <h3>${c.name}</h3>
+        <p>Authentic Bausch + Lomb sealed supply. MRP verified.</p>
+        <div class="from">₹${c.price}</div>
+        <button class="btn" style="margin-top:12px" onclick="addToCart('${c.name}', ${c.price})">Add to booking</button>
       </div>
-      <button class="checkout-whatsapp-btn" onclick="checkoutWhatsApp()">
-        Confirm & Book via WhatsApp
-      </button>
     </div>
-  </aside>
+  `).join('');
 
-  <!-- Complete Reactive Logic -->
-  <script>
-    const RELENS_STORAGE_KEY = "relens_cart_session_v1";
+  contactsTable.innerHTML = `
+    <div class="tw">
+      <table>
+        <thead><tr><th>Product & Pack Detail</th><th>Category</th><th>MRP (₹)</th><th>Action</th></tr></thead>
+        <tbody>
+          ${CONTACTS.map(c => `
+            <tr>
+              <td>${c.name}</td>
+              <td>${c.cat}</td>
+              <td>₹${c.price}</td>
+              <td><button onclick="addToCart('${c.name}',${c.price})">Add</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
 
-    // Product Catalog using Transitions, Stellest, Varilux, and Clean Acetate Glasses
-    const catalogData = [
-      // =========================================================================
-      // 1. FLAGSHIP PROGRESSIVES: EVOLUX ELITE & VARILUX XR
-      // =========================================================================
-      {
-        id: "vv-ee-156-bluvex",
-        name: "Evolux Elite 1.56 Clearview (Bluvex Blue ARC)",
-        category: "Evolux Elite",
-        series: "Evolux Elite (EE)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg", // Varilux Ray-tracing progressive diagram
-        features: ["Flagship panoramic field of view", "Bluvex ARC signature blue finish", "Laser authenticated (EE)"],
-        price: 10190
-      },
-      {
-        id: "vv-ee-156-optix",
-        name: "Evolux Elite 1.56 Clearview (Optix Green ARC)",
-        category: "Evolux Elite",
-        series: "Evolux Elite (EE)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg", // 3D Wavefront ray-trace simulation
-        features: ["Unmatched clarity across every focal zone", "Optix ARC green reflection", "Instant adaptation comfort"],
-        price: 10690
-      },
-      {
-        id: "vv-ee-160-optix",
-        name: "Evolux Elite 1.60 MR-8 Clearview (Optix ARC)",
-        category: "Evolux Elite",
-        series: "Evolux Elite (EE)",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Maximum corridor width", "MR-8 high impact strength", "Ultra-smooth visual flow"],
-        price: 12790
-      },
-      {
-        id: "vv-ee-167-optix",
-        name: "Evolux Elite 1.67 Ultra-Thin Clearview",
-        category: "Evolux Elite",
-        series: "Evolux Elite (EE)",
-        index: 1.67,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Ultra-thin edges for high additions", "Optix ARC coating", "Luxury visual balance"],
-        price: 14490
-      },
-      {
-        id: "vv-ee-174-optix",
-        name: "Evolux Elite 1.74 Extreme High-Index",
-        category: "Evolux Elite",
-        series: "Evolux Elite (EE)",
-        index: 1.74,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Flattest & slimmest progressive on market", "Precision surfaced for high Rx", "Authentic engraving (EE)"],
-        price: 26190
-      },
-      {
-        id: "vv-ee-160-daynite",
-        name: "Evolux Elite 1.60 MR-8 DayNite Adaptive",
-        category: "Evolux Elite",
-        series: "Evolux Elite (EE)",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "transitions.jpg", // Transitions Gen S 8-color gradient palette
-        features: ["Flagship optics + fast photochromic", "Effortless transition in & outdoors", "Bluvex ARC signature reflection"],
-        price: 17690
-      },
+/* Render Essilor */
+function renderEssilor() {
+  essilorGrid.innerHTML = ESSILOR.map(e => `
+    <div class="card">
+      <div class="b">
+        <span class="tag">${e.tag}</span>
+        <h3>${e.title}</h3>
+        <p>${e.desc}</p>
+        <button class="btn o" style="margin-top:14px" onclick="inquireEssilor('${e.title}')">Inquire on WhatsApp</button>
+      </div>
+    </div>
+  `).join('');
+}
 
-      // =========================================================================
-      // 2. EVOLUX PROGRESSIVE (Advanced European Technology)
-      // =========================================================================
-      {
-        id: "vv-ex-156-bluvex",
-        name: "Evolux 1.56 Clearview (Bluvex Blue ARC)",
-        category: "Evolux",
-        series: "Evolux (EX)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Advanced European Technology", "Refined blue reflection finish", "Extended field of vision (Far/Mid/Near)"],
-        price: 6990
-      },
-      {
-        id: "vv-ex-156-optix",
-        name: "Evolux 1.56 Clearview (Optix Green ARC)",
-        category: "Evolux",
-        series: "Evolux (EX)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Green reflection coating", "Reduced peripheral swim", "Reliable all-day comfort"],
-        price: 7490
-      },
-      {
-        id: "vv-ex-160-bluvex",
-        name: "Evolux 1.60 MR-8 Clearview (Bluvex ARC)",
-        category: "Evolux",
-        series: "Evolux (EX)",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["MR-8 premium strength", "20% thinner edge profile", "Ideal for daily drivers & screen users"],
-        price: 9390
-      },
-      {
-        id: "vv-ex-167-bluvex",
-        name: "Evolux 1.67 Ultra-Thin Clearview",
-        category: "Evolux",
-        series: "Evolux (EX)",
-        index: 1.67,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Thin & lightweight for higher prescriptions", "Bluvex ARC reflection", "Authentic engraving (EX)"],
-        price: 10690
-      },
-      {
-        id: "vv-ex-160-daynite",
-        name: "Evolux 1.60 MR-8 DayNite Adaptive (Optix ARC)",
-        category: "Evolux",
-        series: "Evolux (EX)",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "transitions.jpg", // Photochromic palette
-        features: ["Intelligent light transition", "All-day clear indoors to dark outdoors", "Optix ARC green coating"],
-        price: 13890
-      },
+/* Render Sheets Gallery */
+function renderGallery() {
+  const sheets = [
+    { name: "ValueVis Evolux Digital Freeform", img: IM["10"] },
+    { name: "ValueVis Finished Single Vision Rates", img: IM["cv"] },
+    { name: "Bausch + Lomb MRP Sheet 2026", img: IM["10"] }
+  ];
+  sheetsGal.innerHTML = sheets.map(s => `
+    <figure onclick="showLightbox('${s.img}')">
+      <img src="${s.img}" alt="${s.name}">
+      <figcaption>${s.name}</figcaption>
+    </figure>
+  `).join('');
+}
 
-      // =========================================================================
-      // 3. CUSTOMIZED PROGRESSIVES (American Freeform Tech)
-      // =========================================================================
-      {
-        id: "vv-cm-156-clear-hmc",
-        name: "Customized 1.56 Clear Freeform (HMC Green)",
-        category: "Customized",
-        series: "Customized (CM)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["American Freeform design", "Optimized clarity across distances", "HMC Green multi-coat"],
-        price: 3990
-      },
-      {
-        id: "vv-cm-156-bc-hmc",
-        name: "Customized 1.56 BlueCut Freeform (HMC Green)",
-        category: "Customized",
-        series: "Customized (CM)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Balanced corridor transition", "Blue-light screen protection", "Laser authenticated (CM)"],
-        price: 4390
-      },
-      {
-        id: "vv-cm-160-bc-hmc",
-        name: "Customized 1.60 MR-8 BlueCut (HMC Green)",
-        category: "Customized",
-        series: "Customized (CM)",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["MR-8 premium substrate", "Impact resistance for rimless frames", "Smooth visual progression"],
-        price: 6790
-      },
-      {
-        id: "vv-cm-167-bc-hmc",
-        name: "Customized 1.67 Ultra-Thin BlueCut (HMC Green)",
-        category: "Customized",
-        series: "Customized (CM)",
-        index: 1.67,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Slim edge profile for higher powers", "Digital back-surface surfacing", "Reduced eye minification"],
-        price: 8390
-      },
-      {
-        id: "vv-cm-174-bc-hmc",
-        name: "Customized 1.74 Extreme Slim BlueCut",
-        category: "Customized",
-        series: "Customized (CM)",
-        index: 1.74,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Top-tier 1.74 thinness", "HMC Green ARC", "Flattest custom freeform profile"],
-        price: 19790
-      },
-      {
-        id: "vv-cm-160-daynite-bc",
-        name: "Customized 1.60 DayNite + BlueCut (HMC Green)",
-        category: "Customized",
-        series: "Customized (CM)",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "transitions.jpg",
-        features: ["Dual protection: Screens + Sunlight", "Intelligent tint adaptation", "HMC Green coating"],
-        price: 11490
-      },
+/* Cart Management */
+function addToCart(title, price) {
+  cart.push({ id: Date.now() + Math.random(), title, price });
+  updateCart();
+  const el = document.getElementById('book');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
 
-      // =========================================================================
-      // 4. VENTURE & ENTICE PROGRESSIVES
-      // =========================================================================
-      {
-        id: "vv-entice-149",
-        name: "Entice 1.49 Freeform Progressive (HMC Green)",
-        category: "Venture",
-        series: "Entice",
-        index: 1.50,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Essential clarity for everyday vision", "Standard corridor design", "Economic entry-level progressive"],
-        price: 2090
-      },
-      {
-        id: "vv-venture-156-clear",
-        name: "Venture 1.56 Clear Freeform (HMC Green)",
-        category: "Venture",
-        series: "Venture (VT)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Wider visual zones", "Smoother transitions", "Authentic engraving (VT)"],
-        price: 3090
-      },
-      {
-        id: "vv-venture-156-bc",
-        name: "Venture 1.56 BlueCut Freeform (HMC Green)",
-        category: "Venture",
-        series: "Venture (VT)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Everyday performance", "Digital screen comfort", "HMC Green coat"],
-        price: 3490
-      },
-      {
-        id: "vv-venture-160-bc",
-        name: "Venture 1.60 BlueCut Freeform (HMC Green)",
-        category: "Venture",
-        series: "Venture (VT)",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Thin & light for moderate powers", "Optimized computer intermediate corridor", "Quicker adaptation"],
-        price: 5390
-      },
-      {
-        id: "vv-venture-156-daynite-bc",
-        name: "Venture 1.56 DayNite + BlueCut (HMC Green)",
-        category: "Venture",
-        series: "Venture (VT)",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "transitions.jpg",
-        features: ["Outdoor light adaptation", "Screen glare filtration", "HMC Green multi-coat"],
-        price: 4490
-      },
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCart();
+}
 
-      // =========================================================================
-      // 5. SINGLE VISION RX & MYOPIA CONTROL (Stellest & Reference Frames)
-      // =========================================================================
-      {
-        id: "vv-sv-156-clear-hmc",
-        name: "ValueVis RX Clear Single Vision (1.56)",
-        category: "Single Vision",
-        series: "Single Vision Rx",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=700&q=80",
-        features: ["Custom surfaced precision optics", "Scratch resistance & UV block", "HMC Green coating"],
-        price: 3290
-      },
-      {
-        id: "vv-sv-156-bc-hmc",
-        name: "ValueVis RX BlueCut Single Vision (1.56)",
-        category: "Single Vision",
-        series: "Single Vision Rx",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=700&q=80",
-        features: ["Custom surfaced optics", "HMC Green/Blue ARC", "Higher cyl power availability"],
-        price: 3590
-      },
-      {
-        id: "vv-sv-160-bc-hmc",
-        name: "ValueVis RX MR-8 Hi-Index BlueCut (1.60)",
-        category: "Single Vision",
-        series: "Single Vision Rx",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=700&q=80", // Clear browline clubmaster frame
-        features: ["MR-8 impact resistant material", "20% thinner profile", "Perfect for rimless & supra frames"],
-        price: 5790
-      },
-      {
-        id: "es-stellest-myopia",
-        name: "Essilor Stellest® Myopia Control (1.59)",
-        category: "Single Vision",
-        series: "Essilor Myopia Care",
-        index: 1.59,
-        brand: "Essilor",
-        image: "stellest.jpg", // Essilor Stellest concentric microlens ring technology
-        features: ["H.A.L.T. concentric ring design", "Clinically proven to slow myopia by 67%", "Impact-resistant polycarbonate"],
-        price: 15500
-      },
-      {
-        id: "vv-sv-167-bc-hmc",
-        name: "Single Vision Rx 1.67 Ultra-Thin BlueCut",
-        category: "Single Vision",
-        series: "Single Vision Rx",
-        index: 1.67,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=700&q=80",
-        features: ["Aspheric design for powers up to -12.00 D", "HMC Green multi-coat", "Minimal eye minification"],
-        price: 7390
-      },
-      {
-        id: "vv-sv-160-daynite-hmc",
-        name: "Single Vision Rx 1.60 MR-8 DayNite (HMC Green)",
-        category: "Single Vision",
-        series: "Single Vision Rx",
-        index: 1.60,
-        brand: "ValueVis",
-        image: "transitions.jpg",
-        features: ["Adaptive indoor-to-outdoor clarity", "MR-8 durability", "HMC Green ARC"],
-        price: 8290
-      },
+function updateCart() {
+  cartCnt.textContent = cart.length;
+  if (cart.length === 0) {
+    cartItems.innerHTML = `<p class="note">Nothing selected yet. Pick a price from the catalog.</p>`;
+    cartTot.textContent = "₹0";
+    return;
+  }
+  let sum = 0;
+  cartItems.innerHTML = cart.map(i => {
+    sum += i.price;
+    return `
+      <div class="it">
+        <span>${i.title}</span>
+        <span><b>₹${i.price}</b> <button onclick="removeFromCart(${i.id})" title="Remove">&times;</button></span>
+      </div>
+    `;
+  }).join('');
+  cartTot.textContent = `₹${sum.toLocaleString('en-IN')}`;
+}
 
-      // =========================================================================
-      // 6. FSV & QUICKFIT STOCK LENSES
-      // =========================================================================
-      {
-        id: "vv-fsv-precious-clear",
-        name: "Precious Blue 1.56 FSV Clear (HMC Blue)",
-        category: "FSV Stock",
-        series: "Precious Blue",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80",
-        features: ["Exact power stock (+4.00 to -6.00 / Cyl -2.00)", "HMC Blue reflection", "Dust & water repellent"],
-        price: 1490
-      },
-      {
-        id: "vv-fsv-precious-bc",
-        name: "Precious Blue 1.56 FSV BlueCut (HMC Blue)",
-        category: "FSV Stock",
-        series: "Precious Blue",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=700&q=80",
-        features: ["BlueCut digital screen protection", "HMC Blue coating", "Affordable daily stock lens"],
-        price: 1590
-      },
-      {
-        id: "vv-fsv-precious-daynite",
-        name: "Precious Blue 1.56 FSV DayNite (Photochromic)",
-        category: "FSV Stock",
-        series: "Precious Blue",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "transitions.jpg",
-        features: ["Fast reacting sunlight darkening", "HMC Blue reflection", "All-in-one spectacles + shades"],
-        price: 1890
-      },
-      {
-        id: "vv-fsv-precious-daynite-bc",
-        name: "Precious Blue 1.56 FSV DayNite + BlueCut",
-        category: "FSV Stock",
-        series: "Precious Blue",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "transitions.jpg",
-        features: ["Dual protection: Screen + Sunlight", "HMC Blue coating", "Rapid indoor fadeback"],
-        price: 1990
-      },
-      {
-        id: "vv-stock-v2-pal",
-        name: "QuickFit V2 Stock Progressive 1.56 (HMC)",
-        category: "FSV Stock",
-        series: "QuickFit Stock",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "varilux.jpg",
-        features: ["Stock PAL (+3.00 to -2.00 / Add +3.00)", "Immediate delivery", "HMC coating"],
-        price: 1890
-      },
-      {
-        id: "vv-stock-v2-kt",
-        name: "QuickFit V2 Stock Kryptok 1.56 (HMC)",
-        category: "FSV Stock",
-        series: "QuickFit Stock",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=700&q=80",
-        features: ["Stock round-top bifocal", "HMC multi-coat", "Economical near-and-far solution"],
-        price: 990
-      },
+/* Announcements Rotator */
+const slides = document.querySelectorAll('#bn .sl');
+let curSlide = 0;
+function showSlide(idx) {
+  slides.forEach((s, i) => {
+    s.classList.remove('on', 'out');
+    if (i === idx) s.classList.add('on');
+    else if (i < idx) s.classList.add('out');
+  });
+}
+document.getElementById('bnx').onclick = () => {
+  curSlide = (curSlide + 1) % slides.length;
+  showSlide(curSlide);
+};
+document.getElementById('bp').onclick = () => {
+  curSlide = (curSlide - 1 + slides.length) % slides.length;
+  showSlide(curSlide);
+};
+document.getElementById('bc').onclick = () => {
+  document.getElementById('bn').style.display = 'none';
+};
+setInterval(() => {
+  if (slides.length > 0) {
+    curSlide = (curSlide + 1) % slides.length;
+    showSlide(curSlide);
+  }
+}, 5000);
 
-      // =========================================================================
-      // 7. RX BIFOCAL LENSES
-      // =========================================================================
-      {
-        id: "vv-bf-kt-149",
-        name: "Kryptok (KT) Bifocal 1.49 (HMC Green)",
-        category: "Bifocals",
-        series: "Rx Bifocals",
-        index: 1.50,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80",
-        features: ["Classic round segment near vision", "HMC Green coating", "Dependable distance clarity"],
-        price: 1990
-      },
-      {
-        id: "vv-bf-kt-plus-156-bc",
-        name: "KT Plus BlueCut Bifocal 1.56 (HMC Green)",
-        category: "Bifocals",
-        series: "Rx Bifocals",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=700&q=80",
-        features: ["Upgraded 1.56 thinness", "Screen blue-light filter", "HMC Green multi-coat"],
-        price: 2690
-      },
-      {
-        id: "vv-bf-dbifocal-156-plus",
-        name: "D-Bifocal Plus 1.56 (HMC Green)",
-        category: "Bifocals",
-        series: "Rx Bifocals",
-        index: 1.56,
-        brand: "ValueVis",
-        image: "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=700&q=80",
-        features: ["Flat-top D segment for wider reading zone", "Eliminates image jump", "HMC Green coating"],
-        price: 2790
-      },
+/* Prescription Form & WhatsApp */
+const rxf = document.getElementById('rxf');
+const rxp = document.getElementById('rxp');
+let rxFiles = [];
 
-      // =========================================================================
-      // 8. BAUSCH + LOMB (Authentic Contact Lenses & Solutions)
-      // =========================================================================
-      {
-        id: "bl-ultra-one-day-30",
-        name: "Bausch + Lomb Ultra ONE Day (30 Pack)",
-        category: "Contact Lenses",
-        series: "Daily Silicone Hydrogel",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
-        features: ["MoistureSeal & ComfortFeel 16h moisture", "Silicone hydrogel breathability", "Daily single use"],
-        price: 3281
-      },
-      {
-        id: "bl-biotrue-daily-30",
-        name: "Biotrue ONEday Hypergel (30 Pack)",
-        category: "Contact Lenses",
-        series: "Daily Hypergel",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
-        features: ["78% water matches cornea", "Hypergel bio-inspired hydration", "High definition optics"],
-        price: 2765
-      },
-      {
-        id: "bl-ultra-monthly-6",
-        name: "Bausch + Lomb Ultra Monthly (6 Pack)",
-        category: "Contact Lenses",
-        series: "Monthly Silicone Hydrogel",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
-        features: ["Retains 95% hydration for 16h", "Ideal for long screen hours", "High oxygen transmissibility"],
-        price: 4031
-      },
-      {
-        id: "bl-purevision-2-monthly-6",
-        name: "PureVision 2 HD Monthly (6 Pack)",
-        category: "Contact Lenses",
-        series: "Monthly Silicone Hydrogel",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
-        features: ["High Definition Optics reduce halos", "ComfortMoist thin-edge design", "Extended breathability"],
-        price: 2526
-      },
-      {
-        id: "bl-sl59-monthly-6",
-        name: "SofLens 59 Monthly (6 Pack)",
-        category: "Contact Lenses",
-        series: "Monthly Hydrogel",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
-        features: ["59% water content", "Deposit resistant Hilafilcon B", "Standard reliable comfort"],
-        price: 1645
-      },
-      {
-        id: "bl-biotrue-toric-daily-30",
-        name: "Biotrue ONEday Toric for Astigmatism (30 Pack)",
-        category: "Contact Lenses",
-        series: "Daily Toric",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
-        features: ["Peri-Ballast design for rotational stability", "78% cornea-matched hydration", "Stable astigmatism correction"],
-        price: 2765
-      },
-      {
-        id: "bl-ultra-toric-monthly-6",
-        name: "Bausch + Lomb Ultra Toric Monthly (6 Pack)",
-        category: "Contact Lenses",
-        series: "Monthly Toric",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
-        features: ["OpticAlign minimizes rotation", "MoistureSeal 16h moisture", "Silicone hydrogel for dry screen eyes"],
-        price: 4031
-      },
-      {
-        id: "bl-renu-fresh-355",
-        name: "Renu Fresh Multi-Purpose Solution (355 ml)",
-        category: "Lens Care",
-        series: "Solutions & Drops",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80",
-        features: ["Cleans, rinses, disinfects, and removes protein", "Sustained moisture", "Includes lens case"],
-        price: 605
-      },
-      {
-        id: "bl-biotrue-sol-300",
-        name: "Biotrue Multi-Purpose Solution (300 ml)",
-        category: "Lens Care",
-        series: "Solutions & Drops",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80",
-        features: ["pH matches human tears (pH 7.5)", "Hyaluronan natural lubricant retains 20h moisture", "Dual disinfection"],
-        price: 660
-      },
-      {
-        id: "bl-renu-drops-8ml",
-        name: "Renu MultiPlus Lubricating Drops (8 ml)",
-        category: "Lens Care",
-        series: "Solutions & Drops",
-        index: null,
-        brand: "Bausch + Lomb",
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80",
-        features: ["Instant soothing relief for dry contact lens eyes", "Can be applied directly while wearing lenses", "Sterile formula"],
-        price: 215
-      }
-    ];
-
-    // Official Lab Services & Surcharges
-    const availableAddons = {
-      fullfit: { id: "addon-fullfit", name: "Full Frame Edging Fitting", price: 200 },
-      supra: { id: "addon-supra", name: "Supra (Semi-Rimless) Grooving Fitting", price: 300 },
-      rimless: { id: "addon-rimless", name: "Rimless Precision Drill Mounting", price: 500 },
-      dualcoat: { id: "addon-dualcoat", name: "ValueVis Dual Coat™ (Front Green / Back Blue ARC)", price: 500 },
-      tint: { id: "addon-tint", name: "Custom Sunglass Tint (Full / Gradient)", price: 300 },
-      nosepads: { id: "addon-nosepads", name: "German Silicone Nose Pads", price: 99 },
-      ultrasonic: { id: "addon-ultrasonic", name: "Ultrasonic Deep Cleaning Spa", price: 149 },
-      alignment: { id: "addon-alignment", name: "Frame Realignment & Tightening", price: 199 }
-    };
-
-    // Promo Code Registry
-    const PROMO_CODES = {
-      "RELENS10": { type: "percentage", value: 10, description: "10% Welcome Discount applied", minOrder: 1000 },
-      "DOORSTEPFREE": { type: "flat", value: 200, description: "₹200 Doorstep Special Discount applied", minOrder: 1200 },
-      "PROG500": { type: "progressive_only", value: 500, description: "₹500 Progressive Upgrade Discount applied", minOrder: 3000 }
-    };
-
-    // Live Order Database
-    const RELENS_ORDERS = {
-      "RL-2026-1042": {
-        orderId: "RL-2026-1042",
-        lensName: "Evolux Elite 1.60 MR-8 (Optix ARC)",
-        frameService: "Full Rim Fitting + Ultrasonic Spa",
-        deliveryType: "Doorstep Delivery (Puducherry)",
-        currentStageIndex: 2,
-        estimatedDelivery: "04 Oct 2026",
-        timeline: [
-          { title: "Order Confirmed", date: "01 Oct 2026, 10:30 AM", detail: "Booking created via WhatsApp" },
-          { title: "Prescription & Frame Inspected", date: "01 Oct 2026, 04:15 PM", detail: "Power verified (-3.00 SPH / 1.60 MR-8)" },
-          { title: "Optical Edging & Lens Fitting", date: "In Progress (Lab)", detail: "Free-form surfacing on Coburn Cobalt NXT" },
-          { title: "Quality & Alignment Check", date: "Pending", detail: "Axis balance and pantoscopic tilt verification" },
-          { title: "Out for Doorstep Delivery", date: "Scheduled", detail: "Optical specialist assigned for fitting" },
-          { title: "Delivered & Fitted", date: "Pending", detail: "Customer doorstep sign-off" }
-        ]
-      },
-      "RL-2026-1088": {
-        orderId: "RL-2026-1088",
-        lensName: "Single Vision Rx 1.60 MR-8 BlueCut",
-        frameService: "German Silicone Nose Pads",
-        deliveryType: "Doorstep Delivery (Lawspet, Puducherry)",
-        currentStageIndex: 4,
-        estimatedDelivery: "Today",
-        timeline: [
-          { title: "Order Confirmed", date: "02 Oct 2026, 09:00 AM", detail: "Service confirmed" },
-          { title: "Prescription & Frame Inspected", date: "02 Oct 2026, 11:30 AM", detail: "Single vision power matched" },
-          { title: "Optical Edging & Lens Fitting", date: "02 Oct 2026, 05:00 PM", detail: "Precision mounted into existing frame" },
-          { title: "Quality & Alignment Check", date: "03 Oct 2026, 09:30 AM", detail: "Zero-stress test and UV check passed" },
-          { title: "Out for Doorstep Delivery", date: "En Route", detail: "Specialist is out for doorstep trial" },
-          { title: "Delivered & Fitted", date: "Pending", detail: "Awaiting customer fit confirmation" }
-        ]
-      }
-    };
-
-    let cart = [];
-    const selectedAddons = new Set();
-    let appliedPromo = null;
-    let activeFilter = "all";
-    let currentRecommendedIndex = null;
-    let isIndexFilterActive = false;
-    let currentRxMode = "manual";
-    let selectedRxFile = null;
-
-    // Render Catalog
-    function renderCatalog(items) {
-      const container = document.getElementById("catalogGrid");
-      if (!container) return;
-
-      if (!items || items.length === 0) {
-        container.innerHTML = `<div style="grid-column: 1 / -1; padding: 2rem; text-align: center; background: white; border-radius: 12px;"><p style="color: #64748b;">No lenses found matching this selection.</p></div>`;
-        return;
-      }
-
-      container.innerHTML = items.map(item => {
-        const isRecommended = currentRecommendedIndex && (item.index === currentRecommendedIndex);
-        return `
-          <article class="catalog-card ${isRecommended ? 'recommended-match' : ''}">
-            <div class="card-media">
-              ${isRecommended ? '<span class="match-badge">⭐ Recommended for Your Power</span>' : ''}
-              <img src="${item.image}" alt="${item.name}" loading="lazy" class="product-img">
-              <div class="brand-pill"><span>${item.brand} • ${item.series}</span></div>
-            </div>
-            <div class="card-body">
-              <div class="tag-row">
-                <span class="category-badge">${item.category}</span>
-                ${item.index ? `<span class="index-pill">${item.index} Index</span>` : ''}
-              </div>
-              <h3 class="product-title">${item.name}</h3>
-              <ul class="feature-tags">
-                ${item.features.map(f => `<li>✓ ${f}</li>`).join("")}
-              </ul>
-              <div class="card-action">
-                <div class="price-wrap">
-                  <span class="price-label">Official MRP</span>
-                  <span class="price">₹${item.price.toLocaleString("en-IN")}</span>
-                </div>
-                <button class="select-btn" onclick="handleSelectLens('${item.id}')">Select</button>
-              </div>
-            </div>
-          </article>
-        `;
-      }).join("");
+rxf.onchange = (e) => {
+  const files = Array.from(e.target.files).slice(0, 3);
+  rxFiles = files;
+  rxp.innerHTML = '';
+  files.forEach((f, idx) => {
+    const div = document.createElement('div');
+    if (f.type.startsWith('image/')) {
+      const url = URL.createObjectURL(f);
+      div.innerHTML = `<img src="${url}"><button onclick="removeRxFile(${idx})">&times;</button>`;
+    } else {
+      div.innerHTML = `<span>${f.name}</span><button onclick="removeRxFile(${idx})">&times;</button>`;
     }
-
-    function applyFilters() {
-      const filtered = catalogData.filter(item => {
-        const matchesCategory = (activeFilter === "all") || (item.category === activeFilter);
-        let matchesIndex = true;
-        if (isIndexFilterActive && currentRecommendedIndex && item.index) {
-          matchesIndex = (item.index === currentRecommendedIndex);
-        }
-        return matchesCategory && matchesIndex;
-      });
-      renderCatalog(filtered);
-    }
-
-    function toggleIndexFilter() {
-      isIndexFilterActive = !isIndexFilterActive;
-      const btn = document.getElementById("filterByIndexBtn");
-      if (btn) {
-        btn.textContent = isIndexFilterActive ? "Show All Available Lenses" : `Show Only ${currentRecommendedIndex} Lenses`;
-      }
-      applyFilters();
-      toggleCart(false);
-    }
-
-    // Prescription & Index Rule
-    function switchRxMode(mode) {
-      currentRxMode = mode;
-      document.getElementById("tabBtnManual").classList.toggle("active", mode === "manual");
-      document.getElementById("tabBtnUpload").classList.toggle("active", mode === "upload");
-      document.getElementById("rxManualForm").classList.toggle("active", mode === "manual");
-      document.getElementById("rxUploadForm").classList.toggle("active", mode === "upload");
-      saveReLensState();
-    }
-
-    function handleRxFileSelect(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      selectedRxFile = file;
-      document.getElementById("dropzoneEmpty").classList.add("hidden");
-      document.getElementById("dropzonePreview").classList.remove("hidden");
-      document.getElementById("rxFileName").textContent = `📎 ${file.name}`;
-      saveReLensState();
-    }
-
-    function clearRxFile(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      selectedRxFile = null;
-      document.getElementById("rxFileInput").value = "";
-      document.getElementById("dropzonePreview").classList.add("hidden");
-      document.getElementById("dropzoneEmpty").classList.remove("hidden");
-      saveReLensState();
-    }
-
-    function evaluatePrescriptionIndex() {
-      const parseVal = (id) => {
-        const raw = document.getElementById(id)?.value.trim();
-        if (!raw) return 0;
-        const clean = parseFloat(raw.replace("+", ""));
-        return isNaN(clean) ? 0 : clean;
-      };
-
-      const odSph = parseVal("odSph");
-      const odCyl = parseVal("odCyl");
-      const osSph = parseVal("osSph");
-      const osCyl = parseVal("osCyl");
-
-      const maxPower = Math.max(Math.abs(odSph) + Math.abs(odCyl), Math.abs(osSph) + Math.abs(osCyl));
-      const box = document.getElementById("indexRecommendationBox");
-      const title = document.getElementById("recIndexVal");
-      const reason = document.getElementById("recReasonText");
-      const filterBtn = document.getElementById("filterByIndexBtn");
-
-      if (maxPower === 0) {
-        currentRecommendedIndex = null;
-        isIndexFilterActive = false;
-        box.classList.add("hidden");
-        applyFilters();
-        return;
-      }
-
-      if (maxPower <= 2.00) {
-        currentRecommendedIndex = 1.56;
-        title.textContent = "1.56 Standard Index";
-        reason.textContent = "Optimal clarity and durability for light optical powers.[span_26](start_span)"[span_26](end_span);
-        box.className = "index-rec-box rec-standard";
-      } else if (maxPower <= 4.00) {
-        currentRecommendedIndex = 1.60;
-        title.textContent = "1.60 Thin Hi-Index (MR-8)";
-        reason.textContent = "Up to 20% thinner edge profile with high impact strength.[span_27](start_span)"[span_27](end_span);
-        box.className = "index-rec-box rec-mid";
-      } else if (maxPower <= 6.00) {
-        currentRecommendedIndex = 1.67;
-        title.textContent = "1.67 Ultra-Thin Hi-Index";
-        reason.textContent = "Significantly reduces edge thickness and peripheral distortion.[span_28](start_span)"[span_28](end_span);
-        box.className = "index-rec-box rec-high";
-      } else {
-        currentRecommendedIndex = 1.74;
-        title.textContent = "1.74 Extreme Hi-Index";
-        reason.textContent = "Slimmest aesthetic profile for high prescriptions.[span_29](start_span)"[span_29](end_span);
-        box.className = "index-rec-box rec-ultra";
-      }
-
-      filterBtn.textContent = isIndexFilterActive ? "Show All Available Lenses" : `Show Only ${currentRecommendedIndex} Lenses`;
-      box.classList.remove("hidden");
-      applyFilters();
-    }
-
-    // AI Vision Advisor Engine
-    function toggleAiAssistant(isOpen) {
-      document.getElementById("aiModal").classList.toggle("active", isOpen);
-      document.getElementById("aiOverlay").classList.toggle("active", isOpen);
-    }
-
-    function handleAiKeyPress(e) {
-      if (e.key === "Enter") processAiInput();
-    }
-
-    function runAiPrompt(type) {
-      let promptText = "";
-      if (type === "high-screen") promptText = "I spend 8+ hours on laptops and digital screens.";
-      if (type === "reading-distance") promptText = "I need clear vision for reading phone and distance driving.";
-      if (type === "outdoor-sun") promptText = "I want lenses that adapt and turn dark in sunlight.";
-      if (type === "high-power") promptText = "My power is high (-5.00 or above) and I need ultra-thin edges.";
-      
-      document.getElementById("aiUserInput").value = promptText;
-      processAiInput();
-    }
-
-    function processAiInput() {
-      const input = document.getElementById("aiUserInput");
-      const query = input.value.trim().toLowerCase();
-      if (!query) return;
-
-      const chatBody = document.getElementById("aiChatBody");
-      chatBody.innerHTML += `<div class="ai-msg user">${input.value}</div>`;
-      input.value = "";
-      chatBody.scrollTop = chatBody.scrollHeight;
-
-      setTimeout(() => {
-        let reply = "";
-        let recommendedLensId = "";
-
-        if (query.includes("screen") || query.includes("computer") || query.includes("laptop") || query.includes("blue")) {
-          reply = "For heavy screen usage, you need advanced reflection control. I recommend **Single Vision Rx 1.60 MR-8 BlueCut** or **Customized 1.56 BlueCut** with HMC Green reflection.[span_30](start_span)[span_31](start_span)[span_32](start_span)"[span_30](end_span)[span_31](end_span)[span_32](end_span);
-          recommendedLensId = "vv-sv-160-bc-hmc";
-        } else if (query.includes("reading") || query.includes("driving") || query.includes("progressive") || query.includes("bifocal")) {
-          reply = "For seamless multi-distance vision without dividing lines, the **Evolux 1.56 Clearview (Optix Green ARC)** or **Evolux Elite 1.60** provides an expanded visual field with quick adaptation.[span_33](start_span)[span_34](start_span)"[span_33](end_span)[span_34](end_span);
-          recommendedLensId = "vv-ex-156-optix";
-        } else if (query.includes("outdoor") || query.includes("sun") || query.includes("dark") || query.includes("photochromic")) {
-          reply = "You need light-adaptive technology. The **Precious Blue 1.56 FSV DayNite** or **Evolux 1.60 DayNite** reacts smoothly from indoor clear to outdoor dark.[span_35](start_span)[span_36](start_span)[span_37](start_span)"[span_35](end_span)[span_36](end_span)[span_37](end_span);
-          recommendedLensId = "vv-fsv-precious-daynite";
-        } else if (query.includes("high") || query.includes("thick") || query.includes("-5") || query.includes("-6") || query.includes("thin")) {
-          reply = "For strong prescriptions, standard lenses become thick and heavy[span_38](start_span)[span_38](end_span). I recommend **Customized 1.67 Ultra-Thin BlueCut** or **Evolux Elite 1.74 Extreme Thin**.[span_39](start_span)[span_40](start_span)"[span_39](end_span)[span_40](end_span);
-          recommendedLensId = "vv-cm-167-bc-hmc";
-        } else {
-          reply = "Based on balanced everyday performance, the **Precious Blue 1.56 FSV BlueCut** offers great screen comfort and multi-coating at optimal value.[span_41](start_span)"[span_41](end_span);
-          recommendedLensId = "vv-fsv-precious-bc";
-        }
-
-        chatBody.innerHTML += `
-          <div class="ai-msg bot">
-            ${reply}
-            <br><br>
-            <button class="ai-action-btn" onclick="handleSelectLens('${recommendedLensId}'); toggleAiAssistant(false);">
-              👉 Add Recommended Lens to Bag
-            </button>
-          </div>
-        `;
-        chatBody.scrollTop = chatBody.scrollHeight;
-      }, 400);
-    }
-
-    // Cart & Addons
-    function toggleCart(isOpen) {
-      document.getElementById("cartDrawer")?.classList.toggle("active", isOpen);
-      document.getElementById("cartOverlay")?.classList.toggle("active", isOpen);
-    }
-
-    function handleSelectLens(lensId) {
-      const item = catalogData.find(l => l.id === lensId);
-      if (!item) return;
-
-      const existing = cart.find(ci => ci.id === lensId);
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        cart.push({ ...item, quantity: 1 });
-      }
-
-      updateCartUI();
-      saveReLensState();
-      toggleCart(true);
-    }
-
-    function updateQuantity(lensId, delta) {
-      const itemIndex = cart.findIndex(ci => ci.id === lensId);
-      if (itemIndex === -1) return;
-
-      cart[itemIndex].quantity += delta;
-      if (cart[itemIndex].quantity <= 0) {
-        cart.splice(itemIndex, 1);
-      }
-
-      updateCartUI();
-      saveReLensState();
-    }
-
-    function toggleAddon(addonKey) {
-      if (selectedAddons.has(addonKey)) {
-        selectedAddons.delete(addonKey);
-      } else {
-        selectedAddons.add(addonKey);
-      }
-      updateCartTotals();
-      saveReLensState();
-    }
-
-    // Promo Code Functions
-    function quickApplyPromo(code) {
-      const input = document.getElementById("promoCodeInput");
-      if (input) {
-        input.value = code;
-        applyPromoCode();
-      }
-    }
-
-    function applyPromoCode() {
-      const input = document.getElementById("promoCodeInput");
-      const code = input.value.trim().toUpperCase();
-
-      if (!code) {
-        showPromoFeedback("Please enter a valid coupon code.", "error");
-        return;
-      }
-
-      const promo = PROMO_CODES[code];
-      if (!promo) {
-        showPromoFeedback("Invalid coupon code. Try RELENS10 or DOORSTEPFREE.", "error");
-        appliedPromo = null;
-        updateCartTotals();
-        return;
-      }
-
-      const lensesSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      let addonsSubtotal = 0;
-      selectedAddons.forEach(key => {
-        addonsSubtotal += availableAddons[key].price;
-      });
-      const subtotal = lensesSubtotal + addonsSubtotal;
-
-      if (subtotal < promo.minOrder) {
-        showPromoFeedback(`Minimum order of ₹${promo.minOrder.toLocaleString("en-IN")} required for ${code}.`, "error");
-        appliedPromo = null;
-        updateCartTotals();
-        return;
-      }
-
-      if (promo.type === "progressive_only") {
-        const hasProgressive = cart.some(i => i.category === "Progressive" || i.category === "Evolux" || i.category === "Evolux Elite" || i.category === "Customized" || i.category === "Venture");
-        if (!hasProgressive) {
-          showPromoFeedback("PROG500 is only valid on Progressive lens orders.", "error");
-          appliedPromo = null;
-          updateCartTotals();
-          return;
-        }
-      }
-
-      appliedPromo = { code, ...promo };
-      showPromoFeedback(`✓ ${promo.description}`, "success");
-      updateCartTotals();
-      saveReLensState();
-    }
-
-    function showPromoFeedback(message, type) {
-      const feedback = document.getElementById("promoFeedback");
-      if (!feedback) return;
-      feedback.textContent = message;
-      feedback.className = `promo-feedback ${type}`;
-      feedback.classList.remove("hidden");
-    }
-
-    // Update Totals and Financial Breakdown
-    function updateCartTotals() {
-      const subtotalElem = document.getElementById("cartSubtotalPrice");
-      const discountRow = document.getElementById("discountDisplayRow");
-      const discountElem = document.getElementById("cartDiscountPrice");
-      const promoBadge = document.getElementById("appliedPromoBadge");
-      const totalElem = document.getElementById("cartTotalPrice");
-
-      const lensesTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      let addonsTotal = 0;
-      selectedAddons.forEach(key => {
-        addonsTotal += availableAddons[key].price;
-      });
-
-      const subtotal = lensesTotal + addonsTotal;
-      let discountAmount = 0;
-
-      if (appliedPromo && subtotal >= appliedPromo.minOrder) {
-        if (appliedPromo.type === "percentage") {
-          discountAmount = Math.round((subtotal * appliedPromo.value) / 100);
-        } else {
-          discountAmount = appliedPromo.value;
-        }
-
-        if (discountRow) discountRow.classList.remove("hidden");
-        if (discountElem) discountElem.textContent = `-₹${discountAmount.toLocaleString("en-IN")}`;
-        if (promoBadge) promoBadge.textContent = appliedPromo.code;
-      } else {
-        if (discountRow) discountRow.classList.add("hidden");
-        if (appliedPromo && subtotal < appliedPromo.minOrder) {
-          appliedPromo = null;
-          const feedback = document.getElementById("promoFeedback");
-          if (feedback) feedback.classList.add("hidden");
-        }
-      }
-
-      const grandTotal = Math.max(0, subtotal - discountAmount);
-
-      if (subtotalElem) subtotalElem.textContent = `₹${subtotal.toLocaleString("en-IN")}`;
-      if (totalElem) totalElem.textContent = `₹${grandTotal.toLocaleString("en-IN")}`;
-    }
-
-    function updateCartUI() {
-      const container = document.getElementById("cartItemsContainer");
-      const badge = document.getElementById("cartCount");
-      badge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-      if (cart.length === 0) {
-        container.innerHTML = `<div style="text-align: center; padding: 2rem 0; color: #64748b;"><p style="font-weight: 600;">No lenses in your bag yet.</p><span style="font-size: 0.8rem;">Select a lens package from the catalog to continue.</span></div>`;
-        updateCartTotals();
-        return;
-      }
-
-      container.innerHTML = cart.map(item => `
-        <div class="cart-item">
-          <div class="cart-item-details">
-            <span class="item-brand" style="font-size: 0.72rem; color: var(--primary); font-weight: 700;">${item.brand} • ${item.series}</span>
-            <h4 style="font-size: 0.95rem; margin: 2px 0;">${item.name}</h4>
-            <span style="font-size: 0.8rem; color: #64748b;">₹${item.price.toLocaleString("en-IN")} each</span>
-          </div>
-          <div class="item-actions">
-            <div class="qty-stepper">
-              <button onclick="updateQuantity('${item.id}', -1)">−</button>
-              <span style="padding: 0 8px; font-size: 0.85rem;">${item.quantity}</span>
-              <button onclick="updateQuantity('${item.id}', 1)">+</button>
-            </div>
-            <span style="font-weight: 700;">₹${(item.price * item.quantity).toLocaleString("en-IN")}</span>
-          </div>
-        </div>
-      `).join("");
-
-      updateCartTotals();
-    }
-
-    function handleDirectBooking(event) {
-      event.preventDefault();
-      const service = document.getElementById("quickServiceSelect").value;
-      const date = document.getElementById("quickBookingDate").value;
-      const slot = document.getElementById("quickBookingSlot").value;
-
-      const message = `*Direct Service Appointment Request*\nService: ${service}\nPreferred Slot: ${date} (${slot})\nLocation: Puducherry`;
-      window.open(`https://wa.me/message/3XHYZJ2WIHFTO1?text=${encodeURIComponent(message)}`, "_blank");
-    }
-
-    function handleTrackOrder(event) {
-      event.preventDefault();
-      const input = document.getElementById("orderTrackerInput");
-      displayOrderStatus(input.value.trim().toUpperCase().replace("#", ""));
-    }
-
-    function quickFillTrack(id) {
-      document.getElementById("orderTrackerInput").value = id;
-      displayOrderStatus(id);
-    }
-
-    function displayOrderStatus(orderId) {
-      const resultArea = document.getElementById("trackerResultArea");
-      const order = RELENS_ORDERS[orderId];
-
-      if (!order) {
-        resultArea.innerHTML = `
-          <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 1rem; text-align: center; color: #9f1239; margin-top: 1rem;">
-            <h4>Order #${orderId} Not Found</h4>
-            <p style="font-size: 0.8rem; margin: 4px 0 8px;">Please check your Order ID or contact ReLens WhatsApp support directly.</p>
-            <a href="https://wa.me/message/3XHYZJ2WIHFTO1?text=Hi%20ReLens,%20help%20me%20track%20order%20%23${orderId}" target="_blank" style="color: #0284c7; font-weight: 700; font-size: 0.85rem;">Contact Support</a>
-          </div>`;
-        return;
-      }
-
-      const timelineHTML = order.timeline.map((step, idx) => {
-        const isDone = idx < order.currentStageIndex;
-        const isCurrent = idx === order.currentStageIndex;
-        const color = isDone ? "#22c55e" : isCurrent ? "#0284c7" : "#cbd5e1";
-        const icon = isDone ? "✓" : isCurrent ? "●" : "○";
-
-        return `
-          <div style="display: flex; gap: 12px; position: relative;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 20px;">
-              <span style="width: 20px; height: 20px; border-radius: 50%; background: ${isDone || isCurrent ? color : '#fff'}; border: 2px solid ${color}; color: ${isDone || isCurrent ? '#fff' : 'transparent'}; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">${icon}</span>
-              ${idx < order.timeline.length - 1 ? `<span style="width: 2px; flex-grow: 1; background: ${isDone ? '#22c55e' : '#e2e8f0'}; min-height: 24px;"></span>` : ''}
-            </div>
-            <div style="padding-bottom: 1rem; flex-grow: 1;">
-              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: ${isCurrent ? '#0284c7' : '#1e293b'};">
-                <span>${step.title}</span>
-                <span style="font-size: 0.72rem; color: #64748b; font-weight: 400;">${step.date}</span>
-              </div>
-              <p style="font-size: 0.75rem; color: #64748b; margin-top: 2px;">${step.detail}</p>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      resultArea.innerHTML = `
-        <div style="border-top: 1px solid #e2e8f0; padding-top: 1rem; margin-top: 1rem;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-            <div>
-              <span style="background: #e0f2fe; color: #0369a1; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">#${order.orderId}</span>
-              <h3 style="font-size: 1rem; margin-top: 4px;">${order.lensName}</h3>
-              <span style="font-size: 0.75rem; color: #64748b;">${order.frameService} • ${order.deliveryType}</span>
-            </div>
-            <div style="text-align: right;">
-              <span style="font-size: 0.65rem; color: #166534; font-weight: 700; text-transform: uppercase;">Estimated Delivery</span>
-              <div style="font-size: 0.85rem; font-weight: 700; color: #15803d;">${order.estimatedDelivery}</div>
-            </div>
-          </div>
-          <div>${timelineHTML}</div>
-        </div>
-      `;
-    }
-
-    // Prescription Summary Getter
-    function getPrescriptionSummary() {
-      if (currentRxMode === "upload") {
-        if (selectedRxFile) {
-          return `Prescription Slip: Uploaded (${selectedRxFile.name}) - [Attaching image on chat]`;
-        }
-        return `Prescription Slip: Will share photo via WhatsApp`;
-      }
-
-      const odSph = document.getElementById("odSph")?.value.trim() || "Plano";
-      const odCyl = document.getElementById("odCyl")?.value.trim() || "0.00";
-      const odAxis = document.getElementById("odAxis")?.value.trim() || "-";
-      const odAdd = document.getElementById("odAdd")?.value.trim() || "-";
-
-      const osSph = document.getElementById("osSph")?.value.trim() || "Plano";
-      const osCyl = document.getElementById("osCyl")?.value.trim() || "0.00";
-      const osAxis = document.getElementById("osAxis")?.value.trim() || "-";
-      const osAdd = document.getElementById("osAdd")?.value.trim() || "-";
-
-      const isBlank = (odSph === "Plano" && odCyl === "0.00" && osSph === "Plano" && osCyl === "0.00");
-      if (isBlank) {
-        return "Prescription: To be measured/verified during doorstep visit";
-      }
-
-      const recIndex = document.getElementById("recIndexVal")?.textContent || "1.56 Standard";
-
-      return `*Prescription Power:*\n• *OD (Right):* SPH ${odSph} | CYL ${odCyl} | AXIS ${odAxis} | ADD ${odAdd}\n• *OS (Left):*  SPH ${osSph} | CYL ${osCyl} | AXIS ${osAxis} | ADD ${osAdd}\n• *Recommended Lens Index:* ${recIndex}`;
-    }
-
-    // Refined WhatsApp Checkout
-    function checkoutWhatsApp() {
-      if (cart.length === 0 && selectedAddons.size === 0) {
-        alert("Please select at least one lens package or fitting service before proceeding.");
-        return;
-      }
-
-      const lensesSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      let addonsSubtotal = 0;
-      selectedAddons.forEach(key => {
-        addonsSubtotal += availableAddons[key].price;
-      });
-      const subtotal = lensesSubtotal + addonsSubtotal;
-
-      let discountAmount = 0;
-      let promoNote = "";
-      if (appliedPromo && subtotal >= appliedPromo.minOrder) {
-        discountAmount = appliedPromo.type === "percentage" 
-          ? Math.round((subtotal * appliedPromo.value) / 100) 
-          : appliedPromo.value;
-        promoNote = `🎁 *Promo Applied:* ${appliedPromo.code} (-₹${discountAmount.toLocaleString("en-IN")})\n`;
-      }
-      const grandTotal = Math.max(0, subtotal - discountAmount);
-
-      let itemsSummary = cart.length > 0 
-        ? cart.map(item => `  • ${item.name} [${item.brand}] x${item.quantity} ➔ ₹${(item.price * item.quantity).toLocaleString("en-IN")}`).join("\n")
-        : "  • Frame Service / Refurbishing Only";
-
-      let addonsSummary = "";
-      if (selectedAddons.size > 0) {
-        const list = Array.from(selectedAddons).map(key => `  + ${availableAddons[key].name} ➔ ₹${availableAddons[key].price}`).join("\n");
-        addonsSummary = `\n🛠️ *FITTING & LAB ADD-ONS:*\n${list}\n`;
-      }
-
-      const rxDetails = getPrescriptionSummary();
-      const appDate = document.getElementById("appointmentDate")?.value || "Earliest available";
-      const appSlot = document.querySelector('input[name="appointmentSlot"]:checked')?.value || "09:00 AM - 11:00 AM";
-
-      const hasContactLenses = cart.some(i => i.category === "Contact Lenses");
-      const clNotice = hasContactLenses 
-        ? `\n⚠ _Contact lenses: Please keep your eye test slip ready for base curve & diopter verification._\n` 
-        : "";
-
-      const tempOrderId = "RL-2026-" + Math.floor(1000 + Math.random() * 9000);
-
-      const message = 
-`👓 *RELENS DOORSTEP SERVICE BOOKING*
-*Order Ref:* #${tempOrderId}
-─────────────────────────────
-📍 *Location:* Puducherry Doorstep Service
-📅 *Appointment:* ${appDate}
-⏰ *Time Window:* ${appSlot}
-─────────────────────────────
-📦 *LENS PACKAGES:*
-${itemsSummary}
-${addonsSummary}
-─────────────────────────────
-📋 *PRESCRIPTION SUMMARY:*
-${rxDetails}
-${clNotice}─────────────────────────────
-💰 *BILLING SUMMARY:*
-• Subtotal: ₹${subtotal.toLocaleString("en-IN")}
-${promoNote}• *Estimated Total: ₹${grandTotal.toLocaleString("en-IN")}*
-─────────────────────────────
-Hello ReLens team! I would like to confirm this doorstep booking for my frame. Please confirm specialist availability.`;
-
-      window.open(`https://wa.me/message/3XHYZJ2WIHFTO1?text=${encodeURIComponent(message)}`, "_blank");
-    }
-
-    // Storage Management
-    function saveReLensState() {
-      try {
-        const payload = {
-          cart: cart || [],
-          addons: Array.from(selectedAddons || []),
-          appliedPromo: appliedPromo || null,
-          odSph: document.getElementById("odSph")?.value || "",
-          odCyl: document.getElementById("odCyl")?.value || "",
-          odAxis: document.getElementById("odAxis")?.value || "",
-          odAdd: document.getElementById("odAdd")?.value || "",
-          osSph: document.getElementById("osSph")?.value || "",
-          osCyl: document.getElementById("osCyl")?.value || "",
-          osAxis: document.getElementById("osAxis")?.value || "",
-          osAdd: document.getElementById("osAdd")?.value || "",
-          date: document.getElementById("appointmentDate")?.value || ""
-        };
-        localStorage.setItem(RELENS_STORAGE_KEY, JSON.stringify(payload));
-      } catch (e) {}
-    }
-
-    function loadReLensState() {
-      const now = new Date();
-      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-      const datePicker = document.getElementById("appointmentDate");
-      const quickDate = document.getElementById("quickBookingDate");
-      if (datePicker) { datePicker.min = today; datePicker.value = today; }
-      if (quickDate) { quickDate.min = today; quickDate.value = today; }
-
-      try {
-        const raw = localStorage.getItem(RELENS_STORAGE_KEY);
-        if (!raw) return;
-        const data = JSON.parse(raw);
-        if (Array.isArray(data.cart)) { cart = data.cart; updateCartUI(); }
-        if (Array.isArray(data.addons)) {
-          selectedAddons.clear();
-          data.addons.forEach(key => {
-            selectedAddons.add(key);
-            const cb = document.getElementById(`addon-${key}`);
-            if (cb) cb.checked = true;
-          });
-        }
-        if (data.appliedPromo) {
-          appliedPromo = data.appliedPromo;
-          const input = document.getElementById("promoCodeInput");
-          if (input) input.value = appliedPromo.code;
-          showPromoFeedback(`✓ ${appliedPromo.description}`, "success");
-        }
-        if (data.odSph) document.getElementById("odSph").value = data.odSph;
-        if (data.odCyl) document.getElementById("odCyl").value = data.odCyl;
-        if (data.odAxis) document.getElementById("odAxis").value = data.odAxis;
-        if (data.odAdd) document.getElementById("odAdd").value = data.odAdd;
-        if (data.osSph) document.getElementById("osSph").value = data.osSph;
-        if (data.osCyl) document.getElementById("osCyl").value = data.osCyl;
-        if (data.osAxis) document.getElementById("osAxis").value = data.osAxis;
-        if (data.osAdd) document.getElementById("osAdd").value = data.osAdd;
-        if (data.date && datePicker) datePicker.value = data.date;
-        evaluatePrescriptionIndex();
-        updateCartTotals();
-      } catch (e) {}
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      renderCatalog(catalogData);
-      loadReLensState();
-
-      document.querySelectorAll(".filter-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          activeFilter = btn.dataset.filter;
-          applyFilters();
-        });
-      });
-
-      ["odSph", "odCyl", "odAxis", "odAdd", "osSph", "osCyl", "osAxis", "osAdd"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener("input", () => { evaluatePrescriptionIndex(); saveReLensState(); });
-      });
+    rxp.appendChild(div);
+  });
+};
+
+function removeRxFile(idx) {
+  rxFiles.splice(idx, 1);
+  rxp.children[idx].remove();
+}
+
+document.getElementById('rxg').onclick = () => {
+  const name = document.getElementById('rxn').value.trim();
+  const phone = document.getElementById('rxt').value.trim();
+  const pd = document.getElementById('rxd').value.trim();
+  const notes = document.getElementById('rxk').value.trim();
+  
+  const powers = Array.from(document.querySelectorAll('.pw')).reduce((acc, el) => {
+    if (el.value.trim()) acc.push(`${el.getAttribute('data-k')}: ${el.value.trim()}`);
+    return acc;
+  }, []);
+
+  let msg = `Hi ReLens, I would like to upload and verify my eye prescription:\n`;
+  if (name) msg += `Name: ${name}\n`;
+  if (phone) msg += `Phone: ${phone}\n`;
+  if (pd) msg += `PD: ${pd} mm\n`;
+  if (powers.length) msg += `Powers:\n${powers.join('\n')}\n`;
+  if (notes) msg += `Notes: ${notes}\n`;
+  if (rxFiles.length) msg += `(Prescription document attached via chat)\n`;
+
+  window.open(`https://wa.me/919488353749?text=${encodeURIComponent(msg)}`, '_blank');
+};
+
+/* Booking Form Dispatch */
+document.getElementById('send').onclick = () => {
+  const nm = document.getElementById('nm').value.trim();
+  const ph = document.getElementById('ph').value.trim();
+  const ad = document.getElementById('ad').value.trim();
+  const dt = document.getElementById('dt').value;
+  const sl = document.getElementById('sl').value;
+
+  if (!nm || !ph) {
+    document.getElementById('bkc').textContent = "Please fill in your name and WhatsApp number.";
+    document.getElementById('bkc').style.color = "#c0392b";
+    return;
+  }
+
+  let text = `Hello ReLens, I would like to book a lens replacement / delivery:\n`;
+  text += `*Customer:* ${nm} (${ph})\n`;
+  if (ad) text += `*Address:* ${ad}\n`;
+  if (dt) text += `*Pickup Date:* ${dt} (${sl})\n\n`;
+  text += `*Selected Items:*\n`;
+  
+  if (cart.length === 0) {
+    text += `- (No specific item selected, consultation requested)\n`;
+  } else {
+    let sum = 0;
+    cart.forEach(i => {
+      text += `- ${i.title}: ₹${i.price}\n`;
+      sum += i.price;
     });
-  </script>
+    text += `*Total Estimate:* ₹${sum.toLocaleString('en-IN')}\n`;
+  }
+
+  // Save to account history if logged in
+  if (currentUser) {
+    const acc = JSON.parse(localStorage.getItem(`relens_user_${currentUser}`) || '{}');
+    acc.history = acc.history || [];
+    acc.history.push({ date: new Date().toLocaleDateString(), items: [...cart], text });
+    localStorage.setItem(`relens_user_${currentUser}`, JSON.stringify(acc));
+  }
+
+  window.open(`https://wa.me/919488353749?text=${encodeURIComponent(text)}`, '_blank');
+};
+
+function inquireEssilor(title) {
+  const text = `Hi ReLens, I would like to know the current MRP and availability for Essilor ${title}.`;
+  window.open(`https://wa.me/919488353749?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+/* Lightbox Modal */
+function showLightbox(src) {
+  lightbox.querySelector('img').src = src;
+  lightbox.classList.add('on');
+}
+lightbox.onclick = () => lightbox.classList.remove('on');
+
+/* Customer Account Modal */
+const lgModal = document.getElementById('lg');
+document.getElementById('lgb').onclick = (e) => {
+  e.preventDefault();
+  lgModal.classList.add('on');
+  renderAccountView();
+};
+document.getElementById('lx').onclick = () => lgModal.classList.remove('on');
+
+let accMode = 'in';
+document.querySelectorAll('.tabs button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('on'));
+    b.classList.add('on');
+    accMode = b.getAttribute('data-m');
+    document.getElementById('nmw').hidden = accMode === 'in';
+    document.getElementById('adw').hidden = accMode === 'in';
+    document.getElementById('lgo').textContent = accMode === 'in' ? 'Sign in' : 'Create account';
+  };
+});
+
+document.getElementById('lgo').onclick = () => {
+  const p = document.getElementById('lp').value.trim();
+  const pin = document.getElementById('lc').value.trim();
+  const lm = document.getElementById('lm');
+
+  if (!p || pin.length !== 4) {
+    lm.textContent = "Please enter valid 10-digit number & 4-digit PIN.";
+    lm.className = "";
+    return;
+  }
+
+  const key = `relens_user_${p}`;
+  const existing = localStorage.getItem(key);
+
+  if (accMode === 'up') {
+    const name = document.getElementById('ln').value.trim();
+    const addr = document.getElementById('la').value.trim();
+    localStorage.setItem(key, JSON.stringify({ name, phone: p, pin, addr, history: [] }));
+    currentUser = p;
+    lm.textContent = "Account created successfully!";
+    lm.className = "ok";
+    setTimeout(renderAccountView, 500);
+  } else {
+    if (!existing) {
+      lm.textContent = "Account not found. Please create one.";
+      lm.className = "";
+      return;
+    }
+    const data = JSON.parse(existing);
+    if (data.pin !== pin) {
+      lm.textContent = "Incorrect 4-digit PIN.";
+      lm.className = "";
+      return;
+    }
+    currentUser = p;
+    lm.textContent = "Signed in successfully!";
+    lm.className = "ok";
+    setTimeout(renderAccountView, 500);
+  }
+};
+
+function renderAccountView() {
+  const lf = document.getElementById('lf');
+  const ac = document.getElementById('ac');
+  if (!currentUser) {
+    lf.hidden = false;
+    ac.hidden = true;
+    return;
+  }
+  lf.hidden = true;
+  ac.hidden = false;
+  const data = JSON.parse(localStorage.getItem(`relens_user_${currentUser}`) || '{}');
+  
+  // Fill booking form defaults
+  if (data.name) document.getElementById('nm').value = data.name;
+  if (data.phone) document.getElementById('ph').value = data.phone;
+  if (data.addr) document.getElementById('ad').value = data.addr;
+
+  ac.innerHTML = `
+    <h2>Welcome back, ${data.name || 'Customer'}</h2>
+    <p class="sub">Phone: ${data.phone}</p>
+    <p><b>Saved Pickup Address:</b><br>${data.addr || 'None saved'}</p>
+    <h3>Past Booking Requests</h3>
+    <div class="bkh">
+      ${(data.history && data.history.length) ? data.history.map(h => `<p><b>${h.date}:</b>${h.items.map(i=>i.title).join(', ') || 'Custom inquiry'}</p>`).join('') : '<p class="note">No past bookings found on this device.</p>'}
+    </div>
+    <div class="row" style="margin-top:20px">
+      <button class="btn o" onclick="logoutUser()">Log out</button>
+    </div>
+  `;
+}
+
+function logoutUser() {
+  currentUser = null;
+  renderAccountView();
+}
+
+/* Staff Billing & Invoicing Suite */
+const ivModal = document.getElementById('iv');
+document.getElementById('sb').onclick = (e) => {
+  e.preventDefault();
+  ivModal.classList.add('on');
+};
+document.getElementById('ivc0').onclick = () => ivModal.classList.remove('on');
+document.getElementById('ivc1').onclick = () => ivModal.classList.remove('on');
+
+document.getElementById('ivpg').onclick = () => {
+  const pin = document.getElementById('ivpin').value;
+  // Default staff PIN: 2026 or 1234
+  if (pin === "2026" || pin === "1234") {
+    document.getElementById('ivgate').hidden = true;
+    document.getElementById('ivapp').hidden = false;
+    renderInvoiceLines();
+    updateInvoiceDisplay();
+  } else {
+    document.getElementById('ivgt').textContent = "Incorrect staff access PIN.";
+  }
+};
+
+let invoiceLines = [
+  { desc: "ValueVis Lens Replacement Pair", qty: 1, rate: 2600 }
+];
+
+function renderInvoiceLines() {
+  const c = document.getElementById('ivl');
+  c.innerHTML = invoiceLines.map((ln, idx) => `
+    <div class="ln">
+      <input value="${ln.desc}" onchange="invoiceLines[${idx}].desc=this.value;updateInvoiceDisplay()">
+      <input type="number" min="1" value="${ln.qty}" onchange="invoiceLines[${idx}].qty=parseInt(this.value)||1;updateInvoiceDisplay()">
+      <input type="number" min="0" value="${ln.rate}" onchange="invoiceLines[${idx}].rate=parseFloat(this.value)||0;updateInvoiceDisplay()">
+      <button onclick="removeInvoiceLine(${idx})">&times;</button>
+    </div>
+  `).join('');
+}
+
+function removeInvoiceLine(idx) {
+  invoiceLines.splice(idx, 1);
+  renderInvoiceLines();
+  updateInvoiceDisplay();
+}
+
+document.getElementById('ivad').onclick = () => {
+  invoiceLines.push({ desc: "Optical Service / Fitting", qty: 1, rate: 500 });
+  renderInvoiceLines();
+  updateInvoiceDisplay();
+};
+
+document.getElementById('ivsl').onclick = () => {
+  if (cart.length === 0) return;
+  cart.forEach(c => {
+    invoiceLines.push({ desc: c.title, qty: 1, rate: c.price });
+  });
+  renderInvoiceLines();
+  updateInvoiceDisplay();
+};
+
+['ivn', 'ivp', 'iva', 'ivgs', 'ivgr', 'ivd', 'ivx', 'ivin'].forEach(id => {
+  document.getElementById(id).oninput = updateInvoiceDisplay;
+});
+
+function updateInvoiceDisplay() {
+  const name = document.getElementById('ivn').value || "Walk-in Customer";
+  const phone = document.getElementById('ivp').value || "";
+  const address = document.getElementById('iva').value || "";
+  const gstin = document.getElementById('ivgs').value || "";
+  const gstRate = parseFloat(document.getElementById('ivgr').value) || 0;
+  const discount = parseFloat(document.getElementById('ivd').value) || 0;
+  const advance = parseFloat(document.getElementById('ivx').value) || 0;
+  const pricesIncludeGst = document.getElementById('ivin').checked;
+
+  let lineTotal = invoiceLines.reduce((acc, ln) => acc + (ln.qty * ln.rate), 0);
+  let taxable = 0;
+  let gstAmount = 0;
+
+  if (pricesIncludeGst) {
+    taxable = (lineTotal - discount) / (1 + (gstRate / 100));
+    gstAmount = (lineTotal - discount) - taxable;
+  } else {
+    taxable = Math.max(0, lineTotal - discount);
+    gstAmount = taxable * (gstRate / 100);
+  }
+  const grandTotal = taxable + gstAmount;
+  const balance = Math.max(0, grandTotal - advance);
+
+  const inv = document.getElementById('inv');
+  inv.innerHTML = `
+    <div class="ivh">
+      <div>
+        <h2>ReLens Studio</h2>
+        <p>Doorstep Lens Replacement & Optical Specialists<br>Puducherry · +91 94883 53749<br>GSTIN: ${gstin}</p>
+      </div>
+      <div>
+        <p style="text-align:right"><b>Tax Invoice</b><br>Date: ${new Date().toLocaleDateString()}<br>Inv #: RL-${Date.now().toString().slice(-6)}</p>
+      </div>
+    </div>
+    <hr style="border:0;border-top:1px solid #ddd;margin:12px 0">
+    <p><b>Billed To:</b> ${name} ${phone ? `(${phone})` : ''}<br>${address}</p>
+    <table>
+      <thead><tr><th>Description</th><th>Qty</th><th>Rate (₹)</th><th>Amount (₹)</th></tr></thead>
+      <tbody>
+        ${invoiceLines.map(ln => `<tr><td>${ln.desc}</td><td>${ln.qty}</td><td>${ln.rate}</td><td>${ln.qty * ln.rate}</td></tr>`).join('')}
+      </tbody>
+    </table>
+    <table class="tt">
+      <tr><td>Subtotal</td><td>₹${lineTotal.toFixed(2)}</td></tr>
+      ${discount ? `<tr><td>Discount</td><td>-₹${discount.toFixed(2)}</td></tr>` : ''}
+      <tr><td>Taxable Value</td><td>₹${taxable.toFixed(2)}</td></tr>
+      <tr><td>CGST (${(gstRate/2)}%)</td><td>₹${(gstAmount/2).toFixed(2)}</td></tr>
+      <tr><td>SGST (${(gstRate/2)}%)</td><td>₹${(gstAmount/2).toFixed(2)}</td></tr>
+      <tr class="gt"><td>Grand Total</td><td>₹${grandTotal.toFixed(2)}</td></tr>
+      ${advance ? `<tr><td>Advance Paid</td><td>-₹${advance.toFixed(2)}</td></tr>` : ''}
+      <tr style="font-weight:700"><td>Balance Due</td><td>₹${balance.toFixed(2)}</td></tr>
+    </table>
+    <p class="note" style="margin-top:24px;text-align:center">Thank you for trusting ReLens with your vision.</p>
+  `;
+}
+
+document.getElementById('ivpr').onclick = () => window.print();
+
+document.getElementById('ivwa').onclick = () => {
+  const name = document.getElementById('ivn').value || "Customer";
+  const phone = document.getElementById('ivp').value.replace(/\D/g, '');
+  const target = phone ? `91${phone}` : "919488353749";
+  const text = `Hi ${name}, your ReLens invoice is prepared. Total: ${document.querySelector('#inv .gt td:last-child').textContent}. View at our store or download PDF.`;
+  window.open(`https://wa.me/${target}?text=${encodeURIComponent(text)}`, '_blank');
+};
+
+document.getElementById('ivnw').onclick = () => {
+  invoiceLines = [{ desc: "Lens Fitting Service", qty: 1, rate: 1000 }];
+  document.getElementById('ivn').value = '';
+  document.getElementById('ivp').value = '';
+  document.getElementById('iva').value = '';
+  renderInvoiceLines();
+  updateInvoiceDisplay();
+};
+
+/* Document Ready Init */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('img[data-img]').forEach(img => {
+    const k = img.getAttribute('data-img');
+    if (IM[k]) img.src = IM[k];
+  });
+  renderCatalog();
+  renderContacts();
+  renderEssilor();
+  renderGallery();
+  updateCart();
+});
+</script>
 </body>
 </html>
