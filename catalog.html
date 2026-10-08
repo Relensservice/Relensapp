@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071a33">
+<title>ReLens Catalogue &amp; Price List</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#0b1f3a;--mut:#5b6b82;--line:#e1e8f1;--navy:#071a33;--gold:#c9962b;--acc:#0a6fb8}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#06101f;--card:#0e1d33;--ink:#e8eef7;--mut:#93a4bb;--line:#1d3050}}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+header{background:var(--navy);color:#fff;padding:18px 16px 14px}
+header h1{margin:0;font-size:20px}header p{margin:4px 0 0;color:#b8c7dc;font-size:13px}
+nav{position:sticky;top:0;z-index:5;background:var(--navy);display:flex;gap:8px;overflow-x:auto;padding:0 12px 12px}
+nav button{flex:none;border:1px solid #2a4468;background:transparent;color:#cfe0f5;padding:8px 14px;border-radius:20px;font:inherit;font-size:14px;cursor:pointer}
+nav button.on{background:var(--gold);border-color:var(--gold);color:#1a1200;font-weight:600}
+main{max-width:980px;margin:0 auto;padding:14px 12px 90px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 14px}
+.card h2{margin:0 0 2px;font-size:17px}.card .sub{color:var(--mut);font-size:13px;margin:0 0 10px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:430px;font-size:14px}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+th{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.03em}
+td.n{font-variant-numeric:tabular-nums;font-weight:600}td.na{color:var(--mut);font-weight:400}
+tr.hl td{background:rgba(201,150,43,.14)}
+.note{font-size:12.5px;color:var(--mut);margin:8px 0 0}
+.hero{width:100%;border-radius:14px;display:block;margin:0 0 14px}
+.imgs{display:flex;gap:10px;overflow-x:auto;margin:0 0 12px}.imgs img{height:120px;width:auto;border-radius:10px;border:1px solid var(--line);background:#fff;flex:none}
+.pill{display:inline-block;font-size:11px;background:var(--line);color:var(--mut);border-radius:10px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.cta{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));background:#25a244;color:#fff;text-decoration:none;font-weight:600;padding:12px 18px;border-radius:28px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+</style></head><body>
+<header><h1>ReLens Catalogue &amp; Price List</h1><p>Same Frame. Better Vision. &bull; Puducherry &bull; Prices in ₹ per pair (lenses) / per pack (contact lenses)</p></header>
+<nav id="tabs"></nav>
+<main id="m"></main>
+<a class="cta" href="https://wa.me/message/3XHYZJ2WIHFTO1" target="_blank" rel="noopener">WhatsApp us</a>
+<script>
+// ---------- DATA (edit prices here) ----------
+const C4=["HC","Tuff HC","HMC Green","HMC Blue"];
+const T=(title,sub,cols,rows,note,hl)=>({title,sub,cols,rows,note,hl});
+const VV={
+ "Progressive": [
+  T("Customized","Precision freeform progressive • Advanced American freeform technology",C4,[
+   ["1.56 Clear",3290,3490,3990,4290],["1.56 Bluecut",3590,3790,4390,4690],
+   ["1.60 Clear",5490,5690,6490,6790],["1.60 Bluecut",5590,5790,6790,7090],
+   ["1.67 Clear",6990,7190,8090,8390],["1.67 Bluecut",7390,7590,8390,8690],
+   ["1.74 Clear",17990,18190,18990,19290],["1.74 Bluecut",18790,18990,19790,20090]]),
+  T("Venture","Everyday-performance freeform progressive",C4,[
+   ["1.56 Clear",2290,2490,3090,3290],["1.56 Bluecut",2590,2790,3490,3690],
+   ["1.60 Clear",4390,4590,5090,5290],["1.60 Bluecut",4490,4690,5390,5590]]),
+  T("Entice","Entry-level freeform progressive",C4,[["1.49 Clear",1590,1790,2090,2290]]),
+  T("Daynite (photochromic) progressive","Adapts to light • UV protection • PG = photochromic grey",C4,[
+   ["Customized 1.56 PG",4190,4390,5290,5590],["Customized 1.56 PG Bluecut",4590,4790,5790,6090],
+   ["Customized 1.60 PG",8090,8290,9090,9390],["Customized 1.60 PG Bluecut",10490,10690,11490,11790],
+   ["Customized 1.67 PG",12490,12690,13490,13790],["Customized 1.67 PG Bluecut",14390,14590,15490,15790],
+   ["Customized 1.74 PG",28790,28990,29890,30190],["Customized 1.74 PG Bluecut",30790,30990,31790,32090],
+   ["Venture 1.56 PG",3290,3490,4090,4290],["Venture 1.56 PG Bluecut",3590,3790,4490,4690],
+   ["Venture 1.60 PG",6790,6990,7690,7890],["Venture 1.60 PG Bluecut",9090,9290,9790,9990],
+   ["Entice 1.49 PG",2590,2790,2990,3190]]),
+  T("Stock progressive (V² Dig)","Index 1.56 • Power +3.00 / -2.00 • Add up to +3.00",["Tuff HC","HMC"],[
+   ["V² Dig Prog",1290,1890],["V² Dig Bluecut Prog","N/A",2490],["V² Dig PG Prog",1790,2790],["V² Dig PG Bluecut Prog","N/A",3890]])
+ ],
+ "Single vision": [
+  T("Single Vision Rx","Precision optics, clearer every day • White vs Daynite",["White Tuff HC","White HMC Green","White HMC Blue","Daynite HMC Green","Daynite HMC Blue"],[
+   ["1.56 Clear",2690,3290,3490,4090,4290],["1.56 Bluecut",2990,3590,3790,4590,4790],
+   ["1.60 Clear",4690,5490,5690,8290,8490],["1.60 Bluecut",4990,5790,5990,10590,10790],
+   ["1.67 Clear",6190,6990,7190,12990,13190],["1.67 Bluecut",6690,7390,7590,15290,15490]]),
+  T("Precious Blue (FSV)","Index 1.56 • HMC Blue only • +4.00 to -6.00, Cyl up to -2.00",["HMC Blue"],[
+   ["Clear",1490],["Bluecut",1590],["PG",1890],["PG Bluecut",1990]]),
+  T("MR-8 • Index 1.60","Premium lens material • up to 20% thinner • impact resistant • ideal for rimless and sports frames",[],[],"Ask us on WhatsApp for MR-8 pricing.")
+ ],
+ "Bifocal": [
+  T("Rx Bifocal lenses","Clear vision for distance and near in a single lens",C4,[
+   ["KT (1.49)",1390,1590,1990,2190],["KT Bluecut (1.49)",1690,1890,2290,2490],
+   ["KT Plus (1.56)",1790,1990,2390,2590],["KT Plus Bluecut (1.56)",2090,2290,2690,2890],
+   ["D-Bifocal (1.49)",1590,1790,2390,2590],["D-Bifocal Plus (1.56)",1990,2190,2790,2990]],
+   "Daynite (PG) available at +₹1000 per pair on all KT and D-Bifocal products."),
+  T("Lenticular","Index 1.49",["Tuff HC","HMC Green"],[["Lenticular",2490,3290]]),
+  T("Stock Kryptok","Index 1.56 • Power +3.00 / -2.00 • Add up to +3.00",["HC","HMC"],[
+   ["V² Kryptok",790,990],["V² Bluecut Kryptok","N/A",1390],["V² PG Kryptok",1590,1890],["V² PG Bluecut Kryptok","N/A",1990]])
+ ]
+};
+const EV=[
+ T("Evolux","Advanced European technology • Wider field of view, minimal peripheral distortion",["Clearview Optix Arc","Clearview Bluvex Arc","Daynite Optix Arc","Daynite Bluvex Arc"],[
+  ["Evolux 1.56",6990,7490,8190,8690],["Evolux 1.60",8890,9390,13890,14390],["Evolux 1.67",10690,11190,17690,18190]],
+  "Optix Arc = green reflection coating • Bluvex Arc = blue reflection coating"),
+ T("Evolux Elite","Flagship series • Vision. Perfected.",["Clearview Optix Arc","Clearview Bluvex Arc","Daynite Optix Arc","Daynite Bluvex Arc"],[
+  ["Elite 1.56",10190,10690,11190,11690],["Elite 1.60 — Elite Choice",12290,12790,17090,17590],
+  ["Elite 1.67",13990,14490,21190,21690],["Elite 1.74",25690,26190,37790,38290]],"Prices are inclusive of all taxes.",1)
+];
+const ADD=[
+ T("Dual Coat add-on","Green reflection on front, blue on back • Per pair, added to the HMC Green lens price",["Add-on ₹"],[
+  ["Evolux Elite",700],["Evolux",700],["Customized",500],["Venture",300],["Entice",300],["Bifocals",300],["Single Vision",300]]),
+ T("Tints","Full or gradient tint (dark/sun/light grey, brown, blue; green; yellow; pink)",["₹ per pair"],[["Any tint",300]]),
+ T("Fitting charges","Per pair",["₹"],[["Supra fitting",300],["Full fitting",200],["Rimless fitting",500]]),
+ T("Additional charges","Over and above the price list; these orders need one extra working day",["₹"],[
+  ["Power beyond price list (per diopter, per pair)",250],["Add power +0.75, +3.50 & +4.00 (per pair)",200],["Photo brown in bifocals (per pair)",500],
+  ["Prism up to 3Δ (per diopter, per pair)",150],["Prism above 3Δ (per diopter, per pair)",200]],"Prism: up to 6Δ, total power -6.00 D to +6.00 D, single vision only."),
+ T("Power & cylinder range by index","Maximum power availability",["Power","Cylinder"],[
+  ["1.49","+6.00 to -6.00","up to -2.00"],["1.56","+6.00 to -8.00","up to -4.00"],["1.60","+6.00 to -10.00","up to -4.00"],
+  ["1.67","+6.00 to -12.00","up to -4.00"],["1.74","+6.00 to -14.00","up to -4.00"],["Lenticular","+8.00 to +14.00","N/A"]])
+];
+const P=(n,p)=>[n,p];
+const BL=[
+ ["Spherical – daily",["Ultra 30 Lens (silicone hydrogel)",3281],["Ultra 5 Lens (silicone hydrogel)",609],["Biotrue ONEday 30 Lens",2765],["Biotrue ONEday 5 Lens",553],["Medivision+ 30 Lens",2765],["SofLens 30 Lens",1921],["SofLens 90 Lens",5428],["iConnect 30 Lens",1045],["iConnect 10 Lens",395]],
+ ["Spherical – monthly",["Medivision Pro 3 Lens",1968],["Ultra 6 Lens",4031],["PureVision 2 – 6 Lens",2526],["iConnect OxyRich 3 Lens",825],["Medivision 6 Lens",1592],["SofLens 59 – 6 Lens",1645],["iConnect 6 Lens",665],["iConnect 3 Lens",399]],
+ ["Spherical – yearly",["Optima 38 – 1 Lens",1218],["B4 / U4 / HO4 – 1 Lens",1078]],
+ ["Toric",["Biotrue ONEday Toric 30 Lens (daily)",2765],["SofLens Toric 30 Lens (daily)",2146],["Ultra Toric 6 Lens (monthly)",4031],["PureVision 2 Toric 6 Lens (monthly)",2995],["SofLens Toric 6 Lens (monthly)",2268],["SofLens Toric 1 Lens (monthly)",403]],
+ ["Multifocal",["Biotrue ONEday MF 30 Lens (daily)",4500],["Biotrue ONEday MF 5 Lens (daily)",825],["Ultra MF 6 Lens (monthly)",5812],["PureVision 2 MF 6 Lens (monthly)",4593],["SofLens MF 6 Lens (monthly)",3375],["Ultra Multifocal Toric 6 Lens (monthly)",8436]],
+ ["Colour lenses",["Lacelle Circle – 1 Lens (monthly)",515],["Lacelle Circle – 2 Lens (monthly)",1031],["Lacelle Premium – 1 Lens (monthly)",562],["Lacelle Premium – 2 Lens (monthly)",1125],["Lacelle Daily – 10 Lens",928],["Lacelle Daily (new range) – 10 Lens",1199],["Natural Look Plano – 2 Lens (quarterly)",1593],["Natural Look Power – 1 Lens (quarterly)",796]],
+ ["Lens care solutions",["Renu Fresh 60 ml",170],["Renu Fresh 120 ml",285],["Renu Fresh 355 ml",605],["Renu Fresh 500 ml",700],["Biotrue 60 ml",190],["Biotrue 120 ml",360],["Biotrue 300 ml",660],["Renu Advance 60 ml",180],["Renu Advance 118 ml",340],["Renu Advance 355 ml",630],["Renu Advance 473 ml",780],["Boston Simplus 105 ml",260],["Renu Rewetting Drops 8 ml",215]]
+];
+const BLIMG=["biotrue-90.webp","biotrue-presbyopia.webp","soflens59-a.webp","soflens59-b.webp","soflens59-c.webp","iconnect-a.webp","iconnect-b.webp"];
+// ---------- RENDER ----------
+const fmt=v=>typeof v==="number"?"₹"+v.toLocaleString("en-IN"):v;
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+function tbl(t){
+ let h=`<div class="card"><h2>${esc(t.title)}</h2><p class="sub">${esc(t.sub||"")}</p>`;
+ if(t.rows.length){
+  h+=`<div class="tw"><table><tr><th></th>${t.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr>`;
+  t.rows.forEach(r=>{h+=`<tr${t.hl&&/Choice/.test(r[0])?' class="hl"':""}><td>${esc(r[0])}</td>${r.slice(1).map(v=>`<td class="n${v==="N/A"?" na":""}">${fmt(v)}</td>`).join("")}</tr>`});
+  h+="</table></div>";
+ }
+ if(t.note)h+=`<p class="note">${esc(t.note)}</p>`;
+ return h+"</div>";
+}
+function list(g){
+ return `<div class="card"><h2>${esc(g[0])}</h2><div class="tw"><table>${g.slice(1).map(r=>`<tr><td>${esc(r[0])}</td><td class="n">${fmt(r[1])}</td></tr>`).join("")}</table></div></div>`;
+}
+const S={};
+S["ValueVis lenses"]=`<p class="note" style="margin:0 0 12px">ValueVis MRP list, July 2026. HC = hard coat • Tuff HC = scratch-resistant HC • HMC Green / Blue = hard multi-coat.</p>`+
+ Object.entries(VV).map(([k,a])=>`<h3 style="margin:18px 2px 8px">${k}</h3>`+a.map(tbl).join("")).join("");
+S["Evolux"]=EV.map(tbl).join("");
+S["Contact lenses"]=`<img class="hero" src="img/bl-banner.jpg" alt="Bausch + Lomb contact lenses at ReLens">
+ <div class="imgs">${BLIMG.map(f=>`<img loading="lazy" src="img/${f}" alt="">`).join("")}</div>
+ <p class="note" style="margin:0 0 12px">Bausch + Lomb MRP list 2026. Contact lens orders need prescription / fitting verification before final confirmation.</p>`+BL.map(list).join("");
+S["Add-ons & charges"]=ADD.map(tbl).join("");
+const tabs=document.getElementById("tabs"),m=document.getElementById("m");
+Object.keys(S).forEach((k,i)=>{
+ const b=document.createElement("button");b.textContent=k;b.onclick=()=>show(k);tabs.appendChild(b);
+ const s=document.createElement("section");s.id="s"+i;s.innerHTML=S[k];m.appendChild(s);
+});
+function show(k){
+ const ks=Object.keys(S);
+ [...tabs.children].forEach((b,i)=>{b.classList.toggle("on",ks[i]===k);document.getElementById("s"+i).classList.toggle("on",ks[i]===k)});
+ try{history.replaceState(null,"","#"+encodeURIComponent(k))}catch(e){}scrollTo(0,0);
+}
+const h=decodeURIComponent(location.hash.slice(1));show(S[h]?h:Object.keys(S)[0]);
+</script></body></html>
